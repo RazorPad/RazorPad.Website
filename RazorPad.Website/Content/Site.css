@@ -23,6 +23,10 @@ table {
 {
     height: 100%;
 }
+#actions
+{
+    margin-left: 5px;
+}
 .actionItems li
 {
     cursor: pointer;
@@ -264,27 +268,14 @@ iframe
     
 }
 
-#modelGrid {
-	width: 99.8%;
-	height: 100%;
-	
-}
-
-#modelGrid td {
-	border: solid 1px lightgrey;
-	vertical-align: middle;
-	font-size: 100%;
-	line-height: normal;
-}
-
 #razorEditor
 {
     /*top: 16px;*/
 
 	position: relative;
 	height: 100%;
-	width: 99.8%;
-	border: solid 1px #465A7D;
+	width: 100%;
+	/*border: solid 1px #465A7D;*/
 }
 
 #header
@@ -298,7 +289,7 @@ iframe
     background-color: #465A7D;
     color: White;
     height: 16px;
-    width: 99.9%;
+    width: 100%;
     padding-left: 0.1%;
 }
 
@@ -306,7 +297,7 @@ iframe
 {
     top: 16px;
     padding-left: 0.1%;
-    width: 99.9%;
+    width: 100%;
 }
 
 .container_12 {
@@ -382,3 +373,96 @@ iframe
 
 
 /* end table view styles */
+#panes
+{
+    visibility:hidden;
+    background: #ccc;
+}
+
+#modelPane
+{
+    border-left: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    background: #fff;
+}
+
+#razorPane
+{
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    background: #fff;
+}
+
+#resultsPane
+{
+    border-top: 1px solid #aaa;
+    background: #fff;
+}
+
+.modelContent
+{
+    padding:5px 5px;
+}
+
+.modelProps
+{
+    overflow:auto;
+}
+
+.propinput
+{
+    margin-bottom: 3px;
+}
+.propinput input
+{
+    width:99%;
+}
+
+#modelGrid {
+	width: 99.8%;
+	height: auto;
+	/*height: 100%;*/
+	
+}
+
+#modelGrid td, #modelGrid th {
+	border: solid 1px lightgrey;
+	vertical-align: middle;
+	font-size: 100%;
+	line-height: normal;
+	text-align:left;
+}
+
+#modelGrid th
+{
+    padding:2px 2px;
+    font-weight:bold;
+}
+#modelGrid td
+{
+    padding:2px 2px;
+}
+
+.fontBold
+{
+    font-weight:bold;
+}
+#loading
+{
+    background:url('themes/default/images/ajax-loader.gif');
+    display:none;
+    z-index:100;
+    position:absolute;
+    height:100px;
+    width:100px;
+    border:1px solid $d6d6d6;
+    overflow:hidden;
+}
+.CodeMirror
+{
+    font-size:13px !important;
+}
+.CodeMirror span
+{
+    padding: 0px !important;
+}

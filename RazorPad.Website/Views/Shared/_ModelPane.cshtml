@@ -12,43 +12,42 @@
     </div>
 </div>*@
 <div class="editorContainer">
-    <table id="modelPane">
-        <tr>
-            <td>
-                <div class="paneheader">
-                    <div class="title">
-                        Model</div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="tabBar">
-                    <a href="#simple">Simple</a><span class="separator">|</span><a href="#geeky"> Geeky</a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" id="propinput" style="width: 100%; display: block;" />
-                <table id="modelGrid">
-                    <colgroup>
-                        <col width="50%" align="left" />
-                        <col width="50%" align="left" />
-                    </colgroup>
-                    <tbody>
-                        <tr>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </table>
+    <div class="paneheader">
+        <div class="title">
+            Model</div>
+    </div>
+
+    <div class="modelContent">
+        @*<div class="tabBar">
+            <a href="#simple">Simple</a><span class="separator">|</span><a href="#geeky"> Geeky</a>
+        </div>*@
+        <div class="propinput">
+            <input type="text" id="propinput"/>
+        </div>
+        <div class="modelProps">
+            <table id="modelGrid">
+                <colgroup>
+                    <col width="50%" align="left" />
+                    <col width="50%" align="left" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="fontBold">Name</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <script type="text/javascript" charset="utf-8">
 
@@ -95,6 +94,6 @@
             $(this).attr('contentEditable', 'false');
         });
 
-        $(window).resize(function () { resizeEditor($('#modelEditor')); });
+        //$(window).resize(function () { resizeEditor($('#modelEditor')); });
     });
 </script>

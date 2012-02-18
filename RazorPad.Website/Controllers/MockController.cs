@@ -11,9 +11,9 @@ namespace RazorPad.Website.Controllers
         //
         // GET: /Mock/
 
-        public ActionResult Mock()
+        public ActionResult Index()
         {
-            return View();
+            return View("Mock");
         }
 
     }

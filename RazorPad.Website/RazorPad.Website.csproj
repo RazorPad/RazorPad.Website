@@ -15,6 +15,14 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -90,6 +98,8 @@
     <Content Include="Content\reset.css" />
     <Content Include="Content\shCore.css" />
     <Content Include="Content\shThemeDefault.css" />
+    <Content Include="Content\themes\default\images\ajax-loader.gif" />
+    <Content Include="Content\themes\default\layout-default-latest.css" />
     <Content Include="Content\themes\default\default.css" />
     <Content Include="Content\themes\default\images\splitter\paneh.gif" />
     <Content Include="Content\themes\default\images\splitter\panehc.gif" />
@@ -111,6 +121,24 @@
     <Content Include="Content\themes\default\ui.jqgrid.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\ace-uncompressed.js" />
+    <Content Include="Content\themes\default\codemirror.css" />
+    <Content Include="Scripts\codemirror\codemirror.js" />
+    <Content Include="Scripts\codemirror\mode\css.js" />
+    <Content Include="Scripts\codemirror\mode\htmlmixed.js" />
+    <Content Include="Scripts\codemirror\mode\javascript.js" />
+    <Content Include="Scripts\codemirror\mode\xml.js" />
+    <Content Include="Scripts\codemirror\util\dialog.css" />
+    <Content Include="Scripts\codemirror\util\dialog.js" />
+    <Content Include="Scripts\codemirror\util\foldcode.js" />
+    <Content Include="Scripts\codemirror\util\formatting.js" />
+    <Content Include="Scripts\codemirror\util\javascript-hint.js" />
+    <Content Include="Scripts\codemirror\util\overlay.js" />
+    <Content Include="Scripts\codemirror\util\runmode.js" />
+    <Content Include="Scripts\codemirror\util\search.js" />
+    <Content Include="Scripts\codemirror\util\searchcursor.js" />
+    <Content Include="Scripts\codemirror\util\simple-hint.css" />
+    <Content Include="Scripts\codemirror\util\simple-hint.js" />
+    <Content Include="Scripts\jquery.layout-latest.js" />
     <Content Include="Scripts\hpTabs.js" />
     <Content Include="Scripts\jquery.hotkeys.js" />
     <Content Include="Scripts\jquery.watermark.js" />
