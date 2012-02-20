@@ -20,7 +20,12 @@ namespace RazorPad.Website.Models
 
         public static IDocumentStore Initialize()
         {
-            instance = new EmbeddableDocumentStore { ConnectionStringName = "RazorPadDB" };
+#if(DEBUG)
+            instance = new EmbeddableDocumentStore { ConnectionStringName = "RavenDB" };
+#else
+            instance = new Raven.Client.Document.DocumentStore { ConnectionStringName = "RavenDB" };
+#endif
+
             instance.Conventions.IdentityPartsSeparator = "-";
             instance.Initialize();
             return instance;
