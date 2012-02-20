@@ -20,14 +20,14 @@ namespace RazorPad.Website.Controllers
     {
         public ActionResult Index(string id)
         {
+            Fiddle fiddle = null;
             if (!string.IsNullOrEmpty(id))
             {
                 var session = DataDocumentStore.Instance.OpenSession();
-                var fiddle = session.Load<Fiddle>(id);
+                fiddle = session.Load<Fiddle>(id);
                 session.Dispose();
-                return View("MainUI", fiddle);
             }
-            return View("MainUI", new Fiddle());
+            return View("MainUI", fiddle ?? new Fiddle());
         }
 
 
