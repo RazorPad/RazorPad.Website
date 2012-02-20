@@ -1,9 +1,10 @@
-﻿<div class="editorContainer">
+﻿@model string
+<div class="editorContainer">
     <div id="viewHeader" class="paneheader">
         <div class="title">
             View</div>
     </div>
     @*<div id="razorEditor" class="editor model watermarkOn" contentEditable="true">
     </div>*@
-    <textarea id="razorEditor"></textarea>
+    <textarea id="razorEditor">@Model</textarea>
 </div>

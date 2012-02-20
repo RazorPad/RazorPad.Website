@@ -8,15 +8,26 @@ using RazorPad.Compilation;
 using RazorPad.Compilation.Hosts;
 using RazorPad.Website.Models;
 using System.Text.RegularExpressions;
+using System.Web.Script.Serialization;
+using RazorPad.DynamicModel;
+using Raven.Abstractions.Data;
+using Raven.Json.Linq;
 
 namespace RazorPad.Website.Controllers
 {
     [ValidateInput(false)]
     public class RazorPadController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            return View("MainUI");
+            if (!string.IsNullOrEmpty(id))
+            {
+                var session = DataDocumentStore.Instance.OpenSession();
+                var fiddle = session.Load<Fiddle>(id);
+                session.Dispose();
+                return View("MainUI", fiddle);
+            }
+            return View("MainUI", new Fiddle());
         }
 
 
@@ -46,7 +57,12 @@ namespace RazorPad.Website.Controllers
 
             var writer = new StringWriter();
 
-            var templ = TransformRequest(request.Template);
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            jss.RegisterConverters(new JavaScriptConverter[] { new DynamicJsonConverter() });
+
+            dynamic inputModel = jss.Deserialize(request.Model, typeof(object));
+            
+            var templ = request.Template;// TransformRequest(request.Template);
             var generatorResults = compiler.GenerateCode(templ, writer, new RazorPadMvcEngineHost(request.RazorLanguage));
             result.SetGeneratorResults(generatorResults);
             result.GeneratedCode = ExtractCode(writer);
@@ -66,14 +82,61 @@ namespace RazorPad.Website.Controllers
                     //else
                     //    model = new DynamicDictionary();
 
-                    
-                    result.TemplateOutput = Sandbox.Execute(request.Language, templ, request.Model);
+
+                    result.TemplateOutput = Sandbox.Execute(request.Language, templ, inputModel);
                 }
 
                 result.Success = true;
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+            
+        public JsonResult Save([Bind(Prefix = "")]SaveRequest request)
+        {
+            var session = DataDocumentStore.Instance.OpenSession();
+            
+
+            var fiddleId = request.FiddleId;
+            if (string.IsNullOrEmpty(fiddleId))
+            {
+                var fiddle = new Fiddle
+                {
+                    View = request.Template,
+                    InputModel = request.Model,
+                    Language = request.Language.ToString(),
+                    DateCreated = DateTime.UtcNow,
+                    CreatedBy = ""//ToDo: Set Created By
+                };
+
+                session.Store(fiddle);
+                session.SaveChanges();
+                fiddleId = session.Advanced.GetDocumentId(fiddle);
+            }
+            else
+            {
+                session.Advanced.DatabaseCommands.Patch(
+                    fiddleId,
+                    new[]
+                        {
+                            new PatchRequest
+                                {
+                                    Type = PatchCommandType.Set,
+                                    Name = "View",
+                                    Value = request.Template
+                                },
+                            new PatchRequest
+                                {
+                                    Type = PatchCommandType.Set,
+                                    Name = "InputModel",
+                                    Value = request.Model
+                                }
+                        });
+                session.SaveChanges();
+            }
+            session.Dispose();
+    
+            return Json(fiddleId);
         }
 
         private string TransformRequest(string p)

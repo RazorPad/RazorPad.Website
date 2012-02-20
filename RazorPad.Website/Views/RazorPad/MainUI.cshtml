@@ -1,5 +1,6 @@
-﻿<div id="razorPane" class="inlinebox">
-    @Html.Partial("_RazorPane")
+﻿@model RazorPad.Website.Models.Fiddle
+<div id="razorPane" class="inlinebox">
+    @Html.Partial("_RazorPane", Model.View ?? "")
 </div>
 <div id="modelPane" class="inlinebox">
     @Html.Partial("_ModelPane")
@@ -7,19 +8,27 @@
 <div id="resultsPane" class="">
     @Html.Partial("_ResultsPane")
 </div>
+
+
+
+
 <div id="loading"></div>
+@if (Model != null && !string.IsNullOrEmpty(Model.Id))
+{
+    <input type="hidden" id="fiddleId" value="@Model.Id" />
+}
 <script type="text/javascript" charset="utf-8">
-    var razorEditor;
+    var RazorPad = typeof (RazorPad) == 'undefined' ? {} : RazorPad;
+    RazorPad.siteRoot = "@(Url.Content("~/"))";
+    RazorPad.razorEditor = null;
     $(function () {
 
         function resizeRazorEditor() {
-            //$("#razorEditor").height($("#razorPane").height() - $("#viewHeader").height());
-            //            razorEditor.renderer.onResize();
-            $(razorEditor.getScrollerElement()).css({
+            $(RazorPad.razorEditor.getScrollerElement()).css({
                 height: $("#razorPane").height() - $("#viewHeader").height(),
                 width: $("#razorPane").width()
             });
-            razorEditor.refresh();
+            RazorPad.razorEditor.refresh();
             resizeModelProps();
         }
 
@@ -60,35 +69,28 @@
         });
 
 
-
-        //        var HtmlMode = require("ace/mode/html").Mode;
-        //        razorEditor = ace.edit("razorEditor");
-        //        razorEditor.getSession().setMode(new HtmlMode());
-        //        razorEditor.renderer.setShowPrintMargin(false)
-
-        razorEditor = CodeMirror.fromTextArea(document.getElementById("razorEditor"), {
+        RazorPad.razorEditor = CodeMirror.fromTextArea(document.getElementById("razorEditor"), {
             mode: "text/html",
             lineNumbers: true,
             tabMode: "indent",
             matchBrackets: true,
             tabIndex: -1,
-            lineWrapping: true
+            lineWrapping: true,
+            extraKeys: {
+                "Ctrl-S": RazorPad.saveTemplate,
+                "Ctrl-E": RazorPad.executeTemplate
+            }
         });
 
         $("#panes").css('visibility', 'visible');
 
         $(window).resize(resizeRazorEditor).resize();
-    });
 
-//    function resizeEditor(editor) {
-//        //var parent = editor.closest('#razorPane');
-//        //editor.height(parent.height() - editor.siblings().height());
-//        
-//    }
-//    $(function () {
-//        //        $('#razorEditor').val('<h1>Hello @@Model.Name</h1>');
-//        // ace editor needs explicityly sized div
-//        //resizeEditor($('#razorEditor').watermark('razor here'));
-//        
-//    });
+        if($("#fiddleId").val()){
+            //Execute the template (adding timeout to load the layout before ajax calls)
+            setTimeout(function(){
+                RazorPad.executeTemplate();
+            }, 200);
+        }
+    });
 </script>

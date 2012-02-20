@@ -7,7 +7,7 @@ namespace RazorPad.Website.Models
 {
     public class ExecuteRequest : ParseRequest
     {
-        public IEnumerable<JsonProps> Model { get; set; }
+        public string Model { get; set; }
 
         public TemplateLanguage Language { get; set; }
 

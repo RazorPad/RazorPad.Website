@@ -1,116 +1,156 @@
-﻿(function ($) {
-    var saveTemplate = function () {
-        if (console) console.log("Ignoring save key...");
+﻿var RazorPad = typeof(RazorPad) == 'undefined' ? {} : RazorPad;
+
+RazorPad.saveTemplate = function () {
+    RazorPad.showLoading();
+    var data = {
+        Template: RazorPad.razorEditor.getValue(), //ToDo: Need to find a way to find the editor instance on the page
+        Model: JSON.stringify(RazorPad.getModel()),
+        FiddleId: ($('#fiddleId').val() || '')
+    };
+    $.ajax({
+        url: RazorPad.siteRoot + 'Save',
+        cache: false,
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (!response.Messages) {
+                if (!$('#fiddleId').val()) {
+                    location.href = RazorPad.siteRoot + "Index/" + response;
+                }
+                else {
+                    RazorPad.hideLoading();
+                }
+            }
+            else {
+                alert("Save failed, please try again later");
+                RazorPad.hideLoading();
+            }
+        },
+        error: function (error) {
+            alert("Save failed, please try again later");
+        }
+    });
+};
+
+RazorPad.executeTemplate = function() {
+    RazorPad.showLoading();
+    var data = {
+        Template: RazorPad.razorEditor.getValue(),
+        Model:  JSON.stringify(RazorPad.getModel())
     };
 
-    function showLoading() {
-        var $loading = $('#loading');
-        $loading.css({
-            left: ($(document).width() - $loading.width()) / 2,
-            top: ($(document).height() - $loading.height()) / 2
-        }).fadeIn('fast');
-    }
+    $.ajax({
+        url: RazorPad.siteRoot + 'Execute',
+        data: JSON.stringify(data),
+        success: function (resp) {
+            RazorPad.onParseSuccess(resp);
+            RazorPad.showRenderedTemplateOutput(resp.TemplateOutput);
+            $('#template-output').text(resp.TemplateOutput);
+            $('div.tabContainer').hpTabs("select", resp.Success ? 0 : 4); //Select Output tab
+        },
+        error: function (resp) {
+            RazorPad.onParseError(resp);
+            var message = ' [[**** EXECUTION ERROR ****]] \r\n' + JSON.stringify(resp);
+            $('#rendered-output-container').empty().text(message);
+            $('#template-output').text(message);
+            $('div.tabContainer').hpTabs("select", 4); //Select Message tab
+        },
+        complete: function () {
+            RazorPad.hideLoading();
+        }
+    });
+} // END executeTemplate()
 
-    function hideLoading() {
-        $('#loading').fadeOut('slow');
-    }
+RazorPad.handleSaveKey = function(evt) {
+    RazorPad.saveTemplate();
+    evt.stopPropagation();
+    return false;
+}
 
-    function executeTemplate() {
-        showLoading();
-        var model = getModel();
-        var data = {
-            Template: razorEditor.getValue(), //ToDo: Need to find a way to find the editor instance on the page
-            Model: model
-        };
+RazorPad.handleExecuteKey = function(evt) {
+    RazorPad.executeTemplate();
+    evt.stopPropagation();
+    return false;
+}
 
-        $.ajax({
-            url: 'execute',
-            data: JSON.stringify(data),
-            //data: JSON.stringify({ 'Template': $('#razorEditor textarea').val(), "Model": "public class Dummy { public System.DateTime TimeNow { get { return System.DateTime.Now; } } }" }),
-            success: function (resp) {
-                onParseSuccess(resp);
-                showRenderedTemplateOutput(resp.TemplateOutput);
-                $('#template-output').text(resp.TemplateOutput);
-                $('div.tabContainer').hpTabs("select", 0);//Select Output tab
-            },
-            error: function (resp) {
-                onParseError(resp);
-                var message = ' [[**** EXECUTION ERROR ****]] \r\n' + JSON.stringify(resp);
-                $('#rendered-output-container').empty().text(message);
-                $('#template-output').text(message);
-                $('div.tabContainer').hpTabs("select", 4);//Select Message tab
-            },
-            complete: function () {
-                hideLoading();
-            }
-        });
-    } // END executeTemplate()
+RazorPad.showLoading = function() {
+    var $loading = $('#loading');
+    $loading.css({
+        left: ($(document).width() - $loading.width()) / 2,
+        top: ($(document).height() - $loading.height()) / 2
+    }).fadeIn('fast');
+}
 
-    function getModel() {
-        // TODO: Build model from user input
-        var model = {
-            "Name": "Frank Sinatra",
-            "Address": "1234 Stardust Ln, Las Vegas, NV",
-            "Birthday": new Date(1960, 3, 12),
-            "UserID": 9989
-        };
-
-        //return model;
-        return modelProps;
-    }
-
-    function onParseError(err) {
-        updateStatus('fail');
-        showMessages([{ Kind: 'Error', Text: JSON.stringify(err)}]);
-        $('#generated-code').html(' [[**** PARSE ERROR ****]] ');
-    } // END onParseError()
-
-    function onParseSuccess(resp) {
-        if (resp.Success) { updateStatus('success'); }
-        else { updateStatus('fail'); }
-
-        showMessages(resp.Messages);
-        $('#generated-code-container').empty().append($('<pre id="generated-code" class="brush: csharp"></pre>').text(resp.GeneratedCode));
-
-        $('#parser-result-container').empty().append($('<pre id="parser-results" class="brush: html"></pre>').text(resp.ParsedDocument));
-        SyntaxHighlighter.highlight({ toolbar: false });
-    } // END onParseSuccess()
+RazorPad.hideLoading = function() {
+    $('#loading').fadeOut('slow');
+}
 
 
-    function showMessages(messages) {
-        var messagesList = $('#messages');
-        messagesList.html('');
 
-        $.each(messages, function (idx, message) {
-            $('<li/>')
-				.addClass(message.Kind)
-				.html($('<pre/>').html(message.Text))
-				.appendTo(messagesList);
-        });
-    } // END showMessages()
+RazorPad.getModel = function () {
+    var model = {}, name, val;
+    $('#modelGrid > tbody > tr').each(function () {
+        name = $(this).find('span.name').text();
+        val = $(this).find('span.value').text();
+        if (name && val) {
+            model[$.trim(name)] = $.trim(val);
+        }
+    });
+    return model;
+}
 
-    function showRenderedTemplateOutput(templateOutput) {
-        var iframe = $('iframe', '#rendered-output-container');
+RazorPad.onParseError = function(err) {
+    RazorPad.updateStatus('fail');
+    RazorPad.showMessages([{ Kind: 'Error', Text: JSON.stringify(err)}]);
+    $('#generated-code').html(' [[**** PARSE ERROR ****]] ');
+} // END onParseError()
 
-        if (!iframe.get(0))
-            iframe = $('<iframe>').appendTo('#rendered-output-container');
+RazorPad.onParseSuccess = function(resp) {
+    if (resp.Success) { RazorPad.updateStatus('success'); }
+    else { RazorPad.updateStatus('fail'); }
 
-        iframe.contents().find('body').html(templateOutput);
-    }
+    RazorPad.showMessages(resp.Messages);
+    $('#generated-code-container').empty().append($('<pre id="generated-code" class="brush: csharp"></pre>').text(resp.GeneratedCode));
 
-    function updateStatus(status) {
-        $('#template-container').attr('class', status);
-    }
+    $('#parser-result-container').empty().append($('<pre id="parser-results" class="brush: html"></pre>').text(resp.ParsedDocument));
+    SyntaxHighlighter.highlight({ toolbar: false });
+} // END onParseSuccess()
 
 
+RazorPad.showMessages = function(messages) {
+    var messagesList = $('#messages');
+    messagesList.html('');
+
+    $.each(messages, function (idx, message) {
+        $('<li/>')
+			.addClass(message.Kind)
+			.html($('<pre/>').html(message.Text))
+			.appendTo(messagesList);
+    });
+} // END showMessages()
+
+RazorPad.showRenderedTemplateOutput = function(templateOutput) {
+    var iframe = $('iframe', '#rendered-output-container');
+
+    if (!iframe.get(0))
+        iframe = $('<iframe>').appendTo('#rendered-output-container');
+
+    iframe.contents().find('body').html(templateOutput);
+}
+
+RazorPad.updateStatus = function (status) {
+    $('#template-container').attr('class', status);
+}
+
+
+
+$(function () {
     $('#execute')
-		.click(executeTemplate)
-		.ajaxStart(function () {
-		    updateStatus('waiting');
-		    $('#template-output').text('');
-		    $('#generated-code').text('');
-		});
-
+	.click(RazorPad.executeTemplate)
+	.ajaxStart(function () {
+	    RazorPad.updateStatus('waiting');
+	    $('#template-output').text('');
+	    $('#generated-code').text('');
+	});
 
     $.ajaxSetup({
         contentType: "application/json; charset=utf-8",
@@ -118,57 +158,12 @@
         type: 'post'
     });
 
-
-    //	$('#razorEditor textarea').focus(function () {
-
-    //		$(this).filter(function () {
-
-    //			// We only want this to apply if there's not
-    //			// something actually entered
-    //			return /\s/.test(this.value) || this.value === "Razor Markup Here";
-
-    //		}).removeClass("watermarkOn").val("");
-
-    //	});
-
-    // Define what happens when the textbox loses focus
-    // Add the watermark class and default text
-    //	$('#razorEditor textarea').blur(function () {
-
-    //		$(this).filter(function () {
-
-    //			// We only want this to apply if there's not
-    //			// something actually entered
-    //			return /\s/.test(this.value);
-
-    //		}).addClass("watermarkOn").val("Razor Markup Here");
-
-    //	});
-
-    function handleSaveKey(evt) {
-        saveTemplate();
-        evt.stopPropagation();
-        return false;
-    }
-
-    function handleExecuteKey(evt) {
-        executeTemplate();
-        evt.stopPropagation();
-        return false;
-    }
-
     $.fn.bindHotkeys = function () {
         this
-            .bind('keydown', 'ctrl+s', handleSaveKey)
-            .bind('keydown', 'ctrl+e', handleExecuteKey)
-            ;
+        .bind('keydown', 'ctrl+s', RazorPad.handleSaveKey)
+        .bind('keydown', 'ctrl+e', RazorPad.handleExecuteKey);
     };
 
-    $(function () {
-        $(document).bindHotkeys();
-        //$('textarea').bindHotkeys();
-
-        //$('#razorEditor textarea').focus();
-    });
-
-})(jQuery);
+    $(document).bindHotkeys();
+    RazorPad.razorEditor.focus();
+});

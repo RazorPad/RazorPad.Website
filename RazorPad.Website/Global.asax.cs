@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using RazorPad.Website.Models;
 
 namespace RazorPad.Website
 {
@@ -39,6 +40,9 @@ namespace RazorPad.Website
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            DataDocumentStore.Initialize();
         }
+
     }
 }
