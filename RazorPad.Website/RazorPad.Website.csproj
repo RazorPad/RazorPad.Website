@@ -200,6 +200,7 @@
     <Content Include="Content\themes\default\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\default\jquery-ui.css" />
     <Content Include="Content\themes\default\ui.jqgrid.css" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\ace-uncompressed.js" />
     <Content Include="Content\themes\default\codemirror.css" />
