@@ -51,6 +51,10 @@ iframe
     width: 100%;
 }
 
+#template-output-container
+{
+    overflow-y: auto;
+}
 
 .tabBar
 {
