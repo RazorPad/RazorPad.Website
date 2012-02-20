@@ -154,7 +154,9 @@ $(function () {
 	});
 
     $('#save').click(function () { RazorPad.saveTemplate(); });
-    $('#clone').click(function () { RazorPad.saveTemplate(true); });
+    if ($("#fiddleId").val()) {
+        $('#clone').click(function () { RazorPad.saveTemplate(true); }).parent().show();
+    }
 
     $.ajaxSetup({
         contentType: "application/json; charset=utf-8",
