@@ -1,11 +1,11 @@
 ﻿var RazorPad = typeof(RazorPad) == 'undefined' ? {} : RazorPad;
 
-RazorPad.saveTemplate = function () {
+RazorPad.saveTemplate = function (clone) {
     RazorPad.showLoading();
     var data = {
         Template: RazorPad.razorEditor.getValue(), //ToDo: Need to find a way to find the editor instance on the page
         Model: JSON.stringify(RazorPad.getModel()),
-        FiddleId: ($('#fiddleId').val() || '')
+        FiddleId: (clone ? '' : ($('#fiddleId').val() || ''))
     };
     $.ajax({
         url: RazorPad.siteRoot + 'Save',
@@ -13,7 +13,7 @@ RazorPad.saveTemplate = function () {
         data: JSON.stringify(data),
         success: function (response) {
             if (!response.Messages) {
-                if (!$('#fiddleId').val()) {
+                if (clone || !$('#fiddleId').val()) {
                     location.href = RazorPad.siteRoot + "Index/" + response;
                 }
                 else {
@@ -31,7 +31,7 @@ RazorPad.saveTemplate = function () {
     });
 };
 
-RazorPad.executeTemplate = function() {
+RazorPad.executeTemplate = function(clone) {
     RazorPad.showLoading();
     var data = {
         Template: RazorPad.razorEditor.getValue(),
@@ -58,7 +58,7 @@ RazorPad.executeTemplate = function() {
             RazorPad.hideLoading();
         }
     });
-} // END executeTemplate()
+}
 
 RazorPad.handleSaveKey = function(evt) {
     RazorPad.saveTemplate();
@@ -87,10 +87,11 @@ RazorPad.hideLoading = function() {
 
 
 RazorPad.getModel = function () {
-    var model = {}, name, val;
+    var model = {}, name, val, type;
     $('#modelGrid > tbody > tr').each(function () {
         name = $(this).find('span.name').text();
         val = $(this).find('span.value').text();
+        type = $(this).data('type');
         if (name && val) {
             model[$.trim(name)] = $.trim(val);
         }
@@ -151,6 +152,9 @@ $(function () {
 	    $('#template-output').text('');
 	    $('#generated-code').text('');
 	});
+
+    $('#save').click(function () { RazorPad.saveTemplate(); });
+    $('#clone').click(function () { RazorPad.saveTemplate(true); });
 
     $.ajaxSetup({
         contentType: "application/json; charset=utf-8",
