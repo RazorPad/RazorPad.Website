@@ -21,17 +21,17 @@ namespace RazorPad.Website
                 new { controller = "RazorPad", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
-            routes.MapRoute(
-                "beta", // Route name
-                "beta", // URL with parameters
-                new { controller = "RazorPad", action = "beta" } // Parameter defaults
-            );
+            //routes.MapRoute(
+            //    "beta", // Route name
+            //    "beta", // URL with parameters
+            //    new { controller = "RazorPad", action = "beta" } // Parameter defaults
+            //);
 
-            routes.MapRoute(
-                "mock", // Route name
-                "mock", // URL with parameters
-                new { controller = "Mock", action = "Index" } // Parameter defaults
-            );
+            //routes.MapRoute(
+            //    "mock", // Route name
+            //    "mock", // URL with parameters
+            //    new { controller = "Mock", action = "Index" } // Parameter defaults
+            //);
         }
 
         protected void Application_Start()

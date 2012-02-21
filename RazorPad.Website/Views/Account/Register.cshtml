@@ -1,0 +1,24 @@
+﻿<form method="post" action="@Url.Action("Login", "Account")">
+    @if (ViewBag.errorMsg != null) { %>
+        <div class="login-error">@ViewBag.errorMsg</div>
+    }
+    <div>
+        <span class="form-label">User name:</span>
+        <span class="form-field"><input type="text" name="UserName" /></span>
+    </div>
+    <div>
+        <span class="form-label">Email</span>
+        <input type="text" name="Email" />
+    </div>
+    <div>
+        <span class="form-label">Password:</span>
+        <span class="form-field"><input type="password" name="Password" /></span>
+    </div>
+    <div>
+        <span class="form-label">Confirm Password:</span>
+        <span class="form-field"><input type="password" name="ConfirmPassword" /></span>
+    </div>
+    <div class="form-button">
+        <input type="submit" value="Login" />
+    </div>
+</form>

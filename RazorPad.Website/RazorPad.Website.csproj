@@ -158,6 +158,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\MockController.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
     <Compile Include="Models\SaveRequest.cs" />
@@ -234,6 +235,8 @@
     <Content Include="Views\Shared\_ResultsPane.cshtml" />
     <Content Include="Views\Shared\_ModelGrid.cshtml" />
     <Content Include="Views\Shared\Ide.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />
