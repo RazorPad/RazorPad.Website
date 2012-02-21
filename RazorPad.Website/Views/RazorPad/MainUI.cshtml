@@ -77,8 +77,8 @@
             tabIndex: -1,
             lineWrapping: true,
             extraKeys: {
-                "Ctrl-S": RazorPad.saveTemplate,
-                "Ctrl-E": RazorPad.executeTemplate
+                "Ctrl-S": function(){ RazorPad.saveTemplate(); },
+                "Ctrl-E": function(){ RazorPad.executeTemplate(); }
             }
         });
 
