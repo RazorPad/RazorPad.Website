@@ -15,23 +15,19 @@ namespace RazorPad.Website
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            routes.MapRoute(
+                "mock", // Route name
+                "mock", // URL with parameters
+                new { controller = "Mock", action = "Index" } // Parameter defaults
+            );
+
             routes.MapRoute(
                 "Default", // Route name
                 "{action}/{id}", // URL with parameters
                 new { controller = "RazorPad", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
+                );
 
-            //routes.MapRoute(
-            //    "beta", // Route name
-            //    "beta", // URL with parameters
-            //    new { controller = "RazorPad", action = "beta" } // Parameter defaults
-            //);
-
-            //routes.MapRoute(
-            //    "mock", // Route name
-            //    "mock", // URL with parameters
-            //    new { controller = "Mock", action = "Index" } // Parameter defaults
-            //);
         }
 
         protected void Application_Start()
@@ -40,6 +36,7 @@ namespace RazorPad.Website
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
 
             DataDocumentStore.Initialize();
         }
