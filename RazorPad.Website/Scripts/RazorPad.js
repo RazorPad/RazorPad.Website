@@ -8,13 +8,13 @@ RazorPad.saveTemplate = function (clone) {
         FiddleId: (clone ? '' : ($('#fiddleId').val() || ''))
     };
     $.ajax({
-        url: RazorPad.siteRoot + 'Save',
+        url: RazorPad.siteRoot + 'RazorPad/Save',
         cache: false,
         data: JSON.stringify(data),
         success: function (response) {
             if (!response.Messages) {
                 if (clone || !$('#fiddleId').val()) {
-                    location.href = RazorPad.siteRoot + "Index/" + response;
+                    location.href = RazorPad.siteRoot + "RazorPad/Index/" + response;
                 }
                 else {
                     RazorPad.hideLoading();
@@ -39,7 +39,7 @@ RazorPad.executeTemplate = function(clone) {
     };
 
     $.ajax({
-        url: RazorPad.siteRoot + 'Execute',
+        url: RazorPad.siteRoot + 'RazorPad/Execute',
         data: JSON.stringify(data),
         success: function (resp) {
             RazorPad.onParseSuccess(resp);

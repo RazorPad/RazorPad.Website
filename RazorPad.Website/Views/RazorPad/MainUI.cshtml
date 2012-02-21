@@ -21,6 +21,7 @@
     var RazorPad = typeof (RazorPad) == 'undefined' ? {} : RazorPad;
     RazorPad.siteRoot = "@(Url.Content("~/"))";
     RazorPad.razorEditor = null;
+    RazorPad.isUserAuthenticated = @(User.Identity.IsAuthenticated ? "true" : "false"); 
     $(function () {
 
         function resizeRazorEditor() {

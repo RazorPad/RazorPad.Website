@@ -224,6 +224,8 @@
     <Content Include="Scripts\codemirror\util\searchcursor.js" />
     <Content Include="Scripts\codemirror\util\simple-hint.css" />
     <Content Include="Scripts\codemirror\util\simple-hint.js" />
+    <Content Include="Scripts\signup.js" />
+    <Content Include="Scripts\login.js" />
     <Content Include="Scripts\jquery.layout-latest.js" />
     <Content Include="Scripts\hpTabs.js" />
     <Content Include="Scripts\jquery.hotkeys.js" />
@@ -240,6 +242,7 @@
     <Content Include="Views\Shared\Ide.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_SimpleLayout.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />

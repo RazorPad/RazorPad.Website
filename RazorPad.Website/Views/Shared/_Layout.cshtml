@@ -15,17 +15,29 @@
 </head>
 <body>
     <div id="toolbar" class="gradient ui-layout-north">
-        <div id="header" class="grid_4 inlinebox">
+        <div id="header">
             <h1 class="insetType" title="Online Tool to play with Razor View Engine">
                 RazorPad</h1>
         </div>
-        <div id="actions" class="inlinebox">
+        <div id="actions">
             <ul class="actionItems">
                 <li><button id="execute">Execute</button></li>
                 <li><button id="save">Save</button></li>
                 <li style="display:none;"><button id="clone">Clone</button></li>
             </ul>
+            <ul class="actionItems floatRight">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li><button onclick="location.href = '@Url.Action("Login", "Account")';">Login</button></li>
+                }
+                else
+                {
+                    <li>Welcome, <strong>@User.Identity.Name</strong></li>
+                }
+            </ul>
+            <div class="clear clearfix"></div>
         </div>
+        <div class="clear clearfix"></div>
     </div>
     <div id="panes">
         @RenderBody()

@@ -1,16 +1,43 @@
-﻿<form method="post" action="@Url.Action("Login", "Account")">
-    @if (ViewBag.errorMsg != null) { %>
-        <div class="login-error">@ViewBag.errorMsg</div>
-    }
-    <div>
-        <span class="form-label">User name:</span>
-        <span class="form-field"><input type="text" name="UserName" /></span>
+﻿@{
+    Layout = "~/Views/Shared/_SimpleLayout.cshtml";
+}
+<div class="login">
+    <form id="loginForm" method="post" action="@Url.Action("Login", "Account")">
+    <div class="login-box">
+        <div class="box">
+            <h2>Login</h2>
+            @if (ViewBag.errorMsg != null)
+            {
+                <div class="errormsg">@ViewBag.errorMsg</div>
+            }
+            <div>
+                <label>
+                    <span class="form-label">User name:</span>
+                    <input class="form-field" type="text" id="UserName" name="UserName" />
+                    <span class="errormsg hide">Enter your user name</span>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <span class="form-label">Password:</span>
+                    <input class="form-field" type="password" id="Password" name="Password" />
+                    <span class="errormsg hide">Enter your password</span>
+                </label>
+            </div>
+            <div class="form-button">
+                <input type="submit" id="loginBtn" value="Login" />
+                <span class="sign-up">Not registered? <a href="@Url.Action("Register", "Account")">Sign Up</a></span>
+                <div class="clear clearfix"></div>
+            </div>
+        </div>
     </div>
-    <div>
-        <span class="form-label">Password:</span>
-        <span class="form-field"><input type="password" name="Password" /></span>
+    <div class="content">
+        Some cotent here Some cotent here<br />
+        Some cotent here Some cotent here<br />
+        Some cotent here Some cotent here<br />
     </div>
-    <div class="form-button">
-        <input type="submit" value="Login" />
+    <div class="clear clearfix">
     </div>
-</form>
+    </form>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/login.js")"></script>
+</div>

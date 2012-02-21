@@ -24,7 +24,7 @@ namespace RazorPad.Website
 
             routes.MapRoute(
                 "Default", // Route name
-                "{action}/{id}", // URL with parameters
+                "{Controller}/{action}/{id}", // URL with parameters
                 new { controller = "RazorPad", action = "Index", id = UrlParameter.Optional } // Parameter defaults
                 );
 
