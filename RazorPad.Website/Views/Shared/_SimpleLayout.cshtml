@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/reset.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/default/default.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/layout-default-latest.css")" type="text/css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/site.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.js")"></script>
+</head>
+<body>
+    <div id="toolbar" class="gradient ui-layout-north">
+        <div id="header" class="grid_4 inlinebox">
+            <h1 class="insetType" title="Online Tool to play with Razor View Engine">
+                RazorPad
+            </h1>
+        </div>
+        <div class="clear clearfix"></div>
+    </div>
+    <div class="content">
+        @RenderBody()
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("#header h1").click(function () {
+                window.location.href = '@Url.Action("Index", "RazorPad")';
+            }).addClass("pointer");
+        });
+    </script>
+</body>
+</html>
