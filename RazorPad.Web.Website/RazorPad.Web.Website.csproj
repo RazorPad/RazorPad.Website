@@ -183,6 +183,8 @@
     <Compile Include="App_Start\Routing.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
+    <Compile Include="Models\Account\ForgotPassword.cs" />
+    <Compile Include="Models\Account\ResetPassword.cs" />
     <Compile Include="Models\RazorPad\SaveRequest.cs" />
     <Compile Include="Models\RazorPad\ExecuteRequest.cs" />
     <Compile Include="Models\RazorPad\ExecuteResult.cs" />
@@ -247,13 +249,13 @@
     <Content Include="Scripts\mode-html.js" />
     <Content Include="Scripts\splitter.js" />
     <Content Include="Scripts\stringformat.js" />
-    <Content Include="Views\Shared\_RazorPane.cshtml" />
-    <Content Include="Views\Shared\_ModelPane.cshtml" />
-    <Content Include="Views\Shared\_ResultsPane.cshtml" />
-    <Content Include="Views\Shared\_ModelGrid.cshtml" />
+    <Content Include="Views\RazorPad\_RazorPane.cshtml" />
+    <Content Include="Views\RazorPad\_ModelPane.cshtml" />
+    <Content Include="Views\RazorPad\_ResultsPane.cshtml" />
+    <Content Include="Views\RazorPad\_ModelGrid.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Shared\_SimpleLayout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
@@ -327,7 +329,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

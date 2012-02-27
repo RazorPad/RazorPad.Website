@@ -4,78 +4,42 @@
     <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/reset.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/themes/default/default.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/themes/default/jquery-ui.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/shCore.css")" type="text/css" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/shThemeDefault.css")" type="text/css" rel="stylesheet" />
     <link href="@Url.Content("~/Content/themes/layout-default-latest.css")" type="text/css" rel="stylesheet" />
     <link href="@Url.Content("~/Content/site.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/themes/default/codemirror.css")" rel="stylesheet" type="text/css" />
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.js")"></script>
+@RenderSection("Head", false)
 </head>
 <body>
+    
     <div id="toolbar" class="gradient ui-layout-north">
         <div id="header">
             <h1 class="insetType" title="Online Tool to play with Razor View Engine">
                 RazorPad</h1>
         </div>
         <div id="actions">
-            <ul class="actionItems">
-                <li><button id="execute">Execute</button></li>
-                <li><button id="save">Save</button></li>
-                <li style="display:none;"><button id="clone">Clone</button></li>
-            </ul>
-            <ul class="actionItems floatRight">
-                @if (!User.Identity.IsAuthenticated)
-                {
-                    <li><button onclick="location.href = '@Url.Action("Login", "Account")';">Login</button></li>
-                }
-                else
-                {
-                    <li>Welcome, <strong>@User.Identity.Name</strong>
-                        <button onclick="location.href = '@Url.Action("Logout", "Account")';">Logout</button>
-                    </li>
-                }
-            </ul>
+            @RenderSection("Actions", false)
             <div class="clear clearfix"></div>
         </div>
         <div class="clear clearfix"></div>
     </div>
-    <div id="panes">
-        @RenderBody()
-    </div>
+
+    @RenderBody()
+
+    @RenderSection("Tail", false)
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-26932248-1']);
+        _gaq.push(['_setDomainName', 'razorpad.net']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
 
 </body>
-
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/underscore.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/splitter.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.watermark.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/stringformat.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/XRegExp.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/shCore.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/shBrushCSharp.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/shBrushXml.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/codemirror/codemirror.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/codemirror/mode/xml.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/codemirror/mode/javascript.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/codemirror/mode/css.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/codemirror/mode/htmlmixed.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/hpTabs.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.hotkeys.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/RazorPad.js")"></script>
-<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.layout-latest.js")"></script>
-
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-26932248-1']);
-  _gaq.push(['_setDomainName', 'razorpad.net']);
-  _gaq.push(['_setAllowLinker', true]);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
 </html>

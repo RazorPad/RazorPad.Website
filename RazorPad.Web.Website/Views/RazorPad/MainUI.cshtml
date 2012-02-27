@@ -1,22 +1,56 @@
 ﻿@model RazorPad.Web.Fiddle
-<div id="razorPane" class="inlinebox">
-    @Html.Partial("_RazorPane", Model.View ?? "")
-</div>
-<div id="modelPane" class="inlinebox">
-    @Html.Partial("_ModelPane")
-</div>
-<div id="resultsPane" class="">
-    @Html.Partial("_ResultsPane")
-</div>
 
+@section Head {
+    <link href="@Url.Content("~/Content/shCore.css")" type="text/css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/shThemeDefault.css")" type="text/css" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/themes/default/codemirror.css")" rel="stylesheet" type="text/css" />
+}
 
+@section Actions {
+    <ul class="actionItems">
+        <li><button id="execute">Execute</button></li>
+        <li><button id="save">Save</button></li>
+        <li style="display:none;"><button id="clone">Clone</button></li>
+    </ul>
 
+    <ul class="actionItems floatRight">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <li><button onclick="location.href = '@Url.Action("Login", "Account")';">Login</button></li>
+        }
+        else
+        {
+            <li>Welcome, <strong>@User.Identity.Name</strong>
+                <button onclick="location.href = '@Url.Action("Logout", "Account")';">Logout</button>
+            </li>
+        }
+    </ul>
+}
 
-<div id="loading"></div>
 @if (Model != null && !string.IsNullOrEmpty(Model.Id))
 {
     <input type="hidden" id="fiddleId" value="@Model.Id" />
 }
+           
+<div id="panes">
+    
+    <div id="razorPane" class="inlinebox">
+        @Html.Partial("_RazorPane", Model.View ?? "")
+    </div>
+    <div id="modelPane" class="inlinebox">
+        @Html.Partial("_ModelPane")
+    </div>
+    <div id="resultsPane" class="">
+        @Html.Partial("_ResultsPane")
+    </div>
+
+    <div id="loading"></div>
+
+</div>
+
+
+@section Tail {
+
 <script type="text/javascript" charset="utf-8">
     var RazorPad = typeof (RazorPad) == 'undefined' ? {} : RazorPad;
     RazorPad.siteRoot = "@(Url.Content("~/"))";
@@ -95,3 +129,22 @@
         }
     });
 </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery-ui.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/underscore.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/splitter.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.watermark.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/stringformat.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/XRegExp.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/shCore.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/shBrushCSharp.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/shBrushXml.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/codemirror/codemirror.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/codemirror/mode/xml.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/codemirror/mode/javascript.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/codemirror/mode/css.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/codemirror/mode/htmlmixed.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/hpTabs.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.hotkeys.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/RazorPad.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.layout-latest.js")"> </script>
+}
