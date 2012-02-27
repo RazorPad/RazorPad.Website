@@ -111,16 +111,15 @@ namespace RazorPad.Website.Controllers
                 sbMailMsg.Append("<br /><br />- RazorPad");
 
                 var mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress(ConfigurationManager.AppSettings["FromAddress"], ConfigurationManager.AppSettings["MailDisplayName"]);
                 mailMessage.To.Add(Email);
                 mailMessage.Subject = "RazorPad - Password Reset";
                 mailMessage.Body = sbMailMsg.ToString();
                 mailMessage.IsBodyHtml = true;
 
-                SmtpClient smtpClient = new SmtpClient();
-                smtpClient.Host = ConfigurationManager.AppSettings["SMTPHostName"];
-                smtpClient.Port = Convert.ToInt16(ConfigurationManager.AppSettings["PortNo"]);
-                smtpClient.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["Username"], ConfigurationManager.AppSettings["Password"]);
+                var smtpClient = new SmtpClient { 
+                    Credentials = new NetworkCredential(ConfigurationManager.AppSettings["SmtpClient.Username"],
+                                                        ConfigurationManager.AppSettings["SmtpClient.Password"])
+                };
                 smtpClient.Send(mailMessage);
 
                 model.Email = userInfo[0].Email;
