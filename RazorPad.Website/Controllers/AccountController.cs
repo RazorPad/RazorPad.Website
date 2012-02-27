@@ -51,8 +51,12 @@ namespace RazorPad.Website.Controllers
         [HttpPost]
         public ActionResult Register(string UserName, string Password, string Email)
         {
-            var session = DataDocumentStore.Instance.OpenSession();
             //ToDo: Check if UserName already exist
+
+            if (ModelState.IsValid == false)
+                return View("Register");
+
+            var session = DataDocumentStore.Instance.OpenSession();
             var userInfo = new User
             {
                 UserName = UserName,
@@ -64,9 +68,7 @@ namespace RazorPad.Website.Controllers
             session.SaveChanges();
             session.Dispose();
 
-            FormsAuthentication.RedirectToLoginPage();
-
-            return View("Register");
+            return Login(UserName, Password, null);
         }
         #endregion
 
