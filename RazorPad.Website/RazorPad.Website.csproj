@@ -163,8 +163,8 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FacebookController.cs" />
-    <Compile Include="Controllers\MockController.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
+    <Compile Include="Services\Sandbox.cs" />
     <Compile Include="Extensions\FacebookExtensions.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />
     <Compile Include="Models\SaveRequest.cs" />
@@ -324,7 +324,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="packages.config" />
-    <Content Include="Views\Mock\Mock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Database\" />

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using RazorPad.Website.Models;
 using System.Web.Security;
@@ -16,32 +14,28 @@ namespace RazorPad.Website.Controllers
 {
     public class AccountController : Controller
     {
-        #region ---- Actions ----
-
-        #region ---- Login ----
-        public ActionResult Login(string UserName, string Password, string ReturnUrl)
+        public ActionResult Login(string userName, string password, string returnUrl)
         {
-            if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password))
+            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
-                if (ValidateUser(UserName, Password))
-                    RedirectFromLoginPage(UserName, ReturnUrl);
+                if (ValidateUser(userName, password))
+                {
+                    FormsAuthentication.SetAuthCookie(userName, false);
+                    return Redirect("~/");
+                }
                 else
                     ViewBag.errorMsg = "Login failed! Make sure you have entered the right user name and password!";
             }
 
             return View("Login");
         }
-        #endregion
 
-        #region ---- Logout ----
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "RazorPad");
         }
-        #endregion
 
-        #region ---- Register ----
         [HttpGet]
         public ActionResult Register()
         {
@@ -49,7 +43,7 @@ namespace RazorPad.Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(string UserName, string Password, string Email)
+        public ActionResult Register(string userName, string password, string email)
         {
             //ToDo: Check if UserName already exist
 
@@ -59,20 +53,18 @@ namespace RazorPad.Website.Controllers
             var session = DataDocumentStore.Instance.OpenSession();
             var userInfo = new User
             {
-                UserName = UserName,
-                Password = Password,
-                Email = Email,
+                UserName = userName,
+                Password = password,
+                Email = email,
                 DateCreated = DateTime.UtcNow
             };
             session.Store(userInfo);
             session.SaveChanges();
             session.Dispose();
 
-            return Login(UserName, Password, null);
+            return Login(userName, password, null);
         }
-        #endregion
 
-        #region ---- ForgotPassword ----
         [HttpGet]
         public ActionResult ForgotPassword()
         {
@@ -80,11 +72,11 @@ namespace RazorPad.Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult ForgotPassword(string Email)
+        public ActionResult ForgotPassword(string email)
         {
             var session = DataDocumentStore.Instance.OpenSession();
             var userInfo = session.Query<User>()
-                            .Where(u => u.Email == Email)
+                            .Where(u => u.Email == email)
                             .ToArray<User>();
             var model = new ForgotPassword();
             model.EmailNotFound = (userInfo == null || userInfo.Length == 0);
@@ -113,7 +105,7 @@ namespace RazorPad.Website.Controllers
                 sbMailMsg.Append("<br /><br />- RazorPad");
 
                 var mailMessage = new MailMessage();
-                mailMessage.To.Add(Email);
+                mailMessage.To.Add(email);
                 mailMessage.Subject = "RazorPad - Password Reset";
                 mailMessage.Body = sbMailMsg.ToString();
                 mailMessage.IsBodyHtml = true;
@@ -131,19 +123,17 @@ namespace RazorPad.Website.Controllers
             
             return View("ForgotPassword", model);
         }
-        #endregion
 
-        #region ---- ResetPassword ----
         [HttpGet]
-        public ActionResult ResetPassword(string Token)
+        public ActionResult ResetPassword(string token)
         {
             var model = new ResetPassword();
-            model.TokenNotFound = string.IsNullOrEmpty(Token);
+            model.TokenNotFound = string.IsNullOrEmpty(token);
             if(!model.TokenNotFound)
             {
                 var session = DataDocumentStore.Instance.OpenSession();
                 var userInfo = session.Query<User>()
-                                .Where(u => u.ForgotPasswordToken == Token)
+                                .Where(u => u.ForgotPasswordToken == token)
                                 .ToArray<User>();
                 
                 //ToDo: Check if the token is expired
@@ -160,18 +150,18 @@ namespace RazorPad.Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult ResetPassword(string UserId, string Password)
+        public ActionResult ResetPassword(string userId, string password)
         {
             var session = DataDocumentStore.Instance.OpenSession();
             session.Advanced.DatabaseCommands.Patch(
-                    "Users-" + UserId,
+                    "Users-" + userId,
                     new[]
                         {
                             new PatchRequest
                                 {
                                     Type = PatchCommandType.Set,
                                     Name = "Password",
-                                    Value = Password
+                                    Value = password
                                 }
                         });
             session.SaveChanges();
@@ -179,37 +169,20 @@ namespace RazorPad.Website.Controllers
 
             return RedirectToAction("Login", "Account");
         }
-        #endregion
 
-        #endregion
-
-        #region ---- Private Methods ----
-
-        private bool ValidateUser(string UserName, string Password)
+        private bool ValidateUser(string userName, string password)
         {
             bool isValid = false;
             var session = DataDocumentStore.Instance.OpenSession();
             var userInfo = session.Query<User>()
-                           .Where(u => u.UserName == UserName && u.Password == Password)
+                           .Where(u => u.UserName == userName && u.Password == password)
                            .ToArray<User>();
             if (userInfo != null && userInfo.Length > 0)
             {
-                isValid = string.Compare(userInfo[0].Password, Password, true) == 0;
+                isValid = string.Compare(userInfo[0].Password, password, true) == 0;
             }
             session.Dispose();
             return isValid;
         }
-
-        private void RedirectFromLoginPage(string UserName, string ReturnUrl)
-        {
-            //ToDo: Persist User
-            FormsAuthentication.SetAuthCookie(UserName, false);
-
-            if (!string.IsNullOrEmpty(ReturnUrl))
-                Response.Redirect(ReturnUrl);
-            else
-                Response.Redirect(FormsAuthentication.DefaultUrl);
-        }
-        #endregion
     }
 }
