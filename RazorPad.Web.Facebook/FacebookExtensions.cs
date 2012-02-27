@@ -1,9 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using RazorPad.Website.Controllers;
-using RazorPad.Website.Services;
 
-namespace RazorPad.Website.Extensions
+namespace RazorPad.Web.Facebook
 {
     public static class FacebookExtensions
     {

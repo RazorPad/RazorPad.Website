@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using RazorPad.DynamicModel;
 using System.Web.Script.Serialization;
-namespace RazorPad.Website.Models
+using RazorPad.Web.Dynamic;
+
+namespace RazorPad.Web
 {
     public class Fiddle
     {

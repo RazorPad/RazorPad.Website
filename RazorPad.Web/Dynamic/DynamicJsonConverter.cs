@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Web.Script.Serialization;
 
-namespace RazorPad.DynamicModel
+namespace RazorPad.Web.Dynamic
 {
     public class DynamicJsonConverter : JavaScriptConverter
     {

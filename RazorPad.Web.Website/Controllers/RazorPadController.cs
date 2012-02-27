@@ -2,15 +2,16 @@
 using System.CodeDom.Compiler;
 using System.IO;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using Raven.Abstractions.Data;
 using RazorPad.Compilation;
 using RazorPad.Compilation.Hosts;
-using RazorPad.Website.Models;
-using System.Web.Script.Serialization;
-using RazorPad.DynamicModel;
-using Raven.Abstractions.Data;
-using RazorPad.Website.Services;
+using RazorPad.Web.Dynamic;
+using RazorPad.Web.Services;
+using RazorPad.Web.Website.Models.RazorPad;
+using RazorPad.Web.RavenDb;
 
-namespace RazorPad.Website.Controllers
+namespace RazorPad.Web.Website.Controllers
 {
     [ValidateInput(false)]
     public class RazorPadController : Controller

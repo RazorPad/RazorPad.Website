@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using RazorPad.Website.Models;
+using RazorPad.Web.RavenDb;
 
 namespace RazorPad.Web.Website
 {
@@ -36,7 +36,6 @@ namespace RazorPad.Web.Website
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-
 
             DataDocumentStore.Initialize();
         }

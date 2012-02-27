@@ -6,7 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Script.Serialization;
 
-namespace RazorPad.Website.Services
+namespace RazorPad.Web.Facebook
 {
     public class FacebookUser
     {

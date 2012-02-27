@@ -1,4 +1,4 @@
-namespace RazorPad.Website.Models
+namespace RazorPad.Web.Website.Models.RazorPad
 {
     public enum TemplateMessageKind
     {

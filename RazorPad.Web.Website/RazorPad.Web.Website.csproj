@@ -320,21 +320,25 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\RazorPad\MainUI.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\RazorPad.Core\RazorPad.Core.csproj">
-      <Project>{511D144C-F4C7-40A3-B3B4-80D891FCE2F5}</Project>
+      <Project>{511d144c-f4c7-40a3-b3b4-80d891fce2f5}</Project>
       <Name>RazorPad.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RazorPad.Web.Facebook\RazorPad.Web.Facebook.csproj">
+      <Project>{b5d86ffd-300c-44de-b28a-cdff8bc60027}</Project>
+      <Name>RazorPad.Web.Facebook</Name>
     </ProjectReference>
     <ProjectReference Include="..\RazorPad.Web.RavenDb\RazorPad.Web.RavenDb.csproj">
       <Project>{d8fdf341-d9de-4c69-9e8c-db910587ed51}</Project>
       <Name>RazorPad.Web.RavenDb</Name>
     </ProjectReference>
     <ProjectReference Include="..\RazorPad.Web\RazorPad.Web.csproj">
-      <Project>{8687FA7B-28F1-421B-AEF3-404F68B501B4}</Project>
+      <Project>{8687fa7b-28f1-421b-aef3-404f68b501b4}</Project>
       <Name>RazorPad.Web</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\RazorPad\MainUI.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -2,10 +2,8 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using RazorPad.Website.Extensions;
-using RazorPad.Website.Services;
 
-namespace RazorPad.Website.Controllers
+namespace RazorPad.Web.Facebook
 {
     public class FacebookController : Controller
     {

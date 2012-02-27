@@ -2,7 +2,7 @@
 using Raven.Client;
 using Raven.Client.Embedded;
 
-namespace RazorPad.Website.Models
+namespace RazorPad.Web.RavenDb
 {
     public class DataDocumentStore
     {

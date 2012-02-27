@@ -2,7 +2,7 @@ using System;
 using RazorPad.Compilation;
 using RazorPad.Compilation.Hosts;
 
-namespace RazorPad.Website.Services
+namespace RazorPad.Web.Services
 {
     public class Sandbox : MarshalByRefObject
     {

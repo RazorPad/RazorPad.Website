@@ -1,11 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Script.Serialization;
+﻿using System.Web.Script.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace RazorPad.DynamicModel.Tests
+namespace RazorPad.Web.Dynamic
 {
     /// <summary>
     /// Summary description for UnitTest1

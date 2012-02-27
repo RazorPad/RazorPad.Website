@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Text;
 
-namespace RazorPad.DynamicModel
+namespace RazorPad.Web.Dynamic
 {
     public class JsonDynamicObject : DynamicObject
     {

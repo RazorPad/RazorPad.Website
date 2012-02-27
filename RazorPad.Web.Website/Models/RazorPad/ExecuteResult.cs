@@ -2,7 +2,7 @@
 using System.CodeDom.Compiler;
 using System.Linq;
 
-namespace RazorPad.Website.Models
+namespace RazorPad.Web.Website.Models.RazorPad
 {
     [Serializable]
     public class ExecuteResult : ParseResult

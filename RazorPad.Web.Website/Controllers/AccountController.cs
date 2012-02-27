@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using RazorPad.Website.Models;
 using System.Web.Security;
 using Raven.Abstractions.Data;
 using System.Text;
-using RazorPad.Core;
 using System.Net.Mail;
 using System.Net;
 using System.Configuration;
+using Raven.Client.Linq;
+using RazorPad.Core;
+using RazorPad.Web.RavenDb;
 
-namespace RazorPad.Website.Controllers
+namespace RazorPad.Web.Website.Controllers
 {
     public class AccountController : Controller
     {
@@ -101,7 +102,7 @@ namespace RazorPad.Website.Controllers
                 var sbMailMsg = new StringBuilder();
                 sbMailMsg.AppendFormat("Hi {0},<br /><br />", userInfo[0].UserName);
                 sbMailMsg.Append("Please click the below link to reset your password.<br /><br />");
-                sbMailMsg.AppendFormat("<a href=\"{0}\">{0}</a>", Url.AbsoluteAction("ResetPassword", "Account", null) + "?token=" + token);
+                sbMailMsg.AppendFormat("<a href=\"{0}\">{0}</a>", Url.ExternalAction("ResetPassword", "Account", null) + "?token=" + token);
                 sbMailMsg.Append("<br /><br />- RazorPad");
 
                 var mailMessage = new MailMessage();
@@ -176,7 +177,7 @@ namespace RazorPad.Website.Controllers
             var session = DataDocumentStore.OpenSession();
             var userInfo = session.Query<User>()
                            .Where(u => u.UserName == userName && u.Password == password)
-                           .ToArray<User>();
+                           .ToArray();
             if (userInfo != null && userInfo.Length > 0)
             {
                 isValid = string.Compare(userInfo[0].Password, password, true) == 0;

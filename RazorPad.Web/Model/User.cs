@@ -1,5 +1,6 @@
 ﻿using System;
-namespace RazorPad.Website.Models
+
+namespace RazorPad.Web
 {
     public class User
     {
