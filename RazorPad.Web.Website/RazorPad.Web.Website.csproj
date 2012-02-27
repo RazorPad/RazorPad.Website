@@ -85,9 +85,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RavenDB-Embedded.1.0.658-Unstable\lib\net40\Lucene.Net.Contrib.SpellChecker.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC3.2.2.2.0\lib\net40-Full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
@@ -160,17 +170,20 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\GlobalFilters.cs" />
+    <Compile Include="App_Start\NinjectMVC3.cs" />
+    <Compile Include="App_Start\Routing.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
     <Compile Include="Models\RazorPad\SaveRequest.cs" />
     <Compile Include="Models\RazorPad\ExecuteRequest.cs" />
     <Compile Include="Models\RazorPad\ExecuteResult.cs" />
     <Compile Include="Models\RazorPad\ParseRequest.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="Models\RazorPad\ParseResult.cs" />
     <Compile Include="Models\RazorPad\TemplateMessage.cs" />
     <Compile Include="Models\RazorPad\TemplateMessageKind.cs" />
@@ -203,7 +216,6 @@
     <Content Include="Content\themes\default\jquery-ui.css" />
     <Content Include="Content\themes\default\ui.jqgrid.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Global.asax" />
     <Content Include="Scripts\ace-uncompressed.js" />
     <Content Include="Content\themes\default\codemirror.css" />
     <Content Include="Scripts\codemirror\codemirror.js" />

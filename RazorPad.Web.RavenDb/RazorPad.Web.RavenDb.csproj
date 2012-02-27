@@ -95,6 +95,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentSessionFactory.cs" />
+    <Compile Include="DocumentStoreFactory.cs" />
     <Compile Include="RavenDbRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -16,20 +16,9 @@ namespace RazorPad.Web.Website.Controllers
     {
         private readonly IRepository _repository;
 
-        public RazorPadController()
-            : this(new RavenDb.RavenDbRepository())
-        {
-        }
-
         public RazorPadController(IRepository repository)
         {
             _repository = repository;
-        }
-
-        protected override void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-            // Move this to DI container
-            _repository.Dispose();
         }
 
         public ActionResult Index(string id)
