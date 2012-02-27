@@ -48,10 +48,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\RazorPad.Core\RazorPad.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\assets\RazorPad.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AsyncCtpLibrary, Version=1.0.4107.18181, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -255,9 +255,6 @@
     <None Include="_bin_deployableAssemblies\System.Web.Razor.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.Helpers.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.Mvc.dll" />
-    <None Include="..\RazorPad.Core\RazorPad.snk">
-      <Link>RazorPad.snk</Link>
-    </None>
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\default\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\default\images\ui-bg_flat_75_ffffff_40x100.png" />
