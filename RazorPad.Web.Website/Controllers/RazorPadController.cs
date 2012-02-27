@@ -88,7 +88,6 @@ namespace RazorPad.Web.Website.Controllers
             {
                 fiddle = new Fiddle
                 {
-                    Id = Guid.NewGuid().ToString("N"),
                     View = request.Template,
                     InputModel = request.Model,
                     Language = request.Language.ToString(),
