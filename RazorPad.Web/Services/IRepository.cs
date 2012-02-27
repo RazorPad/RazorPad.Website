@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace RazorPad.Web.Services
 {
@@ -7,7 +7,9 @@ namespace RazorPad.Web.Services
     {
         TModel Load<TModel>(string id);
 
-        IEnumerable<TModel> Query<TModel>(Func<TModel, bool> predicate = null);
+        IQueryable<TModel> Query<TModel>();
+
+        void Save<TModel>(TModel instance);
 
         TModel SingleOrDefault<TModel>(Func<TModel, bool> predicate);
     }

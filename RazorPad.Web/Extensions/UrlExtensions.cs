@@ -6,7 +6,7 @@ namespace RazorPad.Web
 {
     public static class UrlExtensions
     {
-        public static string ExternalAction(this UrlHelper url, string actionName, string controllerName, object routeValues)
+        public static string ExternalAction(this UrlHelper url, string actionName, string controllerName, object routeValues = null)
         {
             var requestUrl = url.Action(actionName, controllerName, routeValues);
             return ExternalUrl(url, requestUrl);

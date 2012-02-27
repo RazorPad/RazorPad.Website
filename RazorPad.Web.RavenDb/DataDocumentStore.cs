@@ -26,7 +26,7 @@ namespace RazorPad.Web.RavenDb
         {
 // TODO: Replace with DI
 #if(AppHarbor)
-            instance = new Raven.Client.Document.DocumentStore { ConnectionStringName = "RavenDB" };
+            _instance = new Raven.Client.Document.DocumentStore { ConnectionStringName = "RavenDB" };
 #else
             _instance = new EmbeddableDocumentStore { ConnectionStringName = "RavenDB" };
 #endif

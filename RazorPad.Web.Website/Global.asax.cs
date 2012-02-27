@@ -36,8 +36,6 @@ namespace RazorPad.Web.Website
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-
-            DataDocumentStore.Initialize();
         }
 
     }

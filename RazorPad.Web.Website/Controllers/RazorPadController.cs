@@ -3,27 +3,41 @@ using System.CodeDom.Compiler;
 using System.IO;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using Raven.Abstractions.Data;
 using RazorPad.Compilation;
 using RazorPad.Compilation.Hosts;
 using RazorPad.Web.Dynamic;
 using RazorPad.Web.Services;
 using RazorPad.Web.Website.Models.RazorPad;
-using RazorPad.Web.RavenDb;
 
 namespace RazorPad.Web.Website.Controllers
 {
     [ValidateInput(false)]
     public class RazorPadController : Controller
     {
+        private readonly IRepository _repository;
+
+        public RazorPadController()
+            : this(new RavenDb.RavenDbRepository())
+        {
+        }
+
+        public RazorPadController(IRepository repository)
+        {
+            _repository = repository;
+        }
+
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            // Move this to DI container
+            _repository.Dispose();
+        }
+
         public ActionResult Index(string id)
         {
             Fiddle fiddle = null;
             if (!string.IsNullOrEmpty(id))
             {
-                var session = DataDocumentStore.OpenSession();
-                fiddle = session.Load<Fiddle>(id);
-                session.Dispose();
+                fiddle = _repository.Load<Fiddle>(id);
             }
             return View("MainUI", fiddle ?? new Fiddle());
         }
@@ -79,49 +93,31 @@ namespace RazorPad.Web.Website.Controllers
             
         public JsonResult Save([Bind(Prefix = "")]SaveRequest request)
         {
-            var session = DataDocumentStore.OpenSession();
-            
+            var fiddle = _repository.SingleOrDefault<Fiddle>(f => f.Id == request.FiddleId);
 
-            var fiddleId = request.FiddleId;
-            if (string.IsNullOrEmpty(fiddleId))
+            if (fiddle == null)
             {
-                var fiddle = new Fiddle
+                fiddle = new Fiddle
                 {
+                    Id = Guid.NewGuid().ToString("N"),
                     View = request.Template,
                     InputModel = request.Model,
                     Language = request.Language.ToString(),
                     DateCreated = DateTime.UtcNow,
-                    CreatedBy = ""//ToDo: Set Created By
+                    CreatedBy = User.Identity.Name ?? "Anonymous User"
                 };
 
-                session.Store(fiddle);
-                session.SaveChanges();
-                fiddleId = session.Advanced.GetDocumentId(fiddle);
+                _repository.Save(fiddle);
             }
             else
             {
-                session.Advanced.DatabaseCommands.Patch(
-                    fiddleId,
-                    new[]
-                        {
-                            new PatchRequest
-                                {
-                                    Type = PatchCommandType.Set,
-                                    Name = "View",
-                                    Value = request.Template
-                                },
-                            new PatchRequest
-                                {
-                                    Type = PatchCommandType.Set,
-                                    Name = "InputModel",
-                                    Value = request.Model
-                                }
-                        });
-                session.SaveChanges();
+                fiddle.View = request.Template;
+                fiddle.InputModel = request.Model;
             }
-            session.Dispose();
+
+            _repository.SaveChanges();
     
-            return Json(fiddleId);
+            return Json(fiddle.Id);
         }
 
         protected override void OnException(ExceptionContext filterContext)
