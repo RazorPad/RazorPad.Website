@@ -2,7 +2,7 @@
 using System.Web.Routing;
 using RazorPad.Website.Models;
 
-namespace RazorPad.Website
+namespace RazorPad.Web.Website
 {
     public class MvcApplication : System.Web.HttpApplication
     {

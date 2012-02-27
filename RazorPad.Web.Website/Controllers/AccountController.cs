@@ -50,7 +50,7 @@ namespace RazorPad.Website.Controllers
             if (ModelState.IsValid == false)
                 return View("Register");
 
-            var session = DataDocumentStore.Instance.OpenSession();
+            var session = DataDocumentStore.OpenSession();
             var userInfo = new User
             {
                 UserName = userName,
@@ -74,7 +74,7 @@ namespace RazorPad.Website.Controllers
         [HttpPost]
         public ActionResult ForgotPassword(string email)
         {
-            var session = DataDocumentStore.Instance.OpenSession();
+            var session = DataDocumentStore.OpenSession();
             var userInfo = session.Query<User>()
                             .Where(u => u.Email == email)
                             .ToArray<User>();
@@ -131,7 +131,7 @@ namespace RazorPad.Website.Controllers
             model.TokenNotFound = string.IsNullOrEmpty(token);
             if(!model.TokenNotFound)
             {
-                var session = DataDocumentStore.Instance.OpenSession();
+                var session = DataDocumentStore.OpenSession();
                 var userInfo = session.Query<User>()
                                 .Where(u => u.ForgotPasswordToken == token)
                                 .ToArray<User>();
@@ -152,7 +152,7 @@ namespace RazorPad.Website.Controllers
         [HttpPost]
         public ActionResult ResetPassword(string userId, string password)
         {
-            var session = DataDocumentStore.Instance.OpenSession();
+            var session = DataDocumentStore.OpenSession();
             session.Advanced.DatabaseCommands.Patch(
                     "Users-" + userId,
                     new[]
@@ -173,7 +173,7 @@ namespace RazorPad.Website.Controllers
         private bool ValidateUser(string userName, string password)
         {
             bool isValid = false;
-            var session = DataDocumentStore.Instance.OpenSession();
+            var session = DataDocumentStore.OpenSession();
             var userInfo = session.Query<User>()
                            .Where(u => u.UserName == userName && u.Password == password)
                            .ToArray<User>();

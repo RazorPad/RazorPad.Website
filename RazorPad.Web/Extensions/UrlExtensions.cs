@@ -29,9 +29,20 @@ namespace RazorPad.Website.Extensions
             if(relativeUrl.StartsWith("~/"))
                 absoluteUrl = VirtualPathUtility.ToAbsolute(relativeUrl);
 
-            var externalUrl = string.Format("{0}://{1}{2}", requestUrl.Scheme, requestUrl.Authority, absoluteUrl);
+            var hostPath = new UriBuilder
+            {
+                Host = requestUrl.Host,
+                Path = "/",
+                Port = requestUrl.Port,
+                Scheme = requestUrl.Scheme,
+            };
 
-            return externalUrl;
+#if(AppHarbor)
+            // AppHarbor External Url fix
+            hostPath.Port = 80;
+#endif
+
+            return new Uri(hostPath.Uri, absoluteUrl).AbsoluteUri;
         }
 
     }

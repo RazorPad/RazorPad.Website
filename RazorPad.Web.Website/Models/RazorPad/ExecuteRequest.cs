@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Web.Razor;
+﻿using System.Web.Razor;
 using RazorPad.Compilation;
-using RazorPad.DynamicModel;
 
 namespace RazorPad.Website.Models
 {
-    public class SaveRequest : ParseRequest
+    public class ExecuteRequest : ParseRequest
     {
         public string Model { get; set; }
 
@@ -25,8 +23,6 @@ namespace RazorPad.Website.Models
             }
             set { }
         }
-
-        public string FiddleId { get; set; }
     }
 
     

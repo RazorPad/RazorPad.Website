@@ -20,7 +20,7 @@ namespace RazorPad.Website.Controllers
             Fiddle fiddle = null;
             if (!string.IsNullOrEmpty(id))
             {
-                var session = DataDocumentStore.Instance.OpenSession();
+                var session = DataDocumentStore.OpenSession();
                 fiddle = session.Load<Fiddle>(id);
                 session.Dispose();
             }
@@ -78,7 +78,7 @@ namespace RazorPad.Website.Controllers
             
         public JsonResult Save([Bind(Prefix = "")]SaveRequest request)
         {
-            var session = DataDocumentStore.Instance.OpenSession();
+            var session = DataDocumentStore.OpenSession();
             
 
             var fiddleId = request.FiddleId;
