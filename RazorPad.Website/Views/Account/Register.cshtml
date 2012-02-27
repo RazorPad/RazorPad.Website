@@ -1,41 +1,41 @@
 ﻿@{
     Layout = "~/Views/Shared/_SimpleLayout.cshtml";
 }
-<div class="login">
-    <form id="signUpForm" method="post" action="@Url.Action("Register", "Account")">
-    <div class="login-box">
+<div class="form">
+    <form name="signUpForm" method="post" action="@Url.Action("Register", "Account")">
+    <div class="form-box">
         <div class="box">
             <h2>Sign Up</h2>
             @if (ViewBag.errorMsg != null)
             {
-                <div class="errormsg">@ViewBag.errorMsg</div>
+                <div class="severErrorMsg">@ViewBag.errorMsg</div>
             }
             <div>
                 <label>
                     <span class="form-label">Email:</span>
-                    <input class="form-field" type="text" id="Email" name="Email" />
-                    <span class="errormsg hide">Enter your email</span>
+                    <input class="form-field" maxlength="50" type="text" id="Email" name="Email" />
+                    <span class="errorMsg hide">Enter your email</span>
                 </label>
             </div>
             <div>
                 <label>
                     <span class="form-label">User name:</span>
-                    <input class="form-field" type="text" id="UserName" name="UserName" />
-                    <span class="errormsg hide">Enter your user name</span>
+                    <input class="form-field" maxlength="25" type="text" id="UserName" name="UserName" />
+                    <span class="errorMsg hide">Enter your user name</span>
                 </label>
             </div>
             <div>
                 <label>
                     <span class="form-label">Password:</span>
-                    <input class="form-field" type="password" id="Password" name="Password" />
-                    <span class="errormsg hide">Enter your password</span>
+                    <input class="form-field" maxlength="25" type="password" id="Password" name="Password" />
+                    <span class="errorMsg hide">Enter your password</span>
                 </label>
             </div>
             <div>
                 <label>
                     <span class="form-label">Confirm password:</span>
-                    <input class="form-field" type="password" id="ConfirmPassword" name="ConfirmPassword" />
-                    <span class="errormsg hide">Password do no match</span>
+                    <input class="form-field" maxlength="25" type="password" id="ConfirmPassword" name="ConfirmPassword" />
+                    <span class="errorMsg hide">Password do no match</span>
                 </label>
             </div>
             <div class="form-button">
@@ -51,5 +51,5 @@
     <div class="clear clearfix">
     </div>
     </form>
-    <script type="text/javascript" src="@Url.Content("~/Scripts/signup.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/userManagement.js")"></script>
 </div>

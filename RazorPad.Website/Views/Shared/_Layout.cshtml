@@ -32,7 +32,9 @@
                 }
                 else
                 {
-                    <li>Welcome, <strong>@User.Identity.Name</strong></li>
+                    <li>Welcome, <strong>@User.Identity.Name</strong>
+                        <button onclick="location.href = '@Url.Action("Logout", "Account")';">Logout</button>
+                    </li>
                 }
             </ul>
             <div class="clear clearfix"></div>

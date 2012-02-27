@@ -19,6 +19,19 @@ table {
 	height: inherit;
 }
 
+a:link {
+	color: #2a61ae;
+	text-decoration: none
+}
+a:visited {
+	color: #2a61ae; 
+	text-decoration: none
+}
+a:hover {
+	color: #2a61ae;
+	text-decoration: underline
+}
+
 .container
 {
     height: 100%;
@@ -523,19 +536,19 @@ iframe
 	display: block;
 }
 
-.login
+.form
 {
     background:#ffffff;
     margin:40px 40px;
 }
 
-.login-box
+.form-box
 {
     width:370px;
     float:left;
 }
 
-.login-box .box
+.form-box .box
 {
     padding: 20px 25px 15px;
     background: #eee;
@@ -543,23 +556,23 @@ iframe
     
 }
 
-.login-box h2
+.form-box h2
 {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 17px;
     height: 16px;
     margin: 0 0 1.2em;
     position: relative;
 }
 
-.login .content
+.form .content
 {
     float:left;
     font-size:120%;
     padding: 5px 20px 0px 20px;
 }
 
-.login-box label {
+.form-box label {
     display: block;
     margin: 0 0 1.5em;
 }
@@ -577,9 +590,14 @@ iframe
     height: 25px;
     font-size: 15px;
 }
-.errormsg
+.form-box .form-field
+{
+    width: 315px;
+}
+.errorMsg, .severErrorMsg
 {
     color:Red;
+    margin-bottom:10px;
 }
 .hide
 {
@@ -590,7 +608,7 @@ iframe
     float:right;
     margin:5px 0px 0px 10px;
 }
-.form-button .sign-up a
+.form-box .info
 {
-    text-decoration:none;
+    margin-bottom: 20px;
 }

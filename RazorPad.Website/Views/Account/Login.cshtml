@@ -1,31 +1,35 @@
 ﻿@{
     Layout = "~/Views/Shared/_SimpleLayout.cshtml";
 }
-<div class="login">
-    <form id="loginForm" method="post" action="@Url.Action("Login", "Account")">
-    <div class="login-box">
+<div class="form">
+    <form name="loginForm" method="post" action="@Url.Action("Login", "Account")">
+    <div class="form-box">
         <div class="box">
             <h2>Login</h2>
             @if (ViewBag.errorMsg != null)
             {
-                <div class="errormsg">@ViewBag.errorMsg</div>
+                <div class="severErrorMsg">@ViewBag.errorMsg</div>
             }
             <div>
                 <label>
                     <span class="form-label">User name:</span>
-                    <input class="form-field" type="text" id="UserName" name="UserName" />
-                    <span class="errormsg hide">Enter your user name</span>
+                    <input tabindex="1" maxlength="25" class="form-field" type="text" id="UserName" name="UserName" />
+                    <span class="errorMsg hide">Enter your user name</span>
                 </label>
             </div>
             <div>
                 <label>
-                    <span class="form-label">Password:</span>
-                    <input class="form-field" type="password" id="Password" name="Password" />
-                    <span class="errormsg hide">Enter your password</span>
+                    <div>
+                        <span class="form-label floatLeft">Password:</span>
+                        <a href="@Url.Action("ForgotPassword", "Account")" class="floatRight">Forgot Password?</a>
+                        <div class="clear"></div>
+                    </div>
+                    <input tabindex="2"  maxlength="25" class="form-field" type="password" id="Password" name="Password" />
+                    <span class="errorMsg hide">Enter your password</span>
                 </label>
             </div>
             <div class="form-button">
-                <input type="submit" id="loginBtn" value="Login" />
+                <input tabindex="3" type="submit" id="loginBtn" value="Login" />
                 <span class="sign-up">Not registered? <a href="@Url.Action("Register", "Account")">Sign Up</a></span>
                 <div class="clear clearfix"></div>
             </div>
@@ -39,5 +43,5 @@
     <div class="clear clearfix">
     </div>
     </form>
-    <script type="text/javascript" src="@Url.Content("~/Scripts/login.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/userManagement.js")"></script>
 </div>
