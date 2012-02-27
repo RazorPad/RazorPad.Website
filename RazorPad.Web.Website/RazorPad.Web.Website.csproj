@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RazorPad.Website</RootNamespace>
-    <AssemblyName>RazorPad.Website</AssemblyName>
+    <RootNamespace>RazorPad.Web.Website</RootNamespace>
+    <AssemblyName>RazorPad.Web.Website</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -164,7 +164,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FacebookController.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
-    <Compile Include="Services\Sandbox.cs" />
     <Compile Include="Extensions\FacebookExtensions.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />
     <Compile Include="Models\SaveRequest.cs" />
@@ -323,16 +322,16 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\Database\" />
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RazorPad.Core\RazorPad.Core.csproj">
       <Project>{511D144C-F4C7-40A3-B3B4-80D891FCE2F5}</Project>
       <Name>RazorPad.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RazorPad.DynamicModel\RazorPad.DynamicModel.csproj">
+    <ProjectReference Include="..\RazorPad.Web\RazorPad.Web.csproj">
       <Project>{8687FA7B-28F1-421B-AEF3-404F68B501B4}</Project>
-      <Name>RazorPad.DynamicModel</Name>
+      <Name>RazorPad.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -9,8 +9,8 @@
     <ProjectGuid>{C58BCD42-B3C8-41AA-9A9E-53CC5E75286B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RazorPad.DynamicModel.Tests</RootNamespace>
-    <AssemblyName>RazorPad.DynamicModel.Tests</AssemblyName>
+    <RootNamespace>RazorPad.Web</RootNamespace>
+    <AssemblyName>RazorPad.Web.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -48,12 +48,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="JsonDynamicObjectTests.cs" />
+    <Compile Include="Dynamic\JsonDynamicObjectTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RazorPad.DynamicModel\RazorPad.DynamicModel.csproj">
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RazorPad.Web\RazorPad.Web.csproj">
       <Project>{8687FA7B-28F1-421B-AEF3-404F68B501B4}</Project>
-      <Name>RazorPad.DynamicModel</Name>
+      <Name>RazorPad.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
