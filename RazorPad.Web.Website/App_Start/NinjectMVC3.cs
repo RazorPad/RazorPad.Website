@@ -1,3 +1,4 @@
+using Ninject.Extensions.Conventions;
 using RazorPad.Web.Services;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(RazorPad.Web.Website.App_Start.NinjectMVC3), "Start")]
@@ -48,6 +49,10 @@ namespace RazorPad.Web.Website.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Scan(scanner => {
+                scanner.FromAssembliesMatching("RazorPad.*");
+                scanner.BindWithDefaultConventions();
+            });
 
             kernel.Bind<IRepository>()
                 .To<RavenDb.RavenDbRepository>()

@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -58,8 +59,10 @@
     <Compile Include="Model\Fiddle.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ForgotPasswordEmailer.cs" />
     <Compile Include="Services\IRepository.cs" />
     <Compile Include="Services\IUnitOfWork.cs" />
+    <Compile Include="Services\MembershipService.cs" />
     <Compile Include="Services\Sandbox.cs" />
   </ItemGroup>
   <ItemGroup>

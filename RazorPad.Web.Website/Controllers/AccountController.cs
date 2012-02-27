@@ -1,72 +1,29 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
-using System.Text;
-using System.Net.Mail;
-using System.Net;
-using System.Configuration;
 using RazorPad.Web.Services;
 
 namespace RazorPad.Web.Website.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IRepository _repository;
+        internal static Action<string> AuthenticateUserThunk =
+            username => FormsAuthentication.SetAuthCookie(username, false);
 
-        public AccountController(IRepository repository)
+        internal static Action DeauthenticateUserThunk =
+            () => FormsAuthentication.SignOut();
+
+
+        private readonly IMembershipService _membershipService;
+        private readonly IForgotPasswordEmailer _forgotPasswordEmailer;
+
+
+        public AccountController(IMembershipService membershipService, IForgotPasswordEmailer forgotPasswordEmailer)
         {
-            _repository = repository;
+            _membershipService = membershipService;
+            _forgotPasswordEmailer = forgotPasswordEmailer;
         }
 
-        public ActionResult Login(string userName, string password, string returnUrl)
-        {
-            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
-            {
-                if (IsValidUser(userName, password))
-                {
-                    FormsAuthentication.SetAuthCookie(userName, false);
-                    return Redirect("~/");
-                }
-
-                ViewBag.errorMsg = "Login failed! Make sure you have entered the right user name and password!";
-            }
-
-            return View("Login");
-        }
-
-        public ActionResult Logout()
-        {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "RazorPad");
-        }
-
-        [HttpGet]
-        public ActionResult Register()
-        {
-            return View("Register");
-        }
-
-        [HttpPost]
-        public ActionResult Register(string userName, string password, string email)
-        {
-            //ToDo: Check if UserName already exist
-
-            if (ModelState.IsValid == false)
-                return View("Register");
-
-            var user = new User
-            {
-                UserName = userName,
-                Password = password,
-                Email = email,
-                DateCreated = DateTime.UtcNow
-            };
-
-            _repository.Save(user);
-            _repository.SaveChanges();
-
-            return Login(userName, password, null);
-        }
 
         [HttpGet]
         public ActionResult ForgotPassword()
@@ -77,7 +34,8 @@ namespace RazorPad.Web.Website.Controllers
         [HttpPost]
         public ActionResult ForgotPassword(string email)
         {
-            var user = _repository.SingleOrDefault<User>(u => u.Email == email);
+            User user;
+            var token = _membershipService.GeneratePasswordResetToken(email, out user);
 
             var model = new ForgotPassword();
 
@@ -87,34 +45,10 @@ namespace RazorPad.Web.Website.Controllers
             }
             else
             {
-                user.ForgotPasswordToken = Guid.NewGuid().ToString();
-                _repository.SaveChanges();
+                var resetPasswordUrl = Url.ExternalAction("ResetPassword", "Account", new {token = token});
+                _forgotPasswordEmailer.SendEmail(user, resetPasswordUrl);
 
-                //ToDo: Send the mail
-                var sbMailMsg = new StringBuilder();
-                sbMailMsg.AppendFormat("Hi {0},<br /><br />", user.UserName);
-                sbMailMsg.Append("Please click the below link to reset your password.<br /><br />");
-                sbMailMsg.AppendFormat("<a href=\"{0}\">{0}</a>",
-                                       Url.ExternalAction("ResetPassword", "Account",
-                                                          new {token = user.ForgotPasswordToken}));
-                sbMailMsg.Append("<br /><br />- RazorPad");
-
-                var mailMessage = new MailMessage();
-                mailMessage.To.Add(email);
-                mailMessage.Subject = "RazorPad - Password Reset";
-                mailMessage.Body = sbMailMsg.ToString();
-                mailMessage.IsBodyHtml = true;
-
-                var smtpClient = new SmtpClient
-                                     {
-                                         Credentials =
-                                             new NetworkCredential(
-                                             ConfigurationManager.AppSettings["SmtpClient.Username"],
-                                             ConfigurationManager.AppSettings["SmtpClient.Password"])
-                                     };
-                smtpClient.Send(mailMessage);
-
-                model.Email = user.Email;
+                model.Email = user.EmailAddress;
                 model.EmailSent = true;
             }
 
@@ -122,43 +56,86 @@ namespace RazorPad.Web.Website.Controllers
         }
 
         [HttpGet]
+        public ActionResult Login()
+        {
+            return View("Login");
+        }
+
+        [HttpPost]
+        public ActionResult Login(string username, string password, string returnUrl)
+        {
+            if (_membershipService.ValidateUser(username, password))
+            {
+                AuthenticateUserThunk(username);
+                return Redirect("~/");
+            }
+
+            ViewBag.errorMsg = "Login failed! Make sure you have entered the right user name and password!";
+
+            return View("Login");
+        }
+
+        public ActionResult Logout()
+        {
+            DeauthenticateUserThunk();
+            return RedirectToAction("Index", "RazorPad");
+        }
+
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View("Register");
+        }
+
+        [HttpPost]
+        public ActionResult Register(string username, string password, string email)
+        {
+            var isValidUsername = _membershipService.ValidateNewUsername(username);
+
+            if(isValidUsername == false)
+                ModelState.AddModelError("username", "Invalid user name (user already exists?)");
+
+            if (ModelState.IsValid == false)
+                return View("Register");
+
+            var user = new User
+            {
+                Username = username,
+                Password = password,
+                EmailAddress = email,
+            };
+
+            _membershipService.CreateUser(user);
+
+            return Login(username, password, null);
+        }
+
+        [HttpGet]
         public ActionResult ResetPassword(string token)
         {
             var model = new ResetPassword();
-            model.TokenNotFound = string.IsNullOrEmpty(token);
-            if(!model.TokenNotFound)
+            
+            User user;
+
+            if (_membershipService.ValidatePasswordResetToken(token, out user))
             {
-                var user = _repository.SingleOrDefault<User>(u => u.ForgotPasswordToken == token);
-                
-                model.TokenExpiredOrInvalid = (user == null);
-                if(!model.TokenExpiredOrInvalid)
-                {
-                    model.UserId = user.Id.ToString();
-                }
+                model.UserId = user.Id.ToString();
+            }
+            else
+            {
+                model.TokenNotFound = true;
+                model.TokenExpiredOrInvalid = true;
             }
             
             return View("ResetPassword", model);
         }
 
         [HttpPost]
-        public ActionResult ResetPassword(string userId, string password)
+        public ActionResult ResetPassword(string userId, string password, string token)
         {
-            // TODO: FIX MAJOR SECURITY HOLE -- VALIDATE THE TOKEN!
-            var user = _repository.SingleOrDefault<User>(u => u.UserName == userId);
+            _membershipService.ResetPassword(userId, password, token);
 
-            if(user != null)
-            {
-                user.Password = password;
-                _repository.SaveChanges();
-            }
-
-            return RedirectToAction("Login", "Account");
-        }
-
-        private bool IsValidUser(string userName, string password)
-        {
-            var user = _repository.SingleOrDefault<User>(u => u.UserName == userName && u.Password == password);
-            return user != null;
+            return Login(userId, password, null);
         }
     }
 }
