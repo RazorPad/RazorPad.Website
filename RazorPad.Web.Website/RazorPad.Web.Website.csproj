@@ -236,7 +236,6 @@
     <Content Include="Views\Shared\_ModelPane.cshtml" />
     <Content Include="Views\Shared\_ResultsPane.cshtml" />
     <Content Include="Views\Shared\_ModelGrid.cshtml" />
-    <Content Include="Views\Shared\Ide.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_SimpleLayout.cshtml" />
