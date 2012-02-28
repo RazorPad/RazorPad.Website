@@ -1,30 +1,19 @@
-﻿<div class="form">
+﻿@model RazorPad.Web.Website.Models.Account.LoginRequest
+<div class="form">
     <div class="form-box">
         <div class="box">
             <h2>Login</h2>
-            @if (ViewBag.errorMsg != null)
-            {
-                <div class="severErrorMsg">@ViewBag.errorMsg</div>
-            }
             
         <form name="loginForm" method="post" action="@Url.Action("Login", "Account")">
             <div>
-                <label>
-                    <span class="form-label">User name:</span>
-                    <input tabindex="1" maxlength="25" class="form-field" type="text" id="Username" name="Username" />
-                    <span class="errorMsg hide">Enter your user name</span>
-                </label>
+                @Html.LabelFor(x => x.Username)
+                @Html.EditorFor(x => x.Username)
+                @Html.ValidationMessageFor(x => x.Username)
             </div>
             <div>
-                <label>
-                    <div>
-                        <span class="form-label floatLeft">Password:</span>
-                        <a href="@Url.Action("ForgotPassword", "Account")" class="floatRight">Forgot Password?</a>
-                        <div class="clear"></div>
-                    </div>
-                    <input tabindex="2"  maxlength="25" class="form-field" type="password" id="Password" name="Password" />
-                    <span class="errorMsg hide">Enter your password</span>
-                </label>
+                @Html.LabelFor(x => x.Password)
+                @Html.PasswordFor(x => x.Password)
+                @Html.ValidationMessageFor(x => x.Password)
             </div>
             <div class="form-button">
                 <input tabindex="3" type="submit" id="loginBtn" value="Login" />
@@ -35,12 +24,12 @@
 
         </div>
     </div>
-    <div class="content">
-        Some cotent here Some cotent here<br />
-        Some cotent here Some cotent here<br />
-        Some cotent here Some cotent here<br />
-    </div>
     <div class="clear clearfix">
     </div>
-    <script type="text/javascript" src="@Url.Content("~/Scripts/userManagement.js")"></script>
 </div>
+
+@section Tail {
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery.unobtrusive-ajax.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery.validate.unobtrusive.js")"></script>
+}

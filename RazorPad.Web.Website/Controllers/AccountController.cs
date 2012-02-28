@@ -63,15 +63,15 @@ namespace RazorPad.Web.Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string password, string returnUrl)
+        public ActionResult Login(LoginRequest loginRequest)
         {
-            if (_membershipService.ValidateUser(username, password))
+            if (_membershipService.ValidateUser(loginRequest.Username, loginRequest.Password))
             {
-                AuthenticateUserThunk(username);
+                AuthenticateUserThunk(loginRequest.Username);
                 return Redirect("~/");
             }
 
-            ViewBag.errorMsg = "Login failed! Make sure you have entered the right user name and password!";
+            ModelState.AddModelError(string.Empty, "Invalid username and password");
 
             return View("Login");
         }
@@ -108,7 +108,7 @@ namespace RazorPad.Web.Website.Controllers
 
             _membershipService.CreateUser(user);
 
-            return Login(username, password, null);
+            return Login(new LoginRequest(username, password));
         }
 
         [HttpGet]
@@ -136,7 +136,7 @@ namespace RazorPad.Web.Website.Controllers
         {
             _membershipService.ResetPassword(userId, password, token);
 
-            return Login(userId, password, null);
+            return Login(new LoginRequest(userId, password));
         }
     }
 }

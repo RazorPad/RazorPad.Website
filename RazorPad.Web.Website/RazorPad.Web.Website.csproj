@@ -184,6 +184,7 @@
     <Compile Include="App_Start\NinjectMVC3.cs" />
     <Compile Include="App_Start\Routing.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\Account\LoginRequest.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
     <Compile Include="Models\Account\ForgotPassword.cs" />
     <Compile Include="Models\Account\ResetPassword.cs" />
