@@ -56,10 +56,6 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RazorPad.Core\RazorPad.Core.csproj">
-      <Project>{511d144c-f4c7-40a3-b3b4-80d891fce2f5}</Project>
-      <Name>RazorPad.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RazorPad.Web\RazorPad.Web.csproj">
       <Project>{8687fa7b-28f1-421b-aef3-404f68b501b4}</Project>
       <Name>RazorPad.Web</Name>
