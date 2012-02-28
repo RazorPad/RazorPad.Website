@@ -4,7 +4,7 @@
         <div class="box">
             <h2>Login</h2>
             
-        <form name="loginForm" method="post" action="@Url.Action("Login", "Account")">
+        @using(Html.BeginForm("Login", "Account")) {
             <div>
                 @Html.LabelFor(x => x.Username)
                 @Html.EditorFor(x => x.Username)
@@ -20,7 +20,7 @@
                 <span class="sign-up">Not registered? <a href="@Url.Action("Register", "Account")">Sign Up</a></span>
                 <div class="clear clearfix"></div>
             </div>
-        </form>
+        }
 
         </div>
     </div>

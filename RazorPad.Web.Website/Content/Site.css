@@ -574,7 +574,7 @@ iframe
 
 .form-box label {
     display: block;
-    margin: 0 0 1.5em;
+    margin: 1.5em 0 0;
 }
 
 .form-label
@@ -603,6 +603,11 @@ iframe
 {
     display:none;
 }
+
+.form-button {
+    margin: 2em 0;
+}
+
 .form-button .sign-up
 {
     float:right;
@@ -611,4 +616,69 @@ iframe
 .form-box .info
 {
     margin-bottom: 20px;
+}
+
+/* ajax login/registration dialog */
+.modal-popup {
+    font-size: 0.7em;
+}
+
+    .modal-popup input[type="text"], 
+    .modal-popup input[type="password"] {
+        width: 90%;
+    }
+
+/* info and errors */  
+.message-info {
+    border: solid 1px;
+    clear: both;
+    padding: 10px 20px;
+}
+
+.message-error {
+    clear: both;
+    color: #e80c4d;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+.message-success {
+    color: #7ac0da;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+.success {
+    color: #7ac0da;
+}
+
+.error {
+    color: #e80c4d;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input[type="text"].input-validation-error,
+input[type="password"].input-validation-error {
+    border: solid 1px #e80c4d;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
 }
