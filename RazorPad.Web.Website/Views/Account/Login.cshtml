@@ -1,5 +1,4 @@
 ﻿<div class="form">
-    <form name="loginForm" method="post" action="@Url.Action("Login", "Account")">
     <div class="form-box">
         <div class="box">
             <h2>Login</h2>
@@ -7,6 +6,8 @@
             {
                 <div class="severErrorMsg">@ViewBag.errorMsg</div>
             }
+            
+        <form name="loginForm" method="post" action="@Url.Action("Login", "Account")">
             <div>
                 <label>
                     <span class="form-label">User name:</span>
@@ -30,6 +31,8 @@
                 <span class="sign-up">Not registered? <a href="@Url.Action("Register", "Account")">Sign Up</a></span>
                 <div class="clear clearfix"></div>
             </div>
+        </form>
+
         </div>
     </div>
     <div class="content">
@@ -39,6 +42,5 @@
     </div>
     <div class="clear clearfix">
     </div>
-    </form>
     <script type="text/javascript" src="@Url.Content("~/Scripts/userManagement.js")"></script>
 </div>

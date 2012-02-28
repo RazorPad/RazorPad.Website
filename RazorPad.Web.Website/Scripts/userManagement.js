@@ -4,8 +4,8 @@
         var validate = function () {
             var retVal = false;
             $(f).find(".errorMsg").addClass("hide");
-            if (!$(f.UserName).val()) {
-                $(f.UserName).focus().next(".errorMsg").removeClass("hide");
+            if (!$(f.Username).val()) {
+                $(f.Username).focus().next(".errorMsg").removeClass("hide");
             }
             else if (!$(f.Password).val()) {
                 $(f.Password).focus().next(".errorMsg").removeClass("hide");
@@ -21,7 +21,7 @@
             return validate();
         });
 
-        $(f.UserName).focus();
+        $(f.Username).focus();
     }
     else if ((f = doc.signUpForm) != null) {
         var validate = function () {
@@ -36,8 +36,8 @@
             else if (!emailPattern.test($(f.Email).val())) {
                 $(f.Email).focus().next(".errorMsg").text("Enter valid email").removeClass("hide");
             }
-            else if (!$(f.UserName).val()) {
-                $(f.UserName).focus().next(".errorMsg").removeClass("hide");
+            else if (!$(f.Username).val()) {
+                $(f.Username).focus().next(".errorMsg").removeClass("hide");
             }
             else if (!$(f.Password).val()) {
                 $(f.Password).focus().next(".errorMsg").removeClass("hide");
