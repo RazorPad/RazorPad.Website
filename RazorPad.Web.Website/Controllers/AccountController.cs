@@ -46,11 +46,22 @@ namespace RazorPad.Web.Website.Controllers
             }
             else
             {
-                var resetPasswordUrl = Url.ExternalAction("ResetPassword", "Account", new {token = token});
-                _forgotPasswordEmailer.SendEmail(user, resetPasswordUrl);
-
                 model.Email = user.EmailAddress;
-                model.EmailSent = true;
+
+                var resetPasswordUrl = Url.ExternalAction("ResetPassword", "Account", new { token = token });
+
+                try
+                {
+                    _forgotPasswordEmailer.SendEmail(user, resetPasswordUrl);
+                    model.EmailSent = true;
+                }
+                catch (Exception)
+                {
+                }
+
+#if(DEBUG)                
+                model.Token = token;
+#endif
             }
 
             return View("ForgotPassword", model);
@@ -115,20 +126,18 @@ namespace RazorPad.Web.Website.Controllers
         }
 
         [HttpGet]
-        public ActionResult ResetPassword(string token)
+        public ActionResult ResetPassword(string token = null)
         {
-            var model = new ResetPassword();
-            
-            User user;
+            var model = new ResetPasswordRequest();
 
-            if (_membershipService.ValidatePasswordResetToken(token, out user))
+            User user;
+            if (!string.IsNullOrWhiteSpace(token) && _membershipService.ValidatePasswordResetToken(token, out user))
             {
                 model.UserId = user.Id.ToString();
             }
             else
             {
-                model.TokenNotFound = true;
-                model.TokenExpiredOrInvalid = true;
+                return View("InvalidResetPasswordToken");
             }
             
             return View("ResetPassword", model);

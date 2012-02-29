@@ -188,7 +188,8 @@
     <Compile Include="Models\Account\LoginRequest.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
     <Compile Include="Models\Account\ForgotPassword.cs" />
-    <Compile Include="Models\Account\ResetPassword.cs" />
+    <Compile Include="Models\Account\PasswordRequest.cs" />
+    <Compile Include="Models\Account\ResetPasswordRequest.cs" />
     <Compile Include="Models\RazorPad\SaveRequest.cs" />
     <Compile Include="Models\RazorPad\ExecuteRequest.cs" />
     <Compile Include="Models\RazorPad\ExecuteResult.cs" />
@@ -244,7 +245,6 @@
     <Content Include="Scripts\codemirror\util\searchcursor.js" />
     <Content Include="Scripts\codemirror\util\simple-hint.css" />
     <Content Include="Scripts\codemirror\util\simple-hint.js" />
-    <Content Include="Scripts\userManagement.js" />
     <Content Include="Scripts\jquery.layout-latest.js" />
     <Content Include="Scripts\hpTabs.js" />
     <Content Include="Scripts\jquery.hotkeys.js" />
@@ -263,6 +263,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\InvalidResetPasswordToken.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />
