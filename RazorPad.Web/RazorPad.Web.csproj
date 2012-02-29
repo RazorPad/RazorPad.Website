@@ -68,7 +68,7 @@
     <Compile Include="Services\Sandbox.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\RazorPad.Core\RazorPad.Core.csproj">
+    <ProjectReference Include="..\RazorPad.Core\RazorPad.Core.csproj">
       <Project>{511d144c-f4c7-40a3-b3b4-80d891fce2f5}</Project>
       <Name>RazorPad.Core</Name>
     </ProjectReference>

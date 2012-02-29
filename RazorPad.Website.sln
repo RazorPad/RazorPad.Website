@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 11
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D31B0F21-F11C-4342-8239-50D2441C67E5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPad.Web.Website", "RazorPad.Web.Website\RazorPad.Web.Website.csproj", "{F3A2783E-D8B2-4D8C-8240-C01FC0B8D932}"
 	ProjectSection(ProjectDependencies) = postProject
 		{511D144C-F4C7-40A3-B3B4-80D891FCE2F5} = {511D144C-F4C7-40A3-B3B4-80D891FCE2F5}
@@ -17,6 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPad.Web.Tests", "Razor
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPad.Web", "RazorPad.Web\RazorPad.Web.csproj", "{8687FA7B-28F1-421B-AEF3-404F68B501B4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{511D144C-F4C7-40A3-B3B4-80D891FCE2F5} = {511D144C-F4C7-40A3-B3B4-80D891FCE2F5}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPad.Web.Facebook", "RazorPad.Web.Facebook\RazorPad.Web.Facebook.csproj", "{B5D86FFD-300C-44DE-B28A-CDFF8BC60027}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -28,9 +29,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPad.Web.RavenDb", "Raz
 		{511D144C-F4C7-40A3-B3B4-80D891FCE2F5} = {511D144C-F4C7-40A3-B3B4-80D891FCE2F5}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPad.Core", "Core\RazorPad.Core\RazorPad.Core.csproj", "{511D144C-F4C7-40A3-B3B4-80D891FCE2F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPad.Core", "RazorPad.Core\RazorPad.Core.csproj", "{511D144C-F4C7-40A3-B3B4-80D891FCE2F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPad.Core.Tests", "Core\RazorPad.Core.Tests\RazorPad.Core.Tests.csproj", "{4C25DE40-6799-4144-9F23-3919193772EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorPad.Core.Tests", "RazorPad.Core.Tests\RazorPad.Core.Tests.csproj", "{4C25DE40-6799-4144-9F23-3919193772EC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{511D144C-F4C7-40A3-B3B4-80D891FCE2F5} = {511D144C-F4C7-40A3-B3B4-80D891FCE2F5}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -118,10 +122,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{4C25DE40-6799-4144-9F23-3919193772EC} = {D31B0F21-F11C-4342-8239-50D2441C67E5}
-		{511D144C-F4C7-40A3-B3B4-80D891FCE2F5} = {D31B0F21-F11C-4342-8239-50D2441C67E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = .
