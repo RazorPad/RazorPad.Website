@@ -20,7 +20,7 @@ namespace RazorPad.Web.Website.Models.Account
         [Required]
         [Display(Name = "Email Address")]
         [RegularExpression(
-            @"\b[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b", 
+            @"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", 
             ErrorMessage = "{0} must be a valid email address")]
         public string Email { get; set; }
 
