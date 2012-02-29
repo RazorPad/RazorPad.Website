@@ -1,0 +1,28 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace RazorPad.Web.Website.Models.Account
+{
+    public class LoginRequest
+    {
+        [Required(ErrorMessage = "Invalid username")]
+        [StringLength(int.MaxValue, MinimumLength = 4)]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = "Invalid password")]
+        [StringLength(int.MaxValue, MinimumLength = 4)]
+        public string Password { get; set; }
+
+        public string ReturnUrl { get; set; }
+
+
+        public LoginRequest()
+        {
+        }
+
+        public LoginRequest(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
+    }
+}

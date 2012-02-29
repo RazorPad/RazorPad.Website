@@ -1,0 +1,94 @@
+﻿@using Newtonsoft.Json
+<div class="editorContainer">
+    <div class="paneheader">
+        <div class="title">
+            Model</div>
+    </div>
+
+    <div class="modelContent">
+        @*<div class="tabBar">
+            <a href="#simple">Simple</a><span class="separator">|</span><a href="#geeky"> Geeky</a>
+        </div>*@
+        <div class="propinput">
+            <input type="text" id="propinput"/>
+        </div>
+        <div class="modelProps">
+            <table id="modelGrid">
+                <colgroup>
+                    <col width="50%" align="left" />
+                    <col width="50%" align="left" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="fontBold">Name</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.DynamicInputModel != null)
+                    {
+                        IDictionary<string, object> props = Model.DynamicInputModel.GetProperties();
+                        foreach (var prop in props)
+                        {
+                            <tr>
+                                <td>
+                                    <span class="name">@prop.Key</span>
+                                </td>
+                                <td>
+                                    <span class='value'>@prop.Value</span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+
+    var addPropRow = function (data) {
+        //$('#modelGrid tbody').prepend(String.format("<tr title=\"{2} {0};\"><td><span class='name'>{0}</span></td><td><span class='value'>{1}</span></td></tr>", data.name, data.value, data.type));
+        $('#modelGrid tbody').prepend(String.format("<tr><td><span class='name'>{0}</span></td><td><span class='value'>{1}</span></td></tr>", data.name, data.value));
+    };
+
+    var addToModel = function (txt) {
+        var parts = txt.replace(/^\s*/, '').replace(/[;\s]*$/, '').split(' ');
+        var prop = { type: parts[0], name: parts[1], value: parts[parts.length - 1].replace(/^"/, '').replace(/"$/, '') };
+        addPropRow(prop);
+    };
+
+    $(function () {
+        // ace editor needs explicityly sized div
+
+
+        $('#modelHeader').hpTabs().watermark('model');
+
+        $('#propinput').bind('keypress blur', function (e) {
+            if (this.value.replace(/^\s*/, '').replace(/[;\s]*$/, '').length === 0) { return; }
+            if (e.type === 'keypress' && e.keyCode !== 13) { return; }
+            addToModel(this.value);
+            this.value = '';
+            return false;
+        });
+
+        $('#propinput').val('string Name "world"');
+        
+        $('#modelGrid > tbody').delegate('td', 'click', function () {
+            $(this).children('span').attr('contentEditable', 'true').focus();
+        });
+        $('#modelGrid > tbody').delegate('td span', 'keypress blur', function (e) {
+            if (e.type === 'keypress' && e.keyCode !== 13) { return; }
+            $(this).attr('contentEditable', 'false');
+        });
+
+        //$(window).resize(function () { resizeEditor($('#modelEditor')); });
+    });
+</script>

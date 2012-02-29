@@ -1,0 +1,35 @@
+﻿@model RazorPad.Web.Website.Models.Account.LoginRequest
+<div class="form">
+    <div class="form-box">
+        <div class="box">
+            <h2>Login</h2>
+            
+        @using(Html.BeginForm("Login", "Account")) {
+            <div>
+                @Html.LabelFor(x => x.Username)
+                @Html.EditorFor(x => x.Username)
+                @Html.ValidationMessageFor(x => x.Username)
+            </div>
+            <div>
+                @Html.LabelFor(x => x.Password)
+                @Html.PasswordFor(x => x.Password)
+                @Html.ValidationMessageFor(x => x.Password)
+            </div>
+            <div class="form-button">
+                <input tabindex="3" type="submit" id="loginBtn" value="Login" />
+                <span class="sign-up">Not registered? <a href="@Url.Action("Register", "Account")">Sign Up</a></span>
+                <div class="clear clearfix"></div>
+            </div>
+        }
+
+        </div>
+    </div>
+    <div class="clear clearfix">
+    </div>
+</div>
+
+@section Tail {
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery.unobtrusive-ajax.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery.validate.unobtrusive.js")"></script>
+}

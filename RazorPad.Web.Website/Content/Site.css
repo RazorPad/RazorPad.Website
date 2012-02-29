@@ -1,0 +1,684 @@
+
+/* Hp Styles -------------------------------------------------------------- */
+
+html, body
+{
+    height: 100%;
+    overflow: hidden;
+    font: 85% Segoe UI,Arial,Verdana,Helvetica,sans-serif;
+}
+
+body, div
+{
+    border: 0px solid gray;
+}
+
+table {
+	table-layout: fixed;
+	width: inherit;
+	height: inherit;
+}
+
+a:link {
+	color: #2a61ae;
+	text-decoration: none
+}
+a:visited {
+	color: #2a61ae; 
+	text-decoration: none
+}
+a:hover {
+	color: #2a61ae;
+	text-decoration: underline
+}
+
+.container
+{
+    height: 100%;
+}
+.pointer
+{
+    cursor:pointer;
+}
+
+.actionItems
+{
+    float:left;
+    margin: 7px 10px 0 0px;
+}
+
+.actionItems li
+{
+    cursor: pointer;
+    display: inline;
+    margin-right: 10px;
+    list-style: none;
+}
+
+iframe
+{
+    width: 100%;
+    height: 100%;
+}
+
+#resultsPane, .tabContainer, .panes, #content
+{
+    height: 100%;
+    width: 100%;
+}
+
+#template-output-container
+{
+    overflow-y: auto;
+}
+
+.tabBar
+{
+    background-color: #BCC7D8;
+    height: 20px;
+    padding: 2px 0 2px 0px;
+}
+
+.tabContainer
+{
+    position: relative;
+}
+
+.tabPanels
+{
+    border: 1px solid #8A8FAB;
+    width: 100%;
+    position: absolute;
+    top: 24px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.tabPanels > div
+{
+    display: none;
+}
+
+.tabPanels div
+{
+    height: 100%;
+    width: 100%;
+}
+
+.tabBar a, span
+{
+    padding: 1px;
+    vertical-align: bottom;
+    display: inline-block;
+}
+
+.tabBar a
+{
+    text-decoration: none;
+    color: #000;
+    outline: none;
+}
+
+.tabBar a.selected
+{
+    background-color: #FFEFBB;
+    border: 1px solid #E5C365;
+    position: relative;
+}
+
+.tabBar a:hover
+{
+    background-color: #FFFCF4;
+}
+
+.tabBar span.separator
+{
+    margin: 0 2px;
+    color: #8591A2;
+    vertical-align: inherit;
+}
+
+
+.panes
+{
+    height: 100%;
+    width: 100%;
+    background-color: #8A8FAB;
+}
+
+.panes > div
+{
+    overflow: auto;
+}
+
+.leftPane
+{
+    width: 49.8%;
+    height: 100%;
+    border-right: 1px solid #8A8FAB;
+}
+
+
+.inlinebox
+{
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    zoom: 1; /**display: inline;*/
+}
+
+.rightPane
+{
+    width: 49.8%;
+    height: 100%;
+    margin-left: 0;
+}
+
+
+.topPane
+{
+    height: 60%;
+    width: 100%;
+    background-color: #35496A;
+}
+
+.ace_content
+{
+    background-color: white;
+}
+
+
+.bottomPane
+{
+    height: 40%;
+    width: 100%;
+    background-color: white;
+}
+
+
+/* splitter styles */
+
+/* Splitbar styles; these are the default class names and required styles */
+.splitbarV
+{
+    float: left;
+    width: 6px;
+    height: 100%;
+    line-height: 0px;
+    font-size: 0px;
+    border-left: solid 1px #9cbdff;
+    border-right: solid 1px #9cbdff;
+    background: #cbe1fb url(themes/default/images/splitter/panev.gif) 0% 50%;
+}
+.splitbarH
+{
+    height: 6px;
+    text-align: left;
+    line-height: 0px;
+    font-size: 0px;
+    border-top: solid 1px #9cbdff;
+    border-bottom: solid 1px #9cbdff;
+    background: #cbe1fb url(themes/default/images/splitter/paneh.gif) 50% 0%;
+}
+
+.splitbuttonV
+{
+    margin-top: -41px;
+    margin-left: -4px;
+    top: 50%;
+    position: relative;
+    height: 83px;
+    width: 10px;
+    background: transparent url(themes/default/images/splitter/panevc.gif) 10px 50%;
+}
+.splitbuttonV.invert
+{
+    margin-left: 0px;
+    background: transparent url(themes/default/images/splitter/panevc.gif) 0px 50%;
+}
+.splitbuttonH
+{
+    margin-left: -41px;
+    left: 50%;
+    position: relative;
+    height: 10px !important;
+    width: 83px;
+    background: transparent url(themes/default/images/splitter/panehc.gif) 50% 0px;
+}
+.splitbuttonH.invert
+{
+    margin-top: -4px;
+    background: transparent url(themes/default/images/splitter/panehc.gif) 50% -10px;
+}
+.splitbarV.working, .splitbarH.working, .splitbuttonV.working, .splitbuttonH.working
+{
+    -moz-opacity: .50;
+    filter: alpha(opacity=50);
+    opacity: .50;
+}
+
+/* end splitter styles */
+
+.editorContainer
+{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.editor
+{
+    position: relative;
+    /*top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;*/
+}
+
+
+.watermarkOn
+{
+    color: #CCCCCC;
+    font-style: italic;
+}
+
+#modelEditor
+{
+    /*top: 40px;*/
+	height: 100%;
+    
+}
+
+#razorEditor
+{
+    /*top: 16px;*/
+
+	position: relative;
+	height: 100%;
+	width: 100%;
+	/*border: solid 1px #465A7D;*/
+}
+
+#header
+{
+    float: left;
+    height:40px;
+    width: 200px;
+    padding: 0 7px 0 10px;
+}
+
+.paneheader .title
+{
+    background-color: #465A7D;
+    color: White;
+    height: 16px;
+    width: 100%;
+    padding-left: 0.1%;
+}
+
+.paneheader .tabBar 
+{
+    top: 16px;
+    padding-left: 0.1%;
+    width: 100%;
+}
+
+.container_12 {
+	width: 100%;
+}
+
+.container_12 .grid_1 {
+	width:6.333%;
+}
+
+.container_12 .grid_2 {
+	width:14.667%;
+}
+
+.container_12 .grid_3 {
+	width:23.0%;
+}
+
+.container_12 .grid_4 {
+	width:31.333%;
+}
+
+.container_12 .grid_5 {
+	width:39.667%;
+}
+
+.container_12 .grid_6 {
+	width:48.0%;
+}
+
+.container_12 .grid_7 {
+	width:56.333%;
+}
+
+.container_12 .grid_8 {
+	width:64.667%;
+}
+
+.container_12 .grid_9 {
+	width:73.0%;
+}
+
+.container_12 .grid_10 {
+	width:81.333%;
+}
+
+.container_12 .grid_11 {
+	width:89.667%;
+}
+
+.container_12 .grid_12 {
+	width: 100%;
+}
+
+
+
+/* table view styles */
+#main {
+	width: 100%;
+	height: 100%;
+	table-layout: fixed;
+	border: 1px solid #465A7D;
+	
+}
+
+#main .topRow {
+	height: 65%;
+}
+
+#main .bottomRow {
+	height: 35%;
+}
+
+
+/* end table view styles */
+#panes
+{
+    visibility:hidden;
+    background: #ccc;
+}
+
+#modelPane
+{
+    border-left: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    background: #fff;
+}
+
+#razorPane
+{
+    border-right: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    background: #fff;
+}
+
+#resultsPane
+{
+    border-top: 1px solid #aaa;
+    background: #fff;
+}
+
+.modelContent
+{
+    padding:5px 5px;
+}
+
+.modelProps
+{
+    overflow:auto;
+}
+
+.propinput
+{
+    margin-bottom: 3px;
+}
+.propinput input
+{
+    width:99%;
+}
+
+#modelGrid {
+	width: 99.8%;
+	height: auto;
+	/*height: 100%;*/
+	
+}
+
+#modelGrid td, #modelGrid th {
+	border: solid 1px lightgrey;
+	vertical-align: middle;
+	font-size: 100%;
+	line-height: normal;
+	text-align:left;
+}
+
+#modelGrid th
+{
+    padding:2px 2px;
+    font-weight:bold;
+}
+#modelGrid td
+{
+    padding:2px 2px;
+}
+
+.fontBold
+{
+    font-weight:bold;
+}
+#loading
+{
+    background:url('themes/default/images/ajax-loader.gif');
+    display:none;
+    z-index:100;
+    position:absolute;
+    height:100px;
+    width:100px;
+    border:1px solid $d6d6d6;
+    overflow:hidden;
+}
+.CodeMirror
+{
+    font-size:13px !important;
+}
+.CodeMirror span
+{
+    padding: 0px !important;
+}
+.floatLeft
+{
+    float:left !important;
+}
+.floatRight
+{
+    float:right !important;
+}
+/* Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+/* http://perishablepress.com/press/2008/02/05/lessons-learned-concerning-the-clearfix-css-hack */
+
+.clearfix:after {
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+* html .clearfix {
+	height: 1%;
+}
+
+.clearfix {
+	display: block;
+}
+
+.form
+{
+    background:#ffffff;
+    margin:40px 40px;
+}
+
+.form-box
+{
+    width:370px;
+    float:left;
+}
+
+.form-box .box
+{
+    padding: 20px 25px 15px;
+    background: #eee;
+    border: 1px solid #ddd;
+    
+}
+
+.form-box h2
+{
+    font-size: 18px;
+    line-height: 17px;
+    height: 16px;
+    margin: 0 0 1.2em;
+    position: relative;
+}
+
+.form .content
+{
+    float:left;
+    font-size:120%;
+    padding: 5px 20px 0px 20px;
+}
+
+.form-box label {
+    display: block;
+    margin: 1.5em 0 0;
+}
+
+.form-label
+{
+    font-weight: bold;
+    margin: 0 0 .5em;
+    display: block;
+}
+
+.form-field
+{
+    width: 100%;
+    height: 25px;
+    font-size: 15px;
+}
+.form-box .form-field
+{
+    width: 315px;
+}
+.errorMsg, .severErrorMsg
+{
+    color:Red;
+    margin-bottom:10px;
+}
+.hide
+{
+    display:none;
+}
+
+.form-button {
+    margin: 2em 0;
+}
+
+.form-button .sign-up
+{
+    float:right;
+    margin:5px 0px 0px 10px;
+}
+.form-box .info
+{
+    margin-bottom: 20px;
+}
+
+/* ajax login/registration dialog */
+.modal-popup {
+    font-size: 0.7em;
+}
+
+    .modal-popup input[type="text"], 
+    .modal-popup input[type="password"] {
+        width: 90%;
+    }
+
+/* info and errors */  
+.message-info {
+    border: solid 1px;
+    clear: both;
+    padding: 10px 20px;
+}
+
+.message-error {
+    clear: both;
+    color: #e80c4d;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+.message-success {
+    color: #7ac0da;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+.success {
+    color: #7ac0da;
+}
+
+.error {
+    color: #e80c4d;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input[type="text"].input-validation-error,
+input[type="password"].input-validation-error {
+    border: solid 1px #e80c4d;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}
