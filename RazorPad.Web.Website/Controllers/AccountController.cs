@@ -85,30 +85,33 @@ namespace RazorPad.Web.Website.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View("Register");
+            return View("Register", new CreateNewUserRequest());
         }
 
         [HttpPost]
-        public ActionResult Register(string username, string password, string email)
+        public ActionResult Register(CreateNewUserRequest createNewUserRequest)
         {
-            var isValidUsername = _membershipService.ValidateNewUsername(username);
+            var isValidUsername = _membershipService.ValidateNewUsername(createNewUserRequest.Username);
 
             if(isValidUsername == false)
                 ModelState.AddModelError("username", "Invalid user name (user already exists?)");
 
             if (ModelState.IsValid == false)
-                return View("Register");
+            {
+                createNewUserRequest.Password = createNewUserRequest.PasswordConfirm = null;
+                return View("Register", createNewUserRequest);
+            }
 
             var user = new User
             {
-                Username = username,
-                Password = password,
-                EmailAddress = email,
+                Username = createNewUserRequest.Username,
+                Password = createNewUserRequest.Password,
+                EmailAddress = createNewUserRequest.Email,
             };
 
             _membershipService.CreateUser(user);
 
-            return Login(new LoginRequest(username, password));
+            return Login(new LoginRequest(createNewUserRequest.Username, createNewUserRequest.Password));
         }
 
         [HttpGet]

@@ -184,6 +184,7 @@
     <Compile Include="App_Start\NinjectMVC3.cs" />
     <Compile Include="App_Start\Routing.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Models\Account\CreateNewUserRequest.cs" />
     <Compile Include="Models\Account\LoginRequest.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
     <Compile Include="Models\Account\ForgotPassword.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Models\RazorPad\ParseResult.cs" />
     <Compile Include="Models\RazorPad\TemplateMessage.cs" />
     <Compile Include="Models\RazorPad\TemplateMessageKind.cs" />
+    <Compile Include="Models\Util\MatchesPropertyAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
