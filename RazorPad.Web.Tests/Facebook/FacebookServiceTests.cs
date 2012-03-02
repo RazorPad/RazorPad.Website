@@ -3,6 +3,7 @@
 namespace RazorPad.Web.Facebook
 {
     [TestClass]
+    [Ignore]
     public class FacebookServiceTests
     {
         private const string ApplicationUrl = "http://razorpad.apphb.com/";
@@ -12,11 +13,7 @@ namespace RazorPad.Web.Facebook
         [TestInitialize]
         public void TestInitialize()
         {
-            _service = new FacebookService()
-                           {
-                               ClientId = "[SECRET]",
-                               ClientSecret = "[SECRET]"
-                           };
+            _service = new FacebookService();
         }
 
         [TestMethod]
