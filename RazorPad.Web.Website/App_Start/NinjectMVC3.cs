@@ -1,4 +1,7 @@
+using System.Web;
+using System.Web.Mvc;
 using Ninject.Extensions.Conventions;
+using RazorPad.Web.Facebook;
 using RazorPad.Web.Services;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(RazorPad.Web.Website.App_Start.NinjectMVC3), "Start")]
@@ -76,6 +79,9 @@ namespace RazorPad.Web.Website.App_Start
                 .WithPropertyValue("ConnectionStringName", "RavenDB")
                 .OnActivation(RavenDb.DocumentStoreFactory.Initialize);
 
+            kernel.Bind<FacebookService>().ToSelf()
+                .InSingletonScope()
+                .WithPropertyValue("LocalEndpoint", x => x.Kernel.Get<UrlHelper>().ExternalAction("Authorize", "Facebook"));
         }        
     }
 }

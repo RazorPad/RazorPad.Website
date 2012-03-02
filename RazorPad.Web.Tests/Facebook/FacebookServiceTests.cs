@@ -6,20 +6,18 @@ namespace RazorPad.Web.Facebook
     [Ignore]
     public class FacebookServiceTests
     {
-        private const string ApplicationUrl = "http://razorpad.apphb.com/";
-
         private FacebookService _service;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _service = new FacebookService();
+            _service = new FacebookService { LocalEndpoint = "http://razorpad.apphb.com/" };
         }
 
         [TestMethod]
         public void ShouldProduceLoginUrl()
         {
-            var loginUrl = _service.GetLoginUrl(ApplicationUrl);
+            var loginUrl = _service.GetLoginUrl();
 
             Assert.IsNotNull(loginUrl);
         }
@@ -27,9 +25,7 @@ namespace RazorPad.Web.Facebook
         [TestMethod]
         public void ShouldAuthenticateUser()
         {
-            var token = _service
-                .Authenticate("REPLACE_WITH_YOUR_TOKEN", 
-                ApplicationUrl);
+            var token = _service.Authenticate("REPLACE_WITH_YOUR_TOKEN");
 
             Assert.IsNotNull(token.Value);
         }
@@ -37,13 +33,11 @@ namespace RazorPad.Web.Facebook
         [TestMethod]
         public void ShouldGetUser()
         {
-            var token = _service
-                .Authenticate("REPLACE_WITH_YOUR_TOKEN", 
-                ApplicationUrl);
+            var token = _service.Authenticate("REPLACE_WITH_YOUR_TOKEN");
 
             var user = _service.GetUser(token);
 
-            Assert.IsNotNull(user.UserId);
+            Assert.IsNotNull(user.Id);
         }
     }
 }

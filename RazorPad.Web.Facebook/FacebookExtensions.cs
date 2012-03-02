@@ -7,10 +7,7 @@ namespace RazorPad.Web.Facebook
     {
         public static IHtmlString FacebookLogin(this UrlHelper url)
         {
-            var authorizeAction = url.Action("Authorize", "Facebook");
-            authorizeAction = url.ExternalUrl(authorizeAction);
-
-            var loginUrl = new FacebookService().GetLoginUrl(authorizeAction);
+            var loginUrl = new FacebookService().GetLoginUrl();
 
             return new HtmlString(loginUrl);
         }

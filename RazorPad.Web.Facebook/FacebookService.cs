@@ -14,6 +14,25 @@ namespace RazorPad.Web.Facebook
 
         public string ClientSecret { get; set; }
 
+        public string LocalEndpoint
+        {
+            get { return _localEndpoint; }
+            set
+            {
+                if (value == null)
+                {
+                    _localEndpoint = null;
+                    return;
+                }
+
+                if (!value.EndsWith("/"))
+                    value += "/";
+
+                _localEndpoint = value;
+            }
+        }
+        private string _localEndpoint;
+
         public IEnumerable<string> Permissions { get; set; }
 
 
@@ -25,15 +44,12 @@ namespace RazorPad.Web.Facebook
         }
 
 
-        public AuthToken Authenticate(string code, string redirectUrl)
+        public AuthToken Authenticate(string code)
         {
-            if (!redirectUrl.EndsWith("/"))
-                redirectUrl += "/";
-
             var urlBuilder = new StringBuilder("https://graph.facebook.com/oauth/access_token?");
             urlBuilder.AppendFormat("client_id={0}", ClientId);
             urlBuilder.AppendFormat("&client_secret={0}", ClientSecret);
-            urlBuilder.AppendFormat("&redirect_uri={0}", redirectUrl);
+            urlBuilder.AppendFormat("&redirect_uri={0}", LocalEndpoint);
             urlBuilder.AppendFormat("&code={0}", code);
 
             var url = urlBuilder.ToString();
@@ -57,14 +73,11 @@ namespace RazorPad.Web.Facebook
                        };
         }
 
-        public string GetLoginUrl(string redirectUrl)
+        public string GetLoginUrl()
         {
-            if (!redirectUrl.EndsWith("/"))
-                redirectUrl += "/";
-
             var urlBuilder = new StringBuilder("https://www.facebook.com/dialog/oauth?");
             urlBuilder.AppendFormat( "client_id={0}", ClientId);
-            urlBuilder.AppendFormat("&redirect_uri={0}", redirectUrl);
+            urlBuilder.AppendFormat("&redirect_uri={0}", LocalEndpoint);
 
             if (Permissions != null && Permissions.Any())
                 urlBuilder.AppendFormat("&scope={0}", string.Join(",", Permissions));

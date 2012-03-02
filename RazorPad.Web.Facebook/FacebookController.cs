@@ -1,5 +1,5 @@
-﻿using System.Diagnostics.Contracts;
-using System.Web;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -7,6 +7,10 @@ namespace RazorPad.Web.Facebook
 {
     public class FacebookController : Controller
     {
+        internal static Action<string> AuthenticateUserThunk =
+            username => FormsAuthentication.SetAuthCookie(username, false);
+
+
         private readonly FacebookService _facebook;
 
 
@@ -30,7 +34,7 @@ namespace RazorPad.Web.Facebook
                 if(user == null)
                     return View();
 
-                FormsAuthentication.SetAuthCookie(user, true);
+                AuthenticateUserThunk(user.Email);
 
                 return Redirect("~/");
             }
@@ -41,14 +45,12 @@ namespace RazorPad.Web.Facebook
             return View("AuthorizationFailed", request.Error_Description);
         }
 
-        private string Authenticate(string code)
+        private FacebookUser Authenticate(string code)
         {
             Contract.Requires(string.IsNullOrWhiteSpace(code) == false);
 
-            var redirectUrl = Request.ExternalUrl(VirtualPathUtility.ToAbsolute("~/"));
-            
             // TODO: Async
-            var authToken = _facebook.Authenticate(code, redirectUrl);
+            var authToken = _facebook.Authenticate(code);
 
             if(authToken == null)
                 return null;
@@ -58,13 +60,12 @@ namespace RazorPad.Web.Facebook
 
             var user = _facebook.GetUser(authToken);
 
-            return user.UserId.ToString();
+            return user;
         }
 
         public ActionResult Login()
         {
-            var authorizeUrl = Url.ExternalAction("Authorize", "Facebook");
-            var loginUrl = _facebook.GetLoginUrl(authorizeUrl);
+            var loginUrl = _facebook.GetLoginUrl();
 
             return Redirect(loginUrl);
         }
