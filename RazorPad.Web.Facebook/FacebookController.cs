@@ -28,7 +28,7 @@ namespace RazorPad.Web.Facebook
                 var user = Authenticate(request.Code);
 
                 if(user == null)
-                    return AuthenticationFailed();
+                    return View();
 
                 FormsAuthentication.SetAuthCookie(user, true);
 
@@ -36,14 +36,9 @@ namespace RazorPad.Web.Facebook
             }
 
             if (request.DeniedByUser)
-                return AuthorizationDenied();
+                return View("AuthorizationDenied");
 
-            return AuthorizationFailed(request.Error_Description);
-        }
-
-        private ActionResult AuthenticationFailed()
-        {
-            return View();
+            return View("AuthorizationFailed", request.Error_Description);
         }
 
         private string Authenticate(string code)
@@ -53,25 +48,25 @@ namespace RazorPad.Web.Facebook
             var redirectUrl = Request.ExternalUrl(VirtualPathUtility.ToAbsolute("~/"));
             
             // TODO: Async
-            var facebookUser = _facebook.Authenticate(code, redirectUrl);
+            var authToken = _facebook.Authenticate(code, redirectUrl);
 
-            if(facebookUser == null)
+            if(authToken == null)
                 return null;
 
             // TODO: Find user ID by Facebook User ID
             // TODO: Create new user if none exists
 
-            return facebookUser.EmailAddress;
+            var user = _facebook.GetUser(authToken);
+
+            return user.UserId.ToString();
         }
 
-        private ActionResult AuthorizationFailed(string reason)
+        public ActionResult Login()
         {
-            return View("AuthorizationFailed", reason);
-        }
+            var authorizeUrl = Url.ExternalAction("Authorize", "Facebook");
+            var loginUrl = _facebook.GetLoginUrl(authorizeUrl);
 
-        private ActionResult AuthorizationDenied()
-        {
-            return View("AuthorizationDenied");
+            return Redirect(loginUrl);
         }
     }
 }
