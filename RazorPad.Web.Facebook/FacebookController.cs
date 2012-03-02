@@ -31,16 +31,12 @@ namespace RazorPad.Web.Facebook
             {
                 var user = Authenticate(request.Code);
 
-                if(user == null)
-                    return View();
-
-                AuthenticateUserThunk(user.Email);
-
-                return Redirect("~/");
+                if(user != null)
+                {
+                    AuthenticateUserThunk(user.Email);
+                    return Redirect("~/");
+                }
             }
-
-            if (request.DeniedByUser)
-                return View("AuthorizationDenied");
 
             return View("AuthorizationFailed", request.Error_Description);
         }

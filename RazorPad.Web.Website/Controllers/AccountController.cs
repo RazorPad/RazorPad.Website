@@ -118,9 +118,10 @@ namespace RazorPad.Web.Website.Controllers
             var user = new User
             {
                 Username = createNewUserRequest.Username,
-                Password = createNewUserRequest.Password,
                 EmailAddress = createNewUserRequest.Email,
             };
+
+            user.Credentials.Add(FormsAuthCredential.Create(createNewUserRequest.Password));
 
             _membershipService.CreateUser(user);
 
