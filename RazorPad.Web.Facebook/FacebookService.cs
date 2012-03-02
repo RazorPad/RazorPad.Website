@@ -27,6 +27,9 @@ namespace RazorPad.Web.Facebook
 
         public AuthToken Authenticate(string code, string redirectUrl)
         {
+            if (!redirectUrl.EndsWith("/"))
+                redirectUrl += "/";
+
             var urlBuilder = new StringBuilder("https://graph.facebook.com/oauth/access_token?");
             urlBuilder.AppendFormat("client_id={0}", ClientId);
             urlBuilder.AppendFormat("&client_secret={0}", ClientSecret);
@@ -56,6 +59,9 @@ namespace RazorPad.Web.Facebook
 
         public string GetLoginUrl(string redirectUrl)
         {
+            if (!redirectUrl.EndsWith("/"))
+                redirectUrl += "/";
+
             var urlBuilder = new StringBuilder("https://www.facebook.com/dialog/oauth?");
             urlBuilder.AppendFormat( "client_id={0}", ClientId);
             urlBuilder.AppendFormat("&redirect_uri={0}", redirectUrl);
