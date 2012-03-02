@@ -42,21 +42,22 @@ namespace RazorPad.Web.Website.Controllers
 
             if (user == null)
             {
-                model.EmailNotFound = true;
+                ModelState.AddModelError("EmailAddress", "Email address not found.");
             }
             else
             {
-                model.Email = user.EmailAddress;
+                model.EmailAddress = user.EmailAddress;
 
                 var resetPasswordUrl = Url.ExternalAction("ResetPassword", "Account", new { token = token });
 
                 try
                 {
                     _forgotPasswordEmailer.SendEmail(user, resetPasswordUrl);
-                    model.EmailSent = true;
+                    return View("ForgotPasswordEmailSent", model);
                 }
                 catch (Exception)
                 {
+                    ModelState.AddModelError("EmailAddress", "Error sending email.  Please try again.");
                 }
 
 #if(DEBUG)                
@@ -109,7 +110,8 @@ namespace RazorPad.Web.Website.Controllers
 
             if (ModelState.IsValid == false)
             {
-                createNewUserRequest.Password = createNewUserRequest.PasswordConfirm = null;
+                createNewUserRequest.Password = null;
+                createNewUserRequest.PasswordConfirm = null;
                 return View("Register", createNewUserRequest);
             }
 
