@@ -58,6 +58,7 @@
     <Compile Include="Dynamic\DynamicJsonConverter.cs" />
     <Compile Include="Dynamic\JsonDynamicObject.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />
+    <Compile Include="Model\Credential.cs" />
     <Compile Include="Model\Fiddle.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

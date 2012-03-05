@@ -1,5 +1,5 @@
-﻿using System.Diagnostics.Contracts;
-using System.Web;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -7,6 +7,10 @@ namespace RazorPad.Web.Facebook
 {
     public class FacebookController : Controller
     {
+        internal static Action<string> AuthenticateUserThunk =
+            username => FormsAuthentication.SetAuthCookie(username, false);
+
+
         private readonly FacebookService _facebook;
 
 
@@ -27,51 +31,39 @@ namespace RazorPad.Web.Facebook
             {
                 var user = Authenticate(request.Code);
 
-                if(user == null)
-                    return AuthenticationFailed();
-
-                FormsAuthentication.SetAuthCookie(user, true);
-
-                return Redirect("~/");
+                if(user != null)
+                {
+                    AuthenticateUserThunk(user.Email);
+                    return Redirect("~/");
+                }
             }
 
-            if (request.DeniedByUser)
-                return AuthorizationDenied();
-
-            return AuthorizationFailed(request.Error_Description);
+            return View("AuthorizationFailed", request.Error_Description);
         }
 
-        private ActionResult AuthenticationFailed()
-        {
-            return View();
-        }
-
-        private string Authenticate(string code)
+        private FacebookUser Authenticate(string code)
         {
             Contract.Requires(string.IsNullOrWhiteSpace(code) == false);
 
-            var redirectUrl = Request.ExternalUrl(VirtualPathUtility.ToAbsolute("~/"));
-            
             // TODO: Async
-            var facebookUser = _facebook.Authenticate(code, redirectUrl);
+            var authToken = _facebook.Authenticate(code);
 
-            if(facebookUser == null)
+            if(authToken == null)
                 return null;
 
             // TODO: Find user ID by Facebook User ID
             // TODO: Create new user if none exists
 
-            return facebookUser.EmailAddress;
+            var user = _facebook.GetUser(authToken);
+
+            return user;
         }
 
-        private ActionResult AuthorizationFailed(string reason)
+        public ActionResult Login()
         {
-            return View("AuthorizationFailed", reason);
-        }
+            var loginUrl = _facebook.GetLoginUrl();
 
-        private ActionResult AuthorizationDenied()
-        {
-            return View("AuthorizationDenied");
+            return Redirect(loginUrl);
         }
     }
 }

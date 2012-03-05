@@ -15,10 +15,5 @@ namespace RazorPad.Web.Facebook
         {
             get { return String.IsNullOrWhiteSpace(Code) == false; }
         }
-
-        public bool DeniedByUser
-        {
-            get { return Error_Reason == "user_denied"; }
-        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace RazorPad.Web.Services
 {
@@ -18,14 +19,17 @@ namespace RazorPad.Web.Services
         bool ValidateUser(string username, string password, out User user);
     }
 
+
     public class MembershipService : IMembershipService
     {
         private readonly IRepository _repository;
+
 
         public MembershipService(IRepository repository)
         {
             _repository = repository;
         }
+
 
         public void CreateUser(User user)
         {
@@ -35,26 +39,29 @@ namespace RazorPad.Web.Services
 
         public string GeneratePasswordResetToken(string emailAddress, out User user)
         {
-            user = _repository.SingleOrDefault<User>(u => u.EmailAddress == emailAddress);
+            var credential = GetFormsAuthCredential(u => u.EmailAddress == emailAddress, out user);
 
-            if (user == null)
-                return null;
+            if (credential == null) return null;
 
-            user.ForgotPasswordToken = Guid.NewGuid().ToString("N");
+            credential.SetForgotPasswordToken();
             _repository.SaveChanges();
-            
-            return user.ForgotPasswordToken;
+
+            return credential.ForgotPasswordToken;
         }
 
 
         public void ResetPassword(string username, string password, string token)
         {
-            var user = _repository.SingleOrDefault<User>(u => u.Username == username && u.ForgotPasswordToken == token);
+            User user;
+            var credential = GetFormsAuthCredential(u => u.Username == username, out user);
 
-            if (user == null) 
+            if (credential == null)
                 return;
 
-            user.Password = password;
+            if (credential.ForgotPasswordToken != token)
+                throw new ApplicationException("Invalid forgot password token");
+
+            credential.SetPassword(password);
             _repository.SaveChanges();
         }
 
@@ -66,7 +73,12 @@ namespace RazorPad.Web.Services
 
         public bool ValidatePasswordResetToken(string token, out User user)
         {
-            user = _repository.SingleOrDefault<User>(u => u.ForgotPasswordToken == token);
+            user = _repository.SingleOrDefault<User>(u => 
+                u.Credentials
+                    .OfType<FormsAuthCredential>()
+                    .Any(credential => credential.ForgotPasswordToken == token)
+                );
+
             return user != null;
         }
 
@@ -78,8 +90,28 @@ namespace RazorPad.Web.Services
 
         public bool ValidateUser(string username, string password, out User user)
         {
-            user = _repository.SingleOrDefault<User>(u => u.Username == username && u.Password == password);
+            var passwordHash = FormsAuthCredential.Create(password).Hash;
+
+            user = _repository.SingleOrDefault<User>(u =>
+                u.Credentials
+                    .OfType<FormsAuthCredential>()
+                    .Any(credential => credential.Hash == passwordHash)
+                );
+
             return user != null;
+        }
+
+
+        private FormsAuthCredential GetFormsAuthCredential(Func<User, bool> predicate, out User user)
+        {
+            user = _repository.SingleOrDefault(predicate);
+
+            if (user == null)
+                return null;
+
+            var credential = user.Credentials.OfType<FormsAuthCredential>().SingleOrDefault();
+
+            return credential;
         }
     }
 }

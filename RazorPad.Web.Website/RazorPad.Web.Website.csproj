@@ -264,6 +264,8 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\InvalidResetPasswordToken.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordEmailSent.cshtml" />
+    <Content Include="Views\Shared\AuthenticationFailed.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />
