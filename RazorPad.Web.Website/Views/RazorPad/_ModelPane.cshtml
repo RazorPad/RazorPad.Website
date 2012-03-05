@@ -1,4 +1,4 @@
-﻿@using Newtonsoft.Json
+﻿@using RazorPad.Core
 <div class="editorContainer">
     <div class="paneheader">
         <div class="title">
@@ -28,9 +28,22 @@
                     @if (Model != null && Model.DynamicInputModel != null)
                     {
                         IDictionary<string, object> props = Model.DynamicInputModel.GetProperties();
+                        string type = "string";
                         foreach (var prop in props)
                         {
-                            <tr>
+                            
+                            switch (prop.Value.GetType().ToString())
+                            {
+                                case "System.Int32":
+                                case "System.Int64":
+                                    type = "int";break;
+                                case "System.Double":
+                                    type = "float";break;
+                                default:
+                                    type = "string";break;
+                            }
+                            
+                            <tr title="@type" class="@type" data-type="@type">
                                 <td>
                                     <span class="name">@prop.Key</span>
                                 </td>
@@ -54,20 +67,16 @@
 </div>
 <script type="text/javascript" charset="utf-8">
 
-    var addPropRow = function (data) {
-        //$('#modelGrid tbody').prepend(String.format("<tr title=\"{2} {0};\"><td><span class='name'>{0}</span></td><td><span class='value'>{1}</span></td></tr>", data.name, data.value, data.type));
-        $('#modelGrid tbody').prepend(String.format("<tr><td><span class='name'>{0}</span></td><td><span class='value'>{1}</span></td></tr>", data.name, data.value));
-    };
-
-    var addToModel = function (txt) {
-        var parts = txt.replace(/^\s*/, '').replace(/[;\s]*$/, '').split(' ');
-        var prop = { type: parts[0], name: parts[1], value: parts[parts.length - 1].replace(/^"/, '').replace(/"$/, '') };
-        addPropRow(prop);
-    };
-
     $(function () {
-        // ace editor needs explicityly sized div
+        function addPropRow(data) {
+            $('#modelGrid tbody').prepend(String.format("<tr data-type='{2}'><td><span class='name'>{0}</span></td><td><span class='value'>{1}</span></td></tr>", data.name, data.value, data.type));
+        }
 
+        function addToModel(txt) {
+            var parts = txt.replace(/^\s*/, '').replace(/[;\s]*$/, '').split(' ');
+            var prop = { type: parts[0], name: parts[1], value: parts[parts.length - 1].replace(/^"/, '').replace(/"$/, '') };
+            addPropRow(prop);
+        }
 
         $('#modelHeader').hpTabs().watermark('model');
 
@@ -80,11 +89,12 @@
         });
 
         $('#propinput').val('string Name "world"');
-        
-        $('#modelGrid > tbody').delegate('td', 'click', function () {
+
+        $('#modelGrid > tbody')
+        .delegate('td', 'click', function () {
             $(this).children('span').attr('contentEditable', 'true').focus();
-        });
-        $('#modelGrid > tbody').delegate('td span', 'keypress blur', function (e) {
+        })
+        .delegate('td span', 'keypress blur', function (e) {
             if (e.type === 'keypress' && e.keyCode !== 13) { return; }
             $(this).attr('contentEditable', 'false');
         });

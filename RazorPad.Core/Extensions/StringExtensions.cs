@@ -10,5 +10,6 @@ namespace RazorPad.Core
             var stream = new MemoryStream(Encoding.Default.GetBytes(source ?? string.Empty));
             return new StreamReader(stream);
         }
+
     }
 }

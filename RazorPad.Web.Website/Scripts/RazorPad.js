@@ -3,7 +3,7 @@
 RazorPad.saveTemplate = function (clone) {
     RazorPad.showLoading();
     var data = {
-        Template: RazorPad.razorEditor.getValue(), //ToDo: Need to find a way to find the editor instance on the page
+        Template: RazorPad.razorEditor.getValue(),
         Model: JSON.stringify(RazorPad.getModel()),
         FiddleId: (clone ? '' : ($('#fiddleId').val() || ''))
     };
@@ -84,19 +84,33 @@ RazorPad.hideLoading = function() {
     $('#loading').fadeOut('slow');
 }
 
-
-
 RazorPad.getModel = function () {
-    var model = {}, name, val, type;
+    var model = {}, $this, name, val, type;
     $('#modelGrid > tbody > tr').each(function () {
-        name = $(this).find('span.name').text();
-        val = $(this).find('span.value').text();
-        type = $(this).data('type');
+        $this = $(this);
+        name = $this.find('span.name').text();
+        val = $this.find('span.value').text();
+        type = $this.data('type') || "string";//If type is not specified consider it as string
         if (name && val) {
-            model[$.trim(name)] = $.trim(val);
+            model[$.trim(name)] = RazorPad.parsePropValue($.trim(val), $.trim(type));
         }
     });
     return model;
+}
+
+RazorPad.parsePropValue = function (val, type) {
+    if (type && val) {
+        switch (type.toLowerCase()) {
+            case "int":
+                return parseInt(val);
+            case "float":
+            case "double":
+                return parseFloat(val);
+            case "string":
+                return val;
+        }
+    }
+    return val;
 }
 
 RazorPad.onParseError = function(err) {
