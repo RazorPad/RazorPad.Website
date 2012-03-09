@@ -1,6 +1,6 @@
 using System;
 
-namespace RazorPad.Web.Facebook
+namespace RazorPad.Web.Website.Areas.Account.Models
 {
     public class AuthorizeRequest
     {

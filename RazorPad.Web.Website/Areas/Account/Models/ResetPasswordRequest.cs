@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace RazorPad.Web.Website.Models.Account
+namespace RazorPad.Web.Website.Areas.Account.Models
 {
     public class ResetPasswordRequest : PasswordRequest
     {

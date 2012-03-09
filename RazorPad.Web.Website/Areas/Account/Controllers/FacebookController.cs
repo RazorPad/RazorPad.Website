@@ -3,7 +3,7 @@ using System.Diagnostics.Contracts;
 using System.Web.Mvc;
 using System.Web.Security;
 using RazorPad.Web.Authentication.Facebook;
-using RazorPad.Web.Facebook;
+using RazorPad.Web.Website.Areas.Account.Models;
 
 namespace RazorPad.Web.Website.Areas.Account.Controllers
 {

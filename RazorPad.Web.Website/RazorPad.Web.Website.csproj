@@ -270,7 +270,7 @@
     <Content Include="Views\RazorPad\_ModelPane.cshtml" />
     <Content Include="Views\RazorPad\_ResultsPane.cshtml" />
     <Content Include="Views\RazorPad\_ModelGrid.cshtml" />
-    <Content Include="Areas\Account\Views\FormsAuth\Login.cshtml" />
+    <Content Include="Areas\Account\Views\Shared\Login.cshtml" />
     <Content Include="Areas\Account\Views\Registration\Register.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Account\Views\Password\ForgotPassword.cshtml" />
@@ -354,8 +354,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Account\Services\" />
-    <Folder Include="Areas\Account\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\RazorPad\MainUI.cshtml" />

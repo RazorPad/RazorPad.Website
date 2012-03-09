@@ -3,7 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using RazorPad.Web.Services;
-using RazorPad.Web.Website.Models.Account;
+using RazorPad.Web.Website.Areas.Account.Models;
 
 namespace RazorPad.Web.Website.Areas.Account.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using RazorPad.Web.Authentication;
 using RazorPad.Web.Services;
-using RazorPad.Web.Website.Models.Account;
+using RazorPad.Web.Website.Areas.Account.Models;
 
 namespace RazorPad.Web.Website.Areas.Account.Controllers
 {

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using RazorPad.Web.Util;
 
-namespace RazorPad.Web.Website.Models.Account
+namespace RazorPad.Web.Website.Areas.Account.Models
 {
     public class PasswordRequest
     {
