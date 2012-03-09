@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using RazorPad.Web.Website.Models.Util;
+using RazorPad.Web.Util;
 
 namespace RazorPad.Web.Website.Models.Account
 {

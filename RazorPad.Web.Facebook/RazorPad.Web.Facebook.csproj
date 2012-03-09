@@ -49,11 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizeRequest.cs" />
-    <Compile Include="FacebookController.cs" />
-    <Compile Include="FacebookExtensions.cs" />
-    <Compile Include="FacebookService.cs" />
-    <Compile Include="AuthToken.cs" />
-    <Compile Include="FacebookUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

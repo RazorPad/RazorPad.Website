@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using RazorPad.Web.Authentication;
 
 namespace RazorPad.Web.Services
 {
@@ -73,11 +74,8 @@ namespace RazorPad.Web.Services
 
         public bool ValidatePasswordResetToken(string token, out User user)
         {
-            user = _repository.SingleOrDefault<User>(u => 
-                u.Credentials
-                    .OfType<FormsAuthCredential>()
-                    .Any(credential => credential.ForgotPasswordToken == token)
-                );
+            user = _repository.FindUserByCredential<FormsAuthCredential>(
+                        x => x.ForgotPasswordToken == token);
 
             return user != null;
         }
@@ -92,11 +90,8 @@ namespace RazorPad.Web.Services
         {
             var passwordHash = FormsAuthCredential.Create(password).Hash;
 
-            user = _repository.SingleOrDefault<User>(u =>
-                u.Credentials
-                    .OfType<FormsAuthCredential>()
-                    .Any(credential => credential.Hash == passwordHash)
-                );
+            user = _repository.FindUserByCredential<FormsAuthCredential>(
+                        credential => credential.Hash == passwordHash);
 
             return user != null;
         }

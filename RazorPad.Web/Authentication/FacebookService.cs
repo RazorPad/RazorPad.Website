@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web.Script.Serialization;
+using RazorPad.Web.Authentication;
 
 namespace RazorPad.Web.Facebook
 {
@@ -44,7 +45,7 @@ namespace RazorPad.Web.Facebook
         }
 
 
-        public AuthToken Authenticate(string code)
+        public IntegratedAuthenticationCredential Authenticate(string code)
         {
             var urlBuilder = new StringBuilder("https://graph.facebook.com/oauth/access_token?");
             urlBuilder.AppendFormat("client_id={0}", ClientId);
@@ -66,9 +67,9 @@ namespace RazorPad.Web.Facebook
 
             var expiration = int.Parse(parts["expires"]);
 
-            return new AuthToken
+            return new IntegratedAuthenticationCredential
                        {
-                           Value = parts["access_token"],
+                           Token = parts["access_token"],
                            Expiration = DateTime.Now.AddSeconds(expiration)
                        };
         }
@@ -85,9 +86,9 @@ namespace RazorPad.Web.Facebook
             return urlBuilder.ToString();
         }
 
-        public FacebookUser GetUser(AuthToken token)
+        public FacebookUser GetUser(IntegratedAuthenticationCredential credential)
         {
-            var url = "https://graph.facebook.com/me?access_token=" + token.Value;
+            var url = "https://graph.facebook.com/me?access_token=" + credential.Token;
             
             var response = new WebClient().DownloadString(url);
 

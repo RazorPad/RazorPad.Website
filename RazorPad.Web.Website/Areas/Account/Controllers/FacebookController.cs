@@ -2,8 +2,9 @@
 using System.Diagnostics.Contracts;
 using System.Web.Mvc;
 using System.Web.Security;
+using RazorPad.Web.Facebook;
 
-namespace RazorPad.Web.Facebook
+namespace RazorPad.Web.Website.Areas.Account.Controllers
 {
     public class FacebookController : Controller
     {

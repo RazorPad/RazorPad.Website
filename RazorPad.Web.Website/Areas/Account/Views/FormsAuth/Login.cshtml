@@ -4,7 +4,8 @@
         <div class="box">
             <h2>Login</h2>
             
-        @using(Html.BeginForm("Login", "Account")) {
+        @using (Html.BeginForm("Login", "Home"))
+        {
             <div>
                 @Html.LabelFor(x => x.Username)
                 @Html.EditorFor(x => x.Username)
@@ -17,8 +18,8 @@
             </div>
             <div class="form-button">
                 <input tabindex="3" type="submit" id="loginBtn" value="Login" />
-                <span class="sign-up">Not registered? <a href="@Url.Action("Register", "Account")">Sign Up</a></span>
-                <span class="sign-up"><a href="@Url.Action("ForgotPassword", "Account")">Forgot Password</a></span>
+                <span class="sign-up">Not registered? <a href="@Url.Action("Register", "Registration", new { area = "Account" })">Sign Up</a></span>
+                <span class="sign-up"><a href="@Url.Action("ForgotPassword", "Password", new { area = "Account" })">Forgot Password</a></span>
                 <div class="clear clearfix"></div>
             </div>
         }

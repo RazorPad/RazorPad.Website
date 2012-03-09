@@ -25,9 +25,9 @@ namespace RazorPad.Web.Facebook
         [TestMethod]
         public void ShouldAuthenticateUser()
         {
-            var token = _service.Authenticate("REPLACE_WITH_YOUR_TOKEN");
+            var credential = _service.Authenticate("REPLACE_WITH_YOUR_TOKEN");
 
-            Assert.IsNotNull(token.Value);
+            Assert.IsNotNull(credential.Token);
         }
 
         [TestMethod]

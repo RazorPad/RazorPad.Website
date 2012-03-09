@@ -1,12 +1,9 @@
 using System;
 using System.Web.Security;
+using RazorPad.Web.Services;
 
-namespace RazorPad.Web
+namespace RazorPad.Web.Authentication
 {
-    public abstract class Credential
-    {
-    }
-
     public class FormsAuthCredential : Credential, IEquatable<Credential>
     {
         public string Hash { get; set; }
@@ -16,7 +13,7 @@ namespace RazorPad.Web
         public bool Equals(Credential other)
         {
             return (other is FormsAuthCredential) 
-                && (Hash == ((FormsAuthCredential)other).Hash);
+                   && (Hash == ((FormsAuthCredential)other).Hash);
         }
 
         public void SetForgotPasswordToken()

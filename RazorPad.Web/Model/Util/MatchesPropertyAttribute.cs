@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace RazorPad.Web.Website.Models.Util
+namespace RazorPad.Web.Util
 {
     public class MatchesPropertyAttribute : ValidationAttribute
     {

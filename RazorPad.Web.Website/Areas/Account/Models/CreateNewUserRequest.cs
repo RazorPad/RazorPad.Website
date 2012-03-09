@@ -14,5 +14,13 @@ namespace RazorPad.Web.Website.Models.Account
             @"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", 
             ErrorMessage = "{0} must be a valid email address")]
         public string Email { get; set; }
+
+        public string RedirectUrl { get; set; }
+
+
+        public CreateNewUserRequest()
+        {
+            RedirectUrl = "~/";
+        }
     }
 }

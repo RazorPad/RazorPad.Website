@@ -9,5 +9,12 @@ namespace RazorPad.Web.Website.Models.Account
 
         [Required]
         public string Token { get; set; }
+
+        public string RedirectUrl { get; set; }
+
+        public ResetPasswordRequest()
+        {
+            RedirectUrl = "~/";
+        }
     }
 }
