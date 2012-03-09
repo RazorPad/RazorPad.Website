@@ -5,9 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web.Script.Serialization;
-using RazorPad.Web.Authentication;
 
-namespace RazorPad.Web.Facebook
+namespace RazorPad.Web.Authentication.Facebook
 {
     public class FacebookService
     {

@@ -40,6 +40,9 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetOpenAuth">
+      <HintPath>..\packages\DotNetOpenAuth.3.4.7.11121\lib\DotNetOpenAuth.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -57,9 +60,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\FacebookExtensions.cs" />
-    <Compile Include="Authentication\FacebookService.cs" />
-    <Compile Include="Authentication\FacebookUser.cs" />
+    <Compile Include="Authentication\Facebook\FacebookExtensions.cs" />
+    <Compile Include="Authentication\Facebook\FacebookService.cs" />
+    <Compile Include="Authentication\Facebook\FacebookUser.cs" />
+    <Compile Include="Authentication\OpenId\AuthenticationException.cs" />
+    <Compile Include="Authentication\OpenId\FailedResponse.cs" />
+    <Compile Include="Authentication\OpenId\InvalidIdentifier.cs" />
+    <Compile Include="Authentication\OpenId\OpenIdAuthenticationResponse.cs" />
+    <Compile Include="Authentication\OpenId\OpenIdRelyingPartyFacade.cs" />
+    <Compile Include="Authentication\OpenId\RedirectResponse.cs" />
+    <Compile Include="Authentication\OpenId\SuccessfulResponse.cs" />
     <Compile Include="Dynamic\DynamicJsonConverter.cs" />
     <Compile Include="Dynamic\JsonDynamicObject.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />
@@ -81,6 +91,9 @@
       <Project>{511d144c-f4c7-40a3-b3b4-80d891fce2f5}</Project>
       <Name>RazorPad.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

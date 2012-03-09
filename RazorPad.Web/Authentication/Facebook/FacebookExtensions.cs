@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace RazorPad.Web.Facebook
+namespace RazorPad.Web.Authentication.Facebook
 {
     public static class FacebookExtensions
     {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RazorPad.Web.Authentication.Facebook;
 
 namespace RazorPad.Web.Facebook
 {

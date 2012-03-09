@@ -1,4 +1,4 @@
-namespace RazorPad.Web.Facebook
+namespace RazorPad.Web.Authentication.Facebook
 {
     public class FacebookUser
     {

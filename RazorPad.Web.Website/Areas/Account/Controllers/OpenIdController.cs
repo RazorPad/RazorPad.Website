@@ -1,8 +1,7 @@
 ﻿using System.Web.Mvc;
-using DotNetOpenAuth.Messaging;
 using RazorPad.Web.Authentication;
+using RazorPad.Web.Authentication.OpenId;
 using RazorPad.Web.Services;
-using RazorPad.Web.Website.Areas.Account.Services;
 using RazorPad.Web.Website.Extensions;
 
 namespace RazorPad.Web.Website.Areas.Account.Controllers
@@ -20,17 +19,22 @@ namespace RazorPad.Web.Website.Areas.Account.Controllers
 
         public ActionResult Google(string returnUrl = null)
         {
-            return Authenticate("https://www.google.com/accounts/o8/id", returnUrl);
+            var response = _openId.Google();
+            return ProcessOpenIdResponse(response);
         }
 
         [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get), ValidateInput(false)]
         public ActionResult Authenticate(string provider, string returnUrl = null)
         {
-            OpenIdAuthenticationResponse response = _openId.Authenticate(provider);
+            var response = _openId.Authenticate(provider);
+            return ProcessOpenIdResponse(response);
+        }
 
+        protected virtual ActionResult ProcessOpenIdResponse(OpenIdAuthenticationResponse response, string returnUrl = null)
+        {
             var redirect = response as RedirectResponse;
             if (redirect != null)
-                return redirect.Response.AsActionResult();
+                return redirect;
 
             var success = response as SuccessfulResponse;
             if(success != null)
@@ -43,7 +47,7 @@ namespace RazorPad.Web.Website.Areas.Account.Controllers
                 
                 FormsAuthController.AuthenticateUser(user);
 
-                return Redirect(returnUrl ?? "~/");
+                return Redirect(Url.ExternalUrl(returnUrl ?? "~/"));
             }
 
             var exception = response as AuthenticationException;

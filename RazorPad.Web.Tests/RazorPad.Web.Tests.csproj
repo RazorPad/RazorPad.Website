@@ -57,10 +57,6 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RazorPad.Web.Facebook\RazorPad.Web.Facebook.csproj">
-      <Project>{B5D86FFD-300C-44DE-B28A-CDFF8BC60027}</Project>
-      <Name>RazorPad.Web.Facebook</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RazorPad.Web\RazorPad.Web.csproj">
       <Project>{8687fa7b-28f1-421b-aef3-404f68b501b4}</Project>
       <Name>RazorPad.Web</Name>

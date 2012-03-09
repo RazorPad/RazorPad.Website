@@ -64,10 +64,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RavenDB-Embedded.1.0.658-Unstable\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetOpenAuth, Version=3.4.7.11121, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotNetOpenAuth.3.4.7.11121\lib\DotNetOpenAuth.dll</HintPath>
-    </Reference>
     <Reference Include="Elmah">
       <HintPath>..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
     </Reference>
@@ -198,10 +194,10 @@
     <Compile Include="Areas\Account\Controllers\RegistrationController.cs" />
     <Compile Include="Areas\Account\Controllers\PasswordController.cs" />
     <Compile Include="Areas\Account\Controllers\OpenIdController.cs" />
+    <Compile Include="Areas\Account\Models\AuthorizeRequest.cs" />
     <Compile Include="Areas\Account\Models\OpenIdLoginRequest.cs" />
     <Compile Include="Areas\Account\Models\CreateNewUserRequest.cs" />
     <Compile Include="Areas\Account\Models\LoginRequest.cs" />
-    <Compile Include="Areas\Account\Services\OpenIdRelyingPartyFacade.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
     <Compile Include="Areas\Account\Models\ForgotPassword.cs" />
     <Compile Include="Areas\Account\Models\PasswordRequest.cs" />
@@ -358,6 +354,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Account\Services\" />
     <Folder Include="Areas\Account\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
@@ -367,10 +364,6 @@
     <ProjectReference Include="..\RazorPad.Core\RazorPad.Core.csproj">
       <Project>{511d144c-f4c7-40a3-b3b4-80d891fce2f5}</Project>
       <Name>RazorPad.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RazorPad.Web.Facebook\RazorPad.Web.Facebook.csproj">
-      <Project>{b5d86ffd-300c-44de-b28a-cdff8bc60027}</Project>
-      <Name>RazorPad.Web.Facebook</Name>
     </ProjectReference>
     <ProjectReference Include="..\RazorPad.Web.RavenDb\RazorPad.Web.RavenDb.csproj">
       <Project>{d8fdf341-d9de-4c69-9e8c-db910587ed51}</Project>
