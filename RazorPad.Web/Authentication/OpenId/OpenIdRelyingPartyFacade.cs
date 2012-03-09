@@ -23,17 +23,6 @@ namespace RazorPad.Web.Authentication.OpenId
 
         public OpenIdAuthenticationResponse Authenticate(string provider)
         {
-            Identifier providerId;
-
-            try
-            {
-                providerId = Identifier.Parse(provider);
-            }
-            catch (ArgumentException ex)
-            {
-                return new InvalidIdentifier(provider, ex);
-            }
-
             var openid = new OpenIdRelyingParty();
             var response = openid.GetResponse();
 
@@ -41,6 +30,17 @@ namespace RazorPad.Web.Authentication.OpenId
             {
                 try
                 {
+                    Identifier providerId;
+
+                    try
+                    {
+                        providerId = Identifier.Parse(provider);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        return new InvalidIdentifier(provider, ex);
+                    }
+
                     var authenticationRequest = openid.CreateRequest(providerId);
 
                     var claims = ClaimsFactory();

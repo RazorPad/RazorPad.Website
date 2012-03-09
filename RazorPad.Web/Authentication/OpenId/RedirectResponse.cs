@@ -14,7 +14,23 @@ namespace RazorPad.Web.Authentication.OpenId
 
         public static implicit operator ActionResult(RedirectResponse response)
         {
-            return response.Response.AsActionResult();
+            return new OutgoingWebResponseActionResult(response.Response);
+        }
+
+
+        internal class OutgoingWebResponseActionResult : ActionResult
+        {
+            private readonly OutgoingWebResponse response;
+
+            internal OutgoingWebResponseActionResult(OutgoingWebResponse response)
+            {
+                this.response = response;
+            }
+
+            public override void ExecuteResult(ControllerContext context)
+            {
+                response.Send();
+            }
         }
     }
 }

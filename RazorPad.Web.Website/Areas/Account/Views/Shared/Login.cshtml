@@ -1,0 +1,49 @@
+﻿@model RazorPad.Web.Website.Areas.Account.Models.LoginRequest
+<div class="form">
+    <div class="form-box">
+        <div class="box">
+            <h2>Login</h2>
+            @using (Html.BeginForm("Login", "FormsAuth", new { area = "Account" }))
+            {
+                <div>
+                    @Html.LabelFor(x => x.Username)
+                    @Html.EditorFor(x => x.Username)
+                    @Html.ValidationMessageFor(x => x.Username)
+                </div>
+                <div>
+                    @Html.LabelFor(x => x.Password)
+                    @Html.PasswordFor(x => x.Password)
+                    @Html.ValidationMessageFor(x => x.Password)
+                </div>
+                <div class="form-button">
+                    <input tabindex="3" type="submit" id="loginBtn" value="Login" />
+                    <span class="sign-up">Not registered? <a href="@Url.Action("Register", "Registration", new { area = "Account" })">
+                        Sign Up</a></span><span class="sign-up"><a href="@Url.Action("ForgotPassword", "Password", new { area = "Account" })">
+                            Forgot Password</a></span>
+                    <div class="clear clearfix"></div>
+                </div>
+            }
+
+            <fieldset>
+                @Html.ActionLink("Facebook", "Authorize", "Facebook", new { area = "Account" }, new { @class = "openid-provider facebook"})
+                @Html.ActionLink("Google", "Google", "OpenId", new { area = "Account" }, new { @class = "openid-provider google"})
+                
+                <a class="openid-provider generic" onclick="$('#openid-form').toggle()" href="#">Open ID</a>
+                <div id="openid-form" style="display: none">
+                    @using (Html.BeginForm("Authenticate", "OpenId", new { area = "Account" }))
+                    {
+                        <input name="provider" type="text" width="500px" />
+                        <input type="submit" value="Go!"/>
+                    }
+                </div>
+            </fieldset>
+        </div>
+        </div>
+        <div class="clear clearfix">
+    </div>
+</div>
+@section Tail {
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery.unobtrusive-ajax.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/jquery.validate.unobtrusive.js")"></script>
+}
