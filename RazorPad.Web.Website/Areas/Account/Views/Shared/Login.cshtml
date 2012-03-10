@@ -1,8 +1,10 @@
 ﻿@model RazorPad.Web.Website.Areas.Account.Models.LoginRequest
-<div class="form">
+<div class="login form">
     <div class="form-box">
         <div class="box">
-            <h2>Login</h2>
+            
+            <div class="half">
+            <h2>Account Login</h2>
             @using (Html.BeginForm("Login", "FormsAuth", new { area = "Account" }))
             {
                 <div>
@@ -17,26 +19,45 @@
                 </div>
                 <div class="form-button">
                     <input tabindex="3" type="submit" id="loginBtn" value="Login" />
-                    <span class="sign-up">Not registered? <a href="@Url.Action("Register", "Registration", new { area = "Account" })">
-                        Sign Up</a></span><span class="sign-up"><a href="@Url.Action("ForgotPassword", "Password", new { area = "Account" })">
-                            Forgot Password</a></span>
-                    <div class="clear clearfix"></div>
+                    <span class="sign-up">
+                        Not registered? 
+                        @Html.ActionLink("Register Now", "Register", "Registration", new { area = "Account" })
+                    </span>
+                </div>
+                <div class="links">
+                    <span class="forgot-password">
+                        @Html.ActionLink("Forgot Password", "ForgotPassword", "Password", new { area = "Account" })
+                    </span>
                 </div>
             }
+            </div>
 
+            <div class="half">
+            <h2>Third party login:</h2>
             <fieldset>
-                @Html.ActionLink("Facebook", "Authorize", "Facebook", new { area = "Account" }, new { @class = "openid-provider facebook"})
-                @Html.ActionLink("Google", "Google", "OpenId", new { area = "Account" }, new { @class = "openid-provider google"})
+                <a href="@Url.Action("Authorize", "Facebook", new { area = "Account" })" class="openid-provider facebook">
+                    <img width="60" height="60" title="Login with Facebook" src="@Url.Content("~/content/images/facebook.jpg")"/>
+                </a>
                 
-                <a class="openid-provider generic" onclick="$('#openid-form').toggle()" href="#">Open ID</a>
-                <div id="openid-form" style="display: none">
-                    @using (Html.BeginForm("Authenticate", "OpenId", new { area = "Account" }))
-                    {
-                        <input name="provider" type="text" width="500px" />
-                        <input type="submit" value="Go!"/>
-                    }
+                <a href="@Url.Action("Google", "OpenId", new { area = "Account" })" class="openid-provider google">
+                    <img width="64" height="64" title="Login with Google" src="@Url.Content("~/content/images/google.png")"/>
+                </a>
+                
+                <div class="generic-openid-container">
+                    <a class="openid-provider generic" onclick="$('#openid-form').toggle()" href="#">
+                        <img width="64" height="64" title="Login with OpenID" src="@Url.Content("~/content/images/openid.png")"/>
+                    </a>
+                    <div id="openid-form" style="display: none">
+                        <h3>Open ID Url:</h3>
+                        @using (Html.BeginForm("Authenticate", "OpenId", new { area = "Account" }))
+                        {
+                            <input name="provider" type="text" width="500px"  value="http://<OpenIdName>.myopenid.com"/>
+                            <input type="submit" value="Go!"/>
+                        }
+                    </div>
                 </div>
             </fieldset>
+            </div>
         </div>
         </div>
         <div class="clear clearfix">
