@@ -1,0 +1,12 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Authentication Failed";
+}
+
+<h2>Authentication Failed</h2>
+
+<div>
+    Sorry, but we were unable to authenticate against your Facebook user account.
+    Please @Html.ActionLink("click here to login", "Login", "FormsAuth").
+</div>

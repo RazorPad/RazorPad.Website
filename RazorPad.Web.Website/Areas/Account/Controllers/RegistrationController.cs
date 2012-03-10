@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using RazorPad.Web.Authentication;
 using RazorPad.Web.Services;
 using RazorPad.Web.Website.Areas.Account.Models;
 
@@ -16,6 +15,32 @@ namespace RazorPad.Web.Website.Areas.Account.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult Integrated(
+            [Bind(Prefix = "")]CreateNewUserRequest createNewUserRequest,
+            [Bind(Prefix = "")]IntegratedAuthenticationCredentialsRequest credentials)
+        {
+            return View("Integrated", 
+                        new IntegratedAuthenticationRegistrationViewModel(createNewUserRequest, credentials));
+        }
+
+
+        [HttpPost, ActionName("Integrated")]
+        public ActionResult IntegratedPost(
+            [Bind(Prefix = "")]CreateNewUserRequest createNewUserRequest,
+            [Bind(Prefix = "")]IntegratedAuthenticationCredentialsRequest credentials)
+        {
+            ValidateUsername(createNewUserRequest);
+
+            if (ModelState.IsValid == false)
+            {
+                return View("Integrated",
+                            new IntegratedAuthenticationRegistrationViewModel(createNewUserRequest, credentials));
+            }
+
+            return CreateNewUser(createNewUserRequest, credentials);
+        }
+
 
         [HttpGet]
         public ActionResult Register()
@@ -24,27 +49,38 @@ namespace RazorPad.Web.Website.Areas.Account.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(CreateNewUserRequest createNewUserRequest)
+        public ActionResult Register(
+            [Bind(Prefix = "")]CreateNewUserRequest createNewUserRequest, 
+            [Bind(Prefix = "")]PasswordRequest credentials)
+        {
+            ValidateUsername(createNewUserRequest);
+
+            if (ModelState.IsValid == false)
+            {
+                return View("Register", createNewUserRequest);
+            }
+
+            return CreateNewUser(createNewUserRequest, credentials);
+        }
+
+
+        private void ValidateUsername(CreateNewUserRequest createNewUserRequest)
         {
             var isValidUsername = _membershipService.ValidateNewUsername(createNewUserRequest.Username);
 
             if (isValidUsername == false)
                 ModelState.AddModelError("username", "Invalid user name (user already exists?)");
+        }
 
-            if (ModelState.IsValid == false)
-            {
-                createNewUserRequest.Password = null;
-                createNewUserRequest.PasswordConfirm = null;
-                return View("Register", createNewUserRequest);
-            }
-
+        private ActionResult CreateNewUser(CreateNewUserRequest createNewUserRequest, CredentialRequest credentials)
+        {
             var user = new User
-            {
-                Username = createNewUserRequest.Username,
-                EmailAddress = createNewUserRequest.Email,
-            };
+                           {
+                               Username = createNewUserRequest.Username,
+                               EmailAddress = createNewUserRequest.EmailAddress,
+                           };
 
-            user.Credentials.Add(FormsAuthCredential.Create(createNewUserRequest.Password));
+            user.Credentials.Add(credentials.ToCredential());
 
             _membershipService.CreateUser(user);
 

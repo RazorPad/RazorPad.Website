@@ -1,0 +1,30 @@
+﻿@model RazorPad.Web.Website.Areas.Account.Models.IntegratedAuthenticationRegistrationViewModel
+
+@{
+    ViewBag.Title = "New User Registration";
+}
+
+<div class="form">
+    <div class="form-box">
+        <div class="box">
+            <h2>Sign Up</h2>
+
+            @using(Html.BeginForm("Integrated", "Registration")) {
+
+                @Html.ValidationSummary(true)
+
+                @Html.Hidden("Token", Model.Credentials.Token)
+                @Html.Hidden("Expiration", Model.Credentials.Expiration)
+                @Html.Hidden("UserId", Model.Credentials.UserId)
+                
+                @Html.Partial("_NewUserInfo", Model.Request)
+                
+                <div class="form-button">
+                    <input type="submit" id="signUpBtn" value="Sign Up" />
+                </div>
+            }
+        </div>
+    </div>
+    <div class="clear clearfix">
+    </div>
+</div>

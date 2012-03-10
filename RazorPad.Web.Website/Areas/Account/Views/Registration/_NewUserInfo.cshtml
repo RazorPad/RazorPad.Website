@@ -1,0 +1,13 @@
+﻿@model RazorPad.Web.Website.Areas.Account.Models.CreateNewUserRequest
+
+<div>
+    @Html.LabelFor(x => x.EmailAddress)
+    @Html.EditorFor(x => x.EmailAddress)
+    @Html.ValidationMessageFor(x => x.EmailAddress)
+</div>                
+
+<div>
+    @Html.LabelFor(x => x.Username)
+    @Html.EditorFor(x => x.Username)
+    @Html.ValidationMessageFor(x => x.Username)
+</div>                

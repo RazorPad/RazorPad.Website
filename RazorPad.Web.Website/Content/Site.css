@@ -633,13 +633,10 @@ input[type="text"].input-validation-error, input[type="password"].input-validati
 }
 
 
-.generic-openid-container {
-    margin: 30px 0 0 0;
-}
 .openid-provider {
     margin: 20px;
 }
 
 #openid-form {
-    float: right;
+    margin: 30px 20px;
 }

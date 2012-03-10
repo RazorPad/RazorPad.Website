@@ -15,6 +15,16 @@ namespace RazorPad.Web.Authentication.OpenId
             get { return Response.GetExtension<ClaimsResponse>(); }
         }
 
+        public string EmailAddress
+        {
+            get { return (Credentials == null) ? null : Credentials.Email; }
+        }
+
+        public string FriendlyIdentifier
+        {
+            get { return Response.FriendlyIdentifierForDisplay; }
+        }
+
         public IAuthenticationResponse Response { get; private set; }
 
         public SuccessfulResponse(IAuthenticationResponse response)

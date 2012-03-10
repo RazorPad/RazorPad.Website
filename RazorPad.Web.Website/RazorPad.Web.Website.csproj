@@ -195,6 +195,9 @@
     <Compile Include="Areas\Account\Controllers\PasswordController.cs" />
     <Compile Include="Areas\Account\Controllers\OpenIdController.cs" />
     <Compile Include="Areas\Account\Models\AuthorizeRequest.cs" />
+    <Compile Include="Areas\Account\Models\CredentialRequest.cs" />
+    <Compile Include="Areas\Account\Models\IntegratedAuthenticationCredentialsRequest.cs" />
+    <Compile Include="Areas\Account\Models\IntegratedAuthenticationRegistrationViewModel.cs" />
     <Compile Include="Areas\Account\Models\OpenIdLoginRequest.cs" />
     <Compile Include="Areas\Account\Models\CreateNewUserRequest.cs" />
     <Compile Include="Areas\Account\Models\LoginRequest.cs" />
@@ -214,6 +217,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fluid960.css" />
+    <Content Include="Content\images\facebook.jpg" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\shCore.css" />
     <Content Include="Content\shThemeDefault.css" />
@@ -280,6 +284,9 @@
     <Content Include="Areas\Account\Views\Web.config" />
     <Content Include="Areas\Account\Views\Home\Index.cshtml" />
     <Content Include="Areas\Account\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Account\Views\Registration\Integrated.cshtml" />
+    <Content Include="Areas\Account\Views\Registration\_NewUserInfo.cshtml" />
+    <Content Include="Areas\Account\Views\Facebook\AuthorizationFailed.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />

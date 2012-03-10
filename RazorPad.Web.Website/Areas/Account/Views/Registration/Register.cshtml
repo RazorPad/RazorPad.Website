@@ -8,28 +8,18 @@
 
                 @Html.ValidationSummary(true)
                 
+                @Html.Partial("_NewUserInfo", Model)
+                
                 <div>
-                    @Html.LabelFor(x => x.Email)
-                    @Html.EditorFor(x => x.Email)
-                    @Html.ValidationMessageFor(x => x.Email)
+                    @Html.Label("Password")
+                    @Html.Password("Password")
+                    @Html.ValidationMessage("Password")
                 </div>                
 
                 <div>
-                    @Html.LabelFor(x => x.Username)
-                    @Html.EditorFor(x => x.Username)
-                    @Html.ValidationMessageFor(x => x.Username)
-                </div>                
-
-                <div>
-                    @Html.LabelFor(x => x.Password)
-                    @Html.PasswordFor(x => x.Password)
-                    @Html.ValidationMessageFor(x => x.Password)
-                </div>                
-
-                <div>
-                    @Html.LabelFor(x => x.PasswordConfirm)
-                    @Html.PasswordFor(x => x.PasswordConfirm)
-                    @Html.ValidationMessageFor(x => x.PasswordConfirm)
+                    @Html.Label("PasswordConfirm")
+                    @Html.Password("PasswordConfirm")
+                    @Html.ValidationMessage("PasswordConfirm")
                 </div>                
 
 

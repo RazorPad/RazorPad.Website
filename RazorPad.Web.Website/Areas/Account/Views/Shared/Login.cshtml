@@ -21,37 +21,38 @@
                     <input tabindex="3" type="submit" id="loginBtn" value="Login" />
                     <span class="sign-up">
                         Not registered? 
-                        @Html.ActionLink("Register Now", "Register", "Registration", new { area = "Account" })
+                        @Html.ActionLink("Register Now", "Register", "Registration")
                     </span>
                 </div>
                 <div class="links">
                     <span class="forgot-password">
-                        @Html.ActionLink("Forgot Password", "ForgotPassword", "Password", new { area = "Account" })
+                        @Html.ActionLink("Forgot Password", "ForgotPassword", "Password")
                     </span>
                 </div>
             }
             </div>
 
             <div class="half">
-            <h2>Third party login:</h2>
+            <h2>Third Party Login</h2>
             <fieldset>
-                <a href="@Url.Action("Authorize", "Facebook", new { area = "Account" })" class="openid-provider facebook">
+                <a href="@Url.Action("Login", "Facebook", new { area = "Account" })" class="openid-provider facebook">
                     <img width="60" height="60" title="Login with Facebook" src="@Url.Content("~/content/images/facebook.jpg")"/>
                 </a>
                 
                 <a href="@Url.Action("Google", "OpenId", new { area = "Account" })" class="openid-provider google">
                     <img width="64" height="64" title="Login with Google" src="@Url.Content("~/content/images/google.png")"/>
                 </a>
+
+                <a class="openid-provider generic" onclick="$('#openid-form').toggle()" href="#">
+                    <img width="64" height="64" title="Login with OpenID" src="@Url.Content("~/content/images/openid.png")"/>
+                </a>
                 
                 <div class="generic-openid-container">
-                    <a class="openid-provider generic" onclick="$('#openid-form').toggle()" href="#">
-                        <img width="64" height="64" title="Login with OpenID" src="@Url.Content("~/content/images/openid.png")"/>
-                    </a>
                     <div id="openid-form" style="display: none">
-                        <h3>Open ID Url:</h3>
+                        <h3>Open ID Url</h3>
                         @using (Html.BeginForm("Authenticate", "OpenId", new { area = "Account" }))
                         {
-                            <input name="provider" type="text" width="500px"  value="http://<OpenIdName>.myopenid.com"/>
+                            <input name="provider" type="text" value="http://<OpenIdName>.myopenid.com"/>
                             <input type="submit" value="Go!"/>
                         }
                     </div>

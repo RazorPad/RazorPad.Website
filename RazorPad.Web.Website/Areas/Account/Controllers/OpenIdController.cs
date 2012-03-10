@@ -39,12 +39,21 @@ namespace RazorPad.Web.Website.Areas.Account.Controllers
             var success = response as SuccessfulResponse;
             if(success != null)
             {
-                var user = _repository.FindUserByCredential<IntegratedAuthenticationCredential>(
-                    credential => credential.Token == success.ClaimedIdentifier);
+                var token = success.ClaimedIdentifier;
 
-                if (user == null)
-                    return RegisterNewUser(success);
-                
+                var user = _repository.FindUserByCredential<IntegratedAuthenticationCredential>(
+                    credential => credential.Token == token);
+
+                if (user == null && !string.IsNullOrWhiteSpace(success.EmailAddress))
+                {
+                    user = _repository.FindUserByEmail(success.EmailAddress);
+
+                    if (user == null)
+                        return RegisterNewUser(success);
+
+                    user.Credentials.Add(new IntegratedAuthenticationCredential { Token = token });
+                }
+
                 FormsAuthController.AuthenticateUser(user);
 
                 return Redirect(Url.ExternalUrl(returnUrl ?? "~/"));
@@ -69,9 +78,14 @@ namespace RazorPad.Web.Website.Areas.Account.Controllers
 
         private ActionResult RegisterNewUser(SuccessfulResponse success)
         {
-            // TODO: Create info cookie and Redirect to New User Registration
-            FormsAuthController.AuthenticateUser(success.ClaimedIdentifier);
-            return Redirect("~/");
+            var routeValues = new {
+                    area = "Account",
+                    EmailAddress = success.EmailAddress,
+                    Token = success.ClaimedIdentifier,
+                    UserId = success.FriendlyIdentifier,
+                };
+
+            return RedirectToAction("Integrated", "Registration", routeValues);
         }
     }
 }

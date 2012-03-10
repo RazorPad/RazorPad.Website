@@ -13,8 +13,9 @@ namespace RazorPad.Web.Authentication.OpenId
 
         public OpenIdRelyingPartyFacade()
         {
-            ClaimsFactory = () => null;
+            ClaimsFactory = () => new ClaimsRequest { Email = DemandLevel.Require, };
         }
+
 
         public OpenIdAuthenticationResponse Google()
         {
@@ -58,6 +59,7 @@ namespace RazorPad.Web.Authentication.OpenId
 
             if (response.Status == AuthenticationStatus.Authenticated)
             {
+                var claims = response.GetExtension<ClaimsResponse>();
                 return new SuccessfulResponse(response);
             }
 
