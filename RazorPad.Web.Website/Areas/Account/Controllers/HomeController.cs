@@ -1,7 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
-using System.Web.Security;
-using RazorPad.Web.Services;
+﻿using System.Web.Mvc;
 
 namespace RazorPad.Web.Website.Areas.Account.Controllers
 {

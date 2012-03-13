@@ -40,9 +40,32 @@ a:hover {
     cursor: pointer;
 }
 
+
+#header {
+    display: inline;
+    padding: 10px;
+}
+
+    #header h1 {
+        display: inline;
+    }
+
+    #header a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    #header .beta {
+        color: #CB4B4B;
+        font-size: 60%;
+        font-style: italic;
+    }
+
+
+
 .actionItems {
-    float: left;
-    margin: 7px 10px 0 0px;
+    display: inline;
+    margin: 10px;
 }
 
     .actionItems li {
@@ -265,13 +288,6 @@ iframe {
     height: 100%;
     width: 100%;
     /*border: solid 1px #465A7D;*/
-}
-
-#header {
-    float: left;
-    height: 40px;
-    width: 200px;
-    padding: 0 7px 0 10px;
 }
 
 .paneheader .title {

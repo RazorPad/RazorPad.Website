@@ -10,6 +10,7 @@ namespace RazorPad.Web.Website.Areas.Account.Models
 
         [Required(ErrorMessage = "Invalid password")]
         [StringLength(int.MaxValue, MinimumLength = 4)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         public string ReturnUrl { get; set; }

@@ -13,6 +13,7 @@ namespace RazorPad.Web.Website.Areas.Account.Models
         [RegularExpression(
             @"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", 
             ErrorMessage = "{0} must be a valid email address")]
+        [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
 
         public string RedirectUrl { get; set; }

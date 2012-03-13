@@ -15,11 +15,18 @@ namespace RazorPad.Web.Website.App_Start
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Named route to home page
+            routes.MapRoute(
+                "Home",
+                "",
+                new { controller = "RazorPad", action = "Index", area = string.Empty }
+            );
+
             // Named route to login page
             routes.MapRoute(
                 "Login",
                 "login",
-                new { controller = "Account", action = "Login" }
+                new { controller = "FormsAuth", action = "Login", area = "Account" }
             );
 
             routes.MapRoute(

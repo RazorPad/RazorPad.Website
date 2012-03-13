@@ -11,7 +11,7 @@ namespace RazorPad.Web.Website.Extensions
             if (redirectUrl == null)
                 redirectUrl = HttpUtility.UrlEncode(url.RequestContext.HttpContext.Request.RawUrl);
 
-            return url.Action("Login", "FormsAuth", new { area = "Account", redirectUrl });
+            return url.RouteUrl("Login", new { redirectUrl });
         }
 
         public static string Logout(this UrlHelper url, string redirectUrl = null)
@@ -19,7 +19,7 @@ namespace RazorPad.Web.Website.Extensions
             if (redirectUrl == null)
                 redirectUrl = HttpUtility.UrlEncode(url.RequestContext.HttpContext.Request.RawUrl);
 
-            return url.Action("Logout", "FormsAuth", new { area = "Account", redirectUrl });
+            return url.RouteUrl("Login", new { redirectUrl });
         }
 
     }

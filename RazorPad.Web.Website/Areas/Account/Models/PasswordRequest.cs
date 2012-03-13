@@ -8,6 +8,7 @@ namespace RazorPad.Web.Website.Areas.Account.Models
     {
         [Required]
         [StringLength(50, MinimumLength = 5)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [MatchesProperty("Password")]
