@@ -218,6 +218,8 @@
   <ItemGroup>
     <Content Include="Content\fluid960.css" />
     <Content Include="Content\images\facebook.jpg" />
+    <Content Include="Content\images\google.png" />
+    <Content Include="Content\images\openid.png" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\shCore.css" />
     <Content Include="Content\shThemeDefault.css" />
