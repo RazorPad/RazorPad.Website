@@ -201,6 +201,8 @@
     <Compile Include="Areas\Account\Models\OpenIdLoginRequest.cs" />
     <Compile Include="Areas\Account\Models\CreateNewUserRequest.cs" />
     <Compile Include="Areas\Account\Models\LoginRequest.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
     <Compile Include="Areas\Account\Models\ForgotPassword.cs" />
     <Compile Include="Areas\Account\Models\PasswordRequest.cs" />
@@ -289,6 +291,9 @@
     <Content Include="Areas\Account\Views\Registration\Integrated.cshtml" />
     <Content Include="Areas\Account\Views\Registration\_NewUserInfo.cshtml" />
     <Content Include="Areas\Account\Views\Facebook\AuthorizationFailed.cshtml" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Users\Users.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />
@@ -365,6 +370,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Account\Views\Shared\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\RazorPad\MainUI.cshtml" />

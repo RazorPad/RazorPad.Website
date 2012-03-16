@@ -21,12 +21,12 @@
                     <input tabindex="3" type="submit" id="loginBtn" value="Login" />
                     <span class="sign-up">
                         Not registered? 
-                        @Html.ActionLink("Register Now", "Register", "Registration")
+                        @Html.ActionLink("Register Now", "Register", "Registration", new { area = "Account" }, null)
                     </span>
                 </div>
                 <div class="links">
                     <span class="forgot-password">
-                        @Html.ActionLink("Forgot Password", "ForgotPassword", "Password")
+                        @Html.ActionLink("Forgot Password", "ForgotPassword", "Password", new { area = "Account" }, null)
                     </span>
                 </div>
             }

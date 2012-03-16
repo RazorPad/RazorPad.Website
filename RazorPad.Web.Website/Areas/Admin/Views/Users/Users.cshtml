@@ -1,0 +1,24 @@
+﻿@model IEnumerable<RazorPad.Web.User>
+
+<h2>Registered Users</h2>
+
+@if(TempData.ContainsKey("Message"))
+{
+    <div>@TempData["Message"]</div>
+}
+
+<ul>
+    
+    @foreach(var user in Model)
+    {
+        <li class="user" data-id="@user.Id">
+            <span class="name">@user.Username</span>
+            <span class="emailAddress">(@user.EmailAddress)</span>
+            <span class="actions">
+                @Html.ActionLink("(delete)", "Delete", new { id = @user.Id })
+            </span>
+        </li>
+    }
+    
+
+</ul>
