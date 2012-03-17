@@ -14,7 +14,7 @@ RazorPad.saveTemplate = function (clone) {
         success: function (response) {
             if (!response.Messages) {
                 if (clone || !$('#fiddleId').val()) {
-                    location.href = RazorPad.siteRoot + "RazorPad/Index/" + response;
+                    location.href = RazorPad.siteRoot + response;
                 }
                 else {
                     RazorPad.hideLoading();

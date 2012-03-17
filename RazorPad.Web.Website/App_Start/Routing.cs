@@ -30,8 +30,14 @@ namespace RazorPad.Web.Website.App_Start
             );
 
             routes.MapRoute(
+                "Fiddle",
+                "{id}",
+                new { controller = "RazorPad", action = "Index", id = UrlParameter.Optional, area = string.Empty }
+            );
+
+            routes.MapRoute(
                 "Default",
-                "{Controller}/{action}/{id}",
+                "{controller}/{action}/{id}",
                 new { controller = "RazorPad", action = "Index", id = UrlParameter.Optional }
             );
         }
