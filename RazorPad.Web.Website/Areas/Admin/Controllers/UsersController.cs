@@ -22,6 +22,16 @@ namespace RazorPad.Web.Website.Areas.Admin.Controllers
             return View("Users", users);
         }
 
+        public ActionResult DeleteAll()
+        {
+            foreach (var userId in _repository.Query<User>().Select(x => x.Id))
+            {
+                _session.Advanced.DatabaseCommands.Delete("users-" + userId, null);
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Delete(long id)
         {
             _session.Advanced.DatabaseCommands.Delete("users-"+id, null);
