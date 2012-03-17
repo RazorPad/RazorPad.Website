@@ -1,5 +1,4 @@
-﻿using System;
-using System.CodeDom.Compiler;
+﻿using System.CodeDom.Compiler;
 using System.IO;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
@@ -7,6 +6,7 @@ using RazorPad.Compilation;
 using RazorPad.Compilation.Hosts;
 using RazorPad.Web.Dynamic;
 using RazorPad.Web.Services;
+using RazorPad.Web.Website.Models;
 using RazorPad.Web.Website.Models.RazorPad;
 
 namespace RazorPad.Web.Website.Controllers
@@ -23,12 +23,18 @@ namespace RazorPad.Web.Website.Controllers
 
         public ActionResult Index(string id)
         {
-            Fiddle fiddle = null;
-            if (!string.IsNullOrEmpty(id))
+            var model = new FiddleViewModel();
+            
+            var fiddle = _repository.FindFiddle(id);
+
+            if(fiddle != null)
             {
-                fiddle = _repository.Load<Fiddle>(id);
+                model.Key = fiddle.Key;
+                model.Model = fiddle.Model;
+                model.View = fiddle.View;
             }
-            return View("MainUI", fiddle ?? new Fiddle());
+
+            return View("MainUI", model);
         }
 
 
@@ -82,16 +88,15 @@ namespace RazorPad.Web.Website.Controllers
             
         public JsonResult Save([Bind(Prefix = "")]SaveRequest request)
         {
-            var fiddle = _repository.SingleOrDefault<Fiddle>(f => f.Id == request.FiddleId);
+            var fiddle = _repository.SingleOrDefault<Fiddle>(f => f.Key == request.FiddleId);
 
             if (fiddle == null)
             {
                 fiddle = new Fiddle
                 {
                     View = request.Template,
-                    InputModel = request.Model,
+                    Model = request.Model,
                     Language = request.Language.ToString(),
-                    DateCreated = DateTime.UtcNow,
                     CreatedBy = User.Identity.Name ?? "Anonymous User"
                 };
 
@@ -100,12 +105,12 @@ namespace RazorPad.Web.Website.Controllers
             else
             {
                 fiddle.View = request.Template;
-                fiddle.InputModel = request.Model;
+                fiddle.Model = request.Model;
             }
 
             _repository.SaveChanges();
-    
-            return Json(fiddle.Id);
+
+            return Json(fiddle.Key);
         }
 
         protected override void OnException(ExceptionContext filterContext)

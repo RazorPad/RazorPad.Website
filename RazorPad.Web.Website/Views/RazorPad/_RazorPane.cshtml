@@ -1,10 +1,7 @@
-﻿@model string
+﻿@model RazorPad.Web.Website.Models.FiddleViewModel
 <div class="editorContainer">
     <div id="viewHeader" class="paneheader">
-        <div class="title">
-            View</div>
+        <div class="title">View</div>
     </div>
-    @*<div id="razorEditor" class="editor model watermarkOn" contentEditable="true">
-    </div>*@
-    <textarea id="razorEditor">@Model</textarea>
+    <textarea id="razorEditor">@Model.View</textarea>
 </div>

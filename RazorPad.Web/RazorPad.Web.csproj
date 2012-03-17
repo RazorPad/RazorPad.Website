@@ -85,6 +85,7 @@
     <Compile Include="Services\IUnitOfWork.cs" />
     <Compile Include="Services\MembershipService.cs" />
     <Compile Include="Services\Sandbox.cs" />
+    <Compile Include="Services\UniqueKeyGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RazorPad.Core\RazorPad.Core.csproj">

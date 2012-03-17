@@ -1,5 +1,4 @@
-﻿@using RazorPad.Web.Website.Extensions
-@model RazorPad.Web.Fiddle
+﻿@model RazorPad.Web.Website.Models.FiddleViewModel
 
 @section Head {
     <link href="@Url.Content("~/Content/shCore.css")" type="text/css" rel="stylesheet" />
@@ -13,30 +12,16 @@
         <li><button id="save">Save</button></li>
         <li style="display:none;"><button id="clone">Clone</button></li>
     </ul>
-
-    <ul class="actionItems floatRight">
-        @if (!User.Identity.IsAuthenticated)
-        {
-            <li><button onclick="location.href = '@Url.Login()';">Login</button></li>
-        }
-        else
-        {
-            <li>Welcome, <strong>@User.Identity.Name</strong>
-                <button onclick="location.href = '@Url.Logout()';">Logout</button>
-            </li>
-        }
-    </ul>
 }
 
-@if (Model != null && !string.IsNullOrEmpty(Model.Id))
-{
-    <input type="hidden" id="fiddleId" value="@Model.Id" />
+@if (!Model.IsNew) {
+    <input type="hidden" id="fiddleId" value="@Model.Key" />
 }
            
 <div id="panes">
     
     <div id="razorPane" class="inlinebox">
-        @Html.Partial("_RazorPane", Model.View ?? "")
+        @Html.Partial("_RazorPane")
     </div>
     <div id="modelPane" class="inlinebox">
         @Html.Partial("_ModelPane")

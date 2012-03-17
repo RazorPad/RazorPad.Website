@@ -1,14 +1,11 @@
-﻿@using RazorPad.Core
+﻿@model RazorPad.Web.Website.Models.FiddleViewModel
+           
 <div class="editorContainer">
     <div class="paneheader">
-        <div class="title">
-            Model</div>
+        <div class="title">Model</div>
     </div>
 
     <div class="modelContent">
-        @*<div class="tabBar">
-            <a href="#simple">Simple</a><span class="separator">|</span><a href="#geeky"> Geeky</a>
-        </div>*@
         <div class="propinput">
             <input type="text" id="propinput"/>
         </div>
@@ -25,33 +22,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model != null && Model.DynamicInputModel != null)
+                    @foreach (var prop in Model.ModelProperties)
                     {
-                        IDictionary<string, object> props = Model.DynamicInputModel.GetProperties();
-                        string type = "string";
-                        foreach (var prop in props)
+                        string type;
+                        
+                        switch (prop.Value.GetType().ToString())
                         {
-                            
-                            switch (prop.Value.GetType().ToString())
-                            {
-                                case "System.Int32":
-                                case "System.Int64":
-                                    type = "int";break;
-                                case "System.Double":
-                                    type = "float";break;
-                                default:
-                                    type = "string";break;
-                            }
-                            
-                            <tr title="@type" class="@type" data-type="@type">
-                                <td>
-                                    <span class="name">@prop.Key</span>
-                                </td>
-                                <td>
-                                    <span class='value'>@prop.Value</span>
-                                </td>
-                            </tr>
+                            case "System.Int32":
+                            case "System.Int64":
+                                type = "int";
+                                break;
+                            case "System.Double":
+                                type = "float";
+                                break;
+                            default:
+                                type = "string";
+                                break;
                         }
+                            
+                        <tr title="@type" class="@type" data-type="@type">
+                            <td>
+                                <span class="name">@prop.Key</span>
+                            </td>
+                            <td>
+                                <span class='value'>@prop.Value</span>
+                            </td>
+                        </tr>
                     }
                     <tr>
                         <td>

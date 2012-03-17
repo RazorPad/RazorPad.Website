@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using RazorPad.Web.Website.Extensions
+<!DOCTYPE html>
 <html>
 <head>
     <title>RazorPad: The Online Razor Scratch Pad</title>
@@ -18,7 +19,21 @@
                 <span class="beta">beta</span>
             </h1>
         </div>
+
         @RenderSection("Actions", false)
+
+        <ul id="login-actions" class="actionItems">
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <li><button onclick="location.href = '@Url.Login()';">Login</button></li>
+            }
+            else
+            {
+                <li>Welcome, <strong>@User.Identity.Name</strong>
+                    <button onclick="location.href = '@Url.Logout()';">Logout</button>
+                </li>
+            }
+        </ul>
     </div>
     <div class="clear clearfix"></div>
 

@@ -208,13 +208,14 @@
     <Compile Include="Areas\Account\Models\PasswordRequest.cs" />
     <Compile Include="Areas\Account\Models\ResetPasswordRequest.cs" />
     <Compile Include="Extensions\AuthenticationExtensions.cs" />
-    <Compile Include="Models\RazorPad\SaveRequest.cs" />
-    <Compile Include="Models\RazorPad\ExecuteRequest.cs" />
-    <Compile Include="Models\RazorPad\ExecuteResult.cs" />
-    <Compile Include="Models\RazorPad\ParseRequest.cs" />
-    <Compile Include="Models\RazorPad\ParseResult.cs" />
-    <Compile Include="Models\RazorPad\TemplateMessage.cs" />
-    <Compile Include="Models\RazorPad\TemplateMessageKind.cs" />
+    <Compile Include="Models\FiddleViewModel.cs" />
+    <Compile Include="Models\SaveRequest.cs" />
+    <Compile Include="Models\ExecuteRequest.cs" />
+    <Compile Include="Models\ExecuteResult.cs" />
+    <Compile Include="Models\ParseRequest.cs" />
+    <Compile Include="Models\ParseResult.cs" />
+    <Compile Include="Models\TemplateMessage.cs" />
+    <Compile Include="Models\TemplateMessageKind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
