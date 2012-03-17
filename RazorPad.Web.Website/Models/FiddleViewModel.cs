@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using RazorPad.Web.Dynamic;
 
@@ -11,6 +12,10 @@ namespace RazorPad.Web.Website.Models
         public string View { get; set; }
         
         public string Model { get; set; }
+        
+        public string Owner { get; set; }
+        
+        public string CreatedBy { get; set; }
 
         public IDictionary<string, object> ModelProperties
         {
@@ -36,10 +41,38 @@ namespace RazorPad.Web.Website.Models
             }
         }
 
+        public string Title
+        {
+            get
+            {
+                return string.IsNullOrEmpty(_title) ? Key : _title;
+            }
+            set { _title = value; }
+        }
+        private string _title;
+
+        public DateTime? DateCreated { get; set; }
+
         public FiddleViewModel()
         {
             Model = string.Empty;
+            Owner = string.Empty;
+            Title = string.Empty;
             View = string.Empty;
+        }
+
+        public FiddleViewModel(Fiddle fiddle)
+        {
+            if(fiddle == null)
+                return;
+
+            CreatedBy = fiddle.CreatedBy;
+            DateCreated = fiddle.DateCreated;
+            Key = fiddle.Key;
+            Model = fiddle.Model;
+            Owner = fiddle.Owner;
+            Title = fiddle.Title;
+            View = fiddle.View;
         }
     }
 }

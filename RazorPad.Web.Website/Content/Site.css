@@ -654,7 +654,7 @@ input[type="text"].input-validation-error, input[type="password"].input-validati
 }
 
 
-
+/***  Accounts  ***/
 .login .half {
     width: 48%;
     display: inline-block;
@@ -668,4 +668,12 @@ input[type="text"].input-validation-error, input[type="password"].input-validati
 
 #openid-form {
     margin: 30px 20px;
+}
+
+
+
+/*** Users ***/
+.fiddles .fiddle {
+    margin: 10px;
+    padding: 10px;
 }

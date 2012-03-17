@@ -207,6 +207,7 @@
     <Compile Include="Areas\Account\Models\ForgotPassword.cs" />
     <Compile Include="Areas\Account\Models\PasswordRequest.cs" />
     <Compile Include="Areas\Account\Models\ResetPasswordRequest.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Extensions\AuthenticationExtensions.cs" />
     <Compile Include="Models\FiddleViewModel.cs" />
     <Compile Include="Models\SaveRequest.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Models\ParseResult.cs" />
     <Compile Include="Models\TemplateMessage.cs" />
     <Compile Include="Models\TemplateMessageKind.cs" />
+    <Compile Include="Models\UserFiddlesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +297,7 @@
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\Users\Users.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Views\Users\Fiddles.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />

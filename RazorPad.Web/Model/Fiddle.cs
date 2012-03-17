@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using RazorPad.Web.Services;
 
 namespace RazorPad.Web
@@ -51,6 +53,11 @@ namespace RazorPad.Web
         public static Fiddle FindFiddle(this IRepository repository, string key)
         {
             return repository.SingleOrDefault<Fiddle>(x => x.Key == key);
+        }
+
+        public static IEnumerable<Fiddle> FindFiddlesByUsername(this IRepository repository, string username)
+        {
+            return repository.Query<Fiddle>().Where(x => x.CreatedBy == username || x.Owner == username);
         }
 
     }

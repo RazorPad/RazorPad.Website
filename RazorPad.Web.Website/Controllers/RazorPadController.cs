@@ -21,20 +21,12 @@ namespace RazorPad.Web.Website.Controllers
             _repository = repository;
         }
 
+
         public ActionResult Index(string id)
         {
-            var model = new FiddleViewModel();
-            
             var fiddle = _repository.FindFiddle(id);
-
-            if(fiddle != null)
-            {
-                model.Key = fiddle.Key;
-                model.Model = fiddle.Model;
-                model.View = fiddle.View;
-            }
-
-            return View("MainUI", model);
+            
+            return View("MainUI", new FiddleViewModel(fiddle));
         }
 
 
@@ -92,12 +84,14 @@ namespace RazorPad.Web.Website.Controllers
 
             if (fiddle == null)
             {
+                var username = User.Identity.IsAuthenticated ? User.Identity.Name : "Anonymous";
+
                 fiddle = new Fiddle
                 {
                     View = request.Template,
                     Model = request.Model,
                     Language = request.Language.ToString(),
-                    CreatedBy = User.Identity.Name ?? "Anonymous User"
+                    CreatedBy = username
                 };
 
                 _repository.Save(fiddle);
