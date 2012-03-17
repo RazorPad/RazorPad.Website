@@ -2,16 +2,4 @@
 
 <h2>@Model.Username's Saved Fiddles</h2>
 
-<section class="fiddles">
-    
-    @foreach(var fiddle in Model.Fiddles)
-    {
-        <div class="fiddle" data-key="@fiddle.Key">
-            <span class="title">
-                @Html.RouteLink(fiddle.Title, "Fiddle", new { id = fiddle.Key })
-            </span>
-            <span class="create-date">@fiddle.DateCreated</span>
-        </div>
-    }
-
-</section>
+@Html.Partial("_Fiddles")

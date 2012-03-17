@@ -6,12 +6,12 @@ using RazorPad.Web.Services;
 namespace RazorPad.Web.Website.Areas.Admin.Controllers
 {
     [Authorize(Users = "jchadwick,shankars,mrchief")]
-    public class UsersController : Controller
+    public class UserManagementController : Controller
     {
         private readonly IRepository _repository;
         private readonly IDocumentSession _session;
 
-        public UsersController(IRepository repository, IDocumentSession session)
+        public UserManagementController(IRepository repository, IDocumentSession session)
         {
             _repository = repository;
             _session = session;

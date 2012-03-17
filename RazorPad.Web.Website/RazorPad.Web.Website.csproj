@@ -202,7 +202,7 @@
     <Compile Include="Areas\Account\Models\CreateNewUserRequest.cs" />
     <Compile Include="Areas\Account\Models\LoginRequest.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
     <Compile Include="Areas\Account\Models\ForgotPassword.cs" />
     <Compile Include="Areas\Account\Models\PasswordRequest.cs" />
@@ -295,9 +295,10 @@
     <Content Include="Areas\Account\Views\Registration\_NewUserInfo.cshtml" />
     <Content Include="Areas\Account\Views\Facebook\AuthorizationFailed.cshtml" />
     <Content Include="Areas\Admin\Views\Web.config" />
-    <Content Include="Areas\Admin\Views\Users\Users.cshtml" />
+    <Content Include="Areas\Admin\Views\UserManagement\Users.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Views\Users\Fiddles.cshtml" />
+    <Content Include="Views\Users\_Fiddles.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />

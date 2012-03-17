@@ -17,8 +17,19 @@
 @if (!Model.IsNew) {
     <input type="hidden" id="fiddleId" value="@Model.Key" />
 }
-           
+
 <div id="panes">
+    <div id="sidebar">
+    
+        @if(User.Identity.IsAuthenticated)
+        {
+            <div id="user-info">
+                <h3>Saved Fiddles</h3>
+                @Html.Action("UserFiddles", "Users", new { username = User.Identity.Name, area = string.Empty })
+            </div>
+        }
+
+    </div>
     
     <div id="razorPane" class="inlinebox">
         @Html.Partial("_RazorPane")
@@ -76,11 +87,15 @@
 
         var innerLayout = $('#panes').layout({
             closable: false,
-            center__paneSelector: "#modelPane",
-            west__paneSelector: "#razorPane",
+            center__paneSelector: "#razorPane",
+            east__paneSelector: "#modelPane",
+            east__maxSize: 600,
+            east__minSize: 400,
+            east__size: 400,
+            west__paneSelector: "#sidebar",
             west__size: Math.floor((screen.width / 1.67) - 10),
-            west__maxSize: "70%",
-            west__minSize: 400,
+            west__maxSize: 230,
+            west__minSize: 230,
             south__paneSelector: "#resultsPane",
             south__maxSize: "70%",
             south__size: Math.floor((screen.height / 2) - 100),

@@ -93,6 +93,7 @@ iframe {
     height: 100%;
 }
 
+
 #resultsPane, .tabContainer, .panes, #content {
     height: 100%;
     width: 100%;
@@ -674,6 +675,9 @@ input[type="text"].input-validation-error, input[type="password"].input-validati
 
 /*** Users ***/
 .fiddles .fiddle {
-    margin: 10px;
     padding: 10px;
 }
+
+    .fiddles .fiddle .title {
+        width: 60px;
+    }

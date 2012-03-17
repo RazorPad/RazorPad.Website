@@ -32,6 +32,16 @@ namespace RazorPad.Web.Website.Controllers
             if (username == null)
                 return List();
 
+            var viewModel = GetUserFiddlesViewModel(username);
+
+            if (Request.IsAjaxRequest())
+                return Json(viewModel, JsonRequestBehavior.AllowGet);
+
+            return View("Fiddles", viewModel);
+        }
+
+        private UserFiddlesViewModel GetUserFiddlesViewModel(string username)
+        {
             var fiddles = _repository.FindFiddlesByUsername(username) ?? Enumerable.Empty<Fiddle>();
 
             var viewModel = new UserFiddlesViewModel
@@ -39,11 +49,14 @@ namespace RazorPad.Web.Website.Controllers
                                     Fiddles = fiddles.Select(x => new FiddleViewModel(x)),
                                     Username = username,
                                 };
+            return viewModel;
+        }
 
-            if (Request.IsAjaxRequest())
-                return Json(viewModel, JsonRequestBehavior.AllowGet);
-
-            return View("Fiddles", viewModel);
+        [ChildActionOnly]
+        public ActionResult UserFiddles(string username)
+        {
+            var viewModel = GetUserFiddlesViewModel(username);
+            return PartialView("_Fiddles", viewModel);
         }
 
 
