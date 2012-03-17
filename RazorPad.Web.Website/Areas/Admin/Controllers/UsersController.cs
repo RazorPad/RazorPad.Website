@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Raven.Client;
 using Raven.Client.Linq;
 using RazorPad.Web.Services;
 
 namespace RazorPad.Web.Website.Areas.Admin.Controllers
 {
+    [Authorize(Users = "jchadwick,shankars,mrchief")]
     public class UsersController : Controller
     {
         private readonly IRepository _repository;
@@ -23,6 +23,7 @@ namespace RazorPad.Web.Website.Areas.Admin.Controllers
             return View("Users", users);
         }
 
+        [NonAction]
         public ActionResult DeleteAll()
         {
             var userIds = _repository.Query<User>().AsProjection<UserId>();
@@ -34,6 +35,7 @@ namespace RazorPad.Web.Website.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [NonAction]
         public ActionResult Delete(long id)
         {
             _session.Advanced.DatabaseCommands.Delete("users-"+id, null);
