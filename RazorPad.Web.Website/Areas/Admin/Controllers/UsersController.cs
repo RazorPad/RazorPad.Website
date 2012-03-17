@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Raven.Client;
+using Raven.Client.Linq;
 using RazorPad.Web.Services;
 
 namespace RazorPad.Web.Website.Areas.Admin.Controllers
@@ -24,9 +25,10 @@ namespace RazorPad.Web.Website.Areas.Admin.Controllers
 
         public ActionResult DeleteAll()
         {
-            foreach (var userId in _repository.Query<User>().Select(x => x.Id))
+            var userIds = _repository.Query<User>().AsProjection<UserId>();
+            foreach (var userId in userIds)
             {
-                _session.Advanced.DatabaseCommands.Delete("users-" + userId, null);
+                _session.Advanced.DatabaseCommands.Delete("users-" + userId.Id, null);
             }
 
             return RedirectToAction("Index");
@@ -42,6 +44,11 @@ namespace RazorPad.Web.Website.Areas.Admin.Controllers
             TempData.Add("Message", "Deleted user "+id);
 
             return RedirectToAction("Index");
+        }
+
+        public class UserId
+        {
+            public long Id { get; set; }
         }
     }
 }
