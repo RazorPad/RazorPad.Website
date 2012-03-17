@@ -32,6 +32,14 @@ a:hover {
     text-decoration: underline;
 }
 
+h1, h2, h3, h4 {
+    font-weight: bold;
+    text-decoration: underline;
+}
+h2 { font-size: 175%; }
+h3 { font-size: 150%; }
+h4 { font-size: 125%; }
+
 .container {
     height: 100%;
 }
@@ -48,6 +56,7 @@ a:hover {
 
     #header h1 {
         display: inline;
+        text-decoration: none;
     }
 
     #header a {
