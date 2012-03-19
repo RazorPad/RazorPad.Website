@@ -1,0 +1,22 @@
+<mockup version="1.0" skin="sketch" measuredW="1084" measuredH="788" mockupW="1024" mockupH="768">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="60" y="20" w="1024" h="768" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::ButtonBar" x="328" y="102" w="-1" h="-1" measuredW="172" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Run%2C%20Save%2C%20Clone</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Button" x="967" y="103" w="102" h="27" measuredW="102" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Login%20/%20Signup</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="75" y="102" w="127" h="25" measuredW="113" measuredH="33" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <size>24</size>
+        <text>RazorPad</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
