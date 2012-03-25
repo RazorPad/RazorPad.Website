@@ -1,0 +1,75 @@
+#resultsPane
+{
+    border-top: 1px solid #aaa;
+    border-left: 1px solid #aaa;
+}
+
+#resultsPane, .tabContainer, #content {
+    height: 100%;
+    width: 100%;
+}
+
+#template-output-container {
+    overflow-y: auto;
+}
+
+.tabBar {
+    background-color: #BCC7D8;
+    height: 20px;
+    padding: 2px 0 2px 0px;
+}
+
+.tabContainer {
+    position: relative;
+}
+
+.tabPanels {
+    width: 100%;
+    position: absolute;
+    top: 24px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.tabPanels > div {
+    display: none;
+}
+
+.tabPanels div {
+    height: 100%;
+    width: 100%;
+}
+
+.tabBar a, span {
+    padding: 1px;
+    vertical-align: bottom;
+    display: inline-block;
+}
+
+.tabBar a {
+    text-decoration: none;
+    color: #000;
+    outline: none;
+}
+
+.tabBar a.selected {
+    background-color: #FFEFBB;
+    border: 1px solid #E5C365;
+    position: relative;
+}
+
+.tabBar a:hover {
+    background-color: #FFFCF4;
+}
+
+.tabBar span.separator {
+    margin: 0 2px;
+    color: #8591A2;
+    vertical-align: inherit;
+}
+
+#resultsPane {
+    border-top: 1px solid #aaa;
+    background: #fff;
+}

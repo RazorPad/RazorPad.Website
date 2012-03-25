@@ -1,0 +1,44 @@
+#modelPane {
+    border-left: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    background: #fff;
+}
+
+.modelContent {
+    padding: 5px 5px;
+}
+
+.modelProps {
+    overflow: auto;
+}
+
+.propinput {
+    margin-bottom: 3px;
+}
+
+.propinput input {
+    width: 99%;
+}
+
+#modelGrid {
+    width: 99.8%;
+    height: auto;
+    /*height: 100%;*/
+}
+
+#modelGrid td, #modelGrid th {
+    border: solid 1px lightgrey;
+    vertical-align: middle;
+    font-size: 100%;
+    line-height: normal;
+    text-align: left;
+}
+
+#modelGrid th {
+    padding: 2px 2px;
+    font-weight: bold;
+}
+
+#modelGrid td {
+    padding: 2px 2px;
+}

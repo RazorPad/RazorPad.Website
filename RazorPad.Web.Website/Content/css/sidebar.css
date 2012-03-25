@@ -1,0 +1,91 @@
+#sidebar {
+    border: 0px;
+    background: #ccc;
+}
+
+.bottomLinks
+{
+    vertical-align:bottom;
+    bottom: 0px;
+    padding:15px 18px;
+    position: absolute;
+    font-weight: bold;
+}
+
+.fiddle
+{
+    margin-bottom: 5px;
+    border-bottom: 1px dotted #ccc;
+    cursor: pointer;
+}
+
+.fiddle:hover 
+{
+    background: #F7F7F7;
+}
+
+.fiddle span
+{
+    display: block;
+}
+
+.fiddle .create-date
+{
+    color: #666;
+    font-size: 80%;
+}
+
+.fiddleInfo label
+{
+    display:block;
+    margin-bottom: 5px;
+}
+
+.fiddleInfo input, .fiddleInfo textarea
+{
+    width:90%;
+}
+
+.fiddleInfo textarea
+{
+    resize: none;
+    border: 2px inset;
+}
+
+/* Overridding layout styles */
+.ui-layout-toggler-west-open
+{
+    background: url('../images/sidebar_open.png') no-repeat -2px center;
+}
+
+.ui-layout-toggler-west-closed
+{
+    background: url('../images/sidebar_close.png') no-repeat -2px center;
+}
+
+/* Overridding accordion styles */
+.ui-accordion .ui-accordion-header .ui-icon
+{
+    left: 0px;
+}
+
+.ui-accordion-icons .ui-accordion-header a
+{
+    padding-left: 18px;
+    font-size: 1em;
+}
+
+.ui-accordion .ui-state-active a
+{
+    font-weight: bold;
+}
+
+.ui-accordion .ui-accordion-content
+{
+    padding: 13px 18px;
+}
+
+.ui-accordion .ui-accordion-header
+{
+    margin-top: 0px;
+}
