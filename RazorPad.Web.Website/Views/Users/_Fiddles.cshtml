@@ -1,13 +1,16 @@
-﻿@model RazorPad.Web.Website.Models.UserFiddlesViewModel
+﻿@using RazorPad.Core
+@model RazorPad.Web.Website.Models.UserFiddlesViewModel
 
 <section class="fiddles">
     
     @foreach(var fiddle in Model.Fiddles)
     {
         <div class="fiddle" data-key="@fiddle.Key">
-            <span class="title">
-                @Html.RouteLink(fiddle.Title, "Fiddle", new { id = fiddle.Key })
-            </span>
+            <span class="title"><a href="#">@fiddle.Title</a></span>
+            @if (!string.IsNullOrWhiteSpace(fiddle.Notes))
+            {
+                <span class="notes" title="@fiddle.Notes">@fiddle.Notes.TruncateAtWord(30)</span>
+            }
             <span class="create-date">@fiddle.DateCreated</span>
         </div>
     }

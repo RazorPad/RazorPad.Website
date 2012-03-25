@@ -91,7 +91,9 @@ namespace RazorPad.Web.Website.Controllers
                     View = request.Template,
                     Model = request.Model,
                     Language = request.Language.ToString(),
-                    CreatedBy = username
+                    CreatedBy = username,
+                    Title = request.Title,
+                    Notes = request.Notes
                 };
 
                 _repository.Save(fiddle);
@@ -100,6 +102,8 @@ namespace RazorPad.Web.Website.Controllers
             {
                 fiddle.View = request.Template;
                 fiddle.Model = request.Model;
+                fiddle.Title = request.Title;
+                fiddle.Notes = request.Notes;
             }
 
             _repository.SaveChanges();

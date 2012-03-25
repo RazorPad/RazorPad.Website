@@ -5,7 +5,9 @@ RazorPad.saveTemplate = function (clone) {
     var data = {
         Template: RazorPad.razorEditor.getValue(),
         Model: JSON.stringify(RazorPad.getModel()),
-        FiddleId: (clone ? '' : ($('#fiddleId').val() || ''))
+        FiddleId: (clone ? '' : ($('#fiddleId').val() || '')),
+        Title: $('#fiddleTitle').val() || '',
+        Notes: $('#fiddleNotes').val() || ''
     };
     $.ajax({
         url: RazorPad.siteRoot + 'RazorPad/Save',
@@ -31,7 +33,7 @@ RazorPad.saveTemplate = function (clone) {
     });
 };
 
-RazorPad.executeTemplate = function(clone) {
+RazorPad.executeTemplate = function() {
     RazorPad.showLoading();
     var data = {
         Template: RazorPad.razorEditor.getValue(),
@@ -160,16 +162,27 @@ RazorPad.updateStatus = function (status) {
 
 $(function () {
     $('#execute')
-	.click(RazorPad.executeTemplate)
+	.click(function (e) {
+	    e.preventDefault();
+	    RazorPad.executeTemplate();
+	})
 	.ajaxStart(function () {
 	    RazorPad.updateStatus('waiting');
 	    $('#template-output').text('');
 	    $('#generated-code').text('');
 	});
 
-    $('#save').click(function () { RazorPad.saveTemplate(); });
+    $('#save').click(function (e) {
+        e.preventDefault();
+        RazorPad.saveTemplate();
+    });
+
     if ($("#fiddleId").val()) {
-        $('#clone').click(function () { RazorPad.saveTemplate(true); }).parent().show();
+        $('#clone')
+        .click(function (e) {
+            e.preventDefault();
+            RazorPad.saveTemplate(true);
+        }).parent().show();
     }
 
     $.ajaxSetup({
@@ -186,4 +199,11 @@ $(function () {
 
     $(document).bindHotkeys();
     RazorPad.razorEditor.focus();
+
+    if (RazorPad.isUserAuthenticated) {
+        $('#savedFiddles').delegate('.fiddle', 'click', function () {
+            location.href = RazorPad.siteRoot + $(this).data('key');
+            return false;
+        });
+    }
 });

@@ -51,6 +51,8 @@ namespace RazorPad.Web.Website.Models
         }
         private string _title;
 
+        public string Notes { get; set; }
+
         public DateTime? DateCreated { get; set; }
 
         public FiddleViewModel()
@@ -73,6 +75,7 @@ namespace RazorPad.Web.Website.Models
             Owner = fiddle.Owner;
             Title = fiddle.Title;
             View = fiddle.View;
+            Notes = fiddle.Notes;
         }
     }
 }

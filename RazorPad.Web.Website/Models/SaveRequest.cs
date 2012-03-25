@@ -25,6 +25,8 @@ namespace RazorPad.Web.Website.Models.RazorPad
         }
 
         public string FiddleId { get; set; }
+        public string Title { get; set; }
+        public string Notes { get; set; }
     }
 
     

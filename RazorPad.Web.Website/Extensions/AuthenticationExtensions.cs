@@ -19,7 +19,7 @@ namespace RazorPad.Web.Website.Extensions
             if (redirectUrl == null)
                 redirectUrl = HttpUtility.UrlEncode(url.RequestContext.HttpContext.Request.RawUrl);
 
-            return url.RouteUrl("Login", new { redirectUrl });
+            return url.RouteUrl("Logout", new { redirectUrl });
         }
 
     }

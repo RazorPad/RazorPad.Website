@@ -3,10 +3,7 @@
 <html>
 <head>
     <title>RazorPad: The Online Razor Scratch Pad</title>
-    <link href="@Url.Content("~/Content/reset.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/themes/default/default.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/themes/layout-default-latest.css")" type="text/css" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/razorpad.css")" rel="stylesheet" type="text/css" />
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.js")"></script>
 @RenderSection("Head", false)
 </head>
@@ -22,20 +19,26 @@
 
         @RenderSection("Actions", false)
 
-        <ul id="login-actions" class="actionItems">
+
+        <ul id="login-actions" class="actions">
             @if (!User.Identity.IsAuthenticated)
             {
-                <li><button onclick="location.href = '@Url.Login()';">Login</button></li>
+                if (ViewContext.RouteData.Values["action"].ToString().ToLower() != "login")
+                {
+                    <li>
+                        <a href="@Url.Login()">Login</a>
+                    </li>
+                }
             }
             else
             {
                 <li>Welcome, <strong>@User.Identity.Name</strong>
-                    <button onclick="location.href = '@Url.Logout()';">Logout</button>
+                    <a href="@Url.Logout()">Logout</a>
                 </li>
             }
         </ul>
+        <div class="clear"></div>
     </div>
-    <div class="clear clearfix"></div>
 
     @RenderBody()
 

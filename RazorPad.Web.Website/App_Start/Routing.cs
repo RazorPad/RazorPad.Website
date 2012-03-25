@@ -29,6 +29,13 @@ namespace RazorPad.Web.Website.App_Start
                 new { controller = "FormsAuth", action = "Login", area = "Account" }
             );
 
+            // Named route to logout page
+            routes.MapRoute(
+                "Logout",
+                "logout",
+                new { controller = "FormsAuth", action = "Logout", area = "Account" }
+            );
+
             routes.MapRoute(
                 "Fiddle",
                 "{id}",

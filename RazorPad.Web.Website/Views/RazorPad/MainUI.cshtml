@@ -1,16 +1,16 @@
 ﻿@model RazorPad.Web.Website.Models.FiddleViewModel
 
-@section Head {
-    <link href="@Url.Content("~/Content/shCore.css")" type="text/css" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/shThemeDefault.css")" type="text/css" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/themes/default/codemirror.css")" rel="stylesheet" type="text/css" />
-}
-
 @section Actions {
-    <ul class="actionItems">
-        <li><button id="execute">Execute</button></li>
-        <li><button id="save">Save</button></li>
-        <li style="display:none;"><button id="clone">Clone</button></li>
+    <ul class="actions">
+        <li>
+            <a id="execute" href="#">Execute</a>
+        </li>
+        <li>
+            <a id="save" href="#">Save</a>
+        </li>
+        <li style="@(Model.IsNew ? "display:none;" : "")">
+            <a id="clone" href="#">Clone</a>
+        </li>
     </ul>
 }
 
@@ -18,33 +18,24 @@
     <input type="hidden" id="fiddleId" value="@Model.Key" />
 }
 
-<div id="panes">
+<div id="mainContainer">
     <div id="sidebar">
-    
-        @if(User.Identity.IsAuthenticated)
-        {
-            <div id="user-info">
-                <h3>Saved Fiddles</h3>
-                @Html.Action("UserFiddles", "Users", new { username = User.Identity.Name, area = string.Empty })
-            </div>
-        }
-
-    </div>
-    
-    <div id="razorPane" class="inlinebox">
-        @Html.Partial("_RazorPane")
-    </div>
-    <div id="modelPane" class="inlinebox">
-        @Html.Partial("_ModelPane")
-    </div>
-    <div id="resultsPane" class="">
-        @Html.Partial("_ResultsPane")
+        @Html.Partial("_SideBar", Model)
     </div>
 
+    <div id="panes">
+        <div id="razorPane" class="inlinebox">
+            @Html.Partial("_RazorPane")
+        </div>
+        <div id="modelPane" class="inlinebox">
+            @Html.Partial("_ModelPane")
+        </div>
+        <div id="resultsPane" class="">
+            @Html.Partial("_ResultsPane")
+        </div>
+    </div>
     <div id="loading"></div>
-
 </div>
-
 
 @section Tail {
 
@@ -76,10 +67,13 @@
         }
 
         var outerLayout = $('body').layout({
-
             north__paneSelector: "#toolbar",
             north__resizable: false,
-            north__spacing_open: 0,
+            west__paneSelector: "#sidebar",
+            west__size: Math.floor((screen.width / 1.67) - 10),
+            west__resizable: false,
+            west__closable: true,
+            west__maxSize: 230,
             center__paneSelector: "#panes",
             resizeWhileDragging: true,
             closable: false
@@ -92,10 +86,6 @@
             east__maxSize: 600,
             east__minSize: 400,
             east__size: 400,
-            west__paneSelector: "#sidebar",
-            west__size: Math.floor((screen.width / 1.67) - 10),
-            west__maxSize: 230,
-            west__minSize: 230,
             south__paneSelector: "#resultsPane",
             south__maxSize: "70%",
             south__size: Math.floor((screen.height / 2) - 100),
@@ -118,7 +108,7 @@
             }
         });
 
-        $("#panes").css('visibility', 'visible');
+        $("#mainContainer").css('visibility', 'visible');
 
         $(window).resize(resizeRazorEditor).resize();
 
@@ -128,6 +118,15 @@
                 RazorPad.executeTemplate();
             }, 200);
         }
+
+        $('#savedFiddles').height($("#sidebar").height()/2);
+
+        $('#accordion').accordion({ 
+            autoHeight: false,
+            change: function(){
+                $('#savedFiddles').height($("#sidebar").height()/2);
+            }
+        });
     });
 </script>
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery-ui.js")"> </script>
