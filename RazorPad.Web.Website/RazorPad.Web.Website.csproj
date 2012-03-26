@@ -224,11 +224,11 @@
     <None Include="Content\css\razorpad.chirp.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Content\css\sidebar.css" />
-    <Content Include="Content\css\errorMessages.css" />
-    <Content Include="Content\css\razorpad.css">
+    <Content Include="Content\css\razorpad.min.css">
       <DependentUpon>razorpad.chirp.config</DependentUpon>
     </Content>
+    <None Include="Content\css\sidebar.less" />
+    <Content Include="Content\css\errorMessages.css" />
     <Content Include="Content\css\form.css" />
     <Content Include="Content\css\header.css" />
     <Content Include="Content\css\results.css" />

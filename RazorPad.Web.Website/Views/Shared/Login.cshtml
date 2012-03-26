@@ -52,7 +52,7 @@
                         <h3>Open ID Url</h3>
                         @using (Html.BeginForm("Authenticate", "OpenId", new { area = "Account" }))
                         {
-                            <input name="provider" type="text" value="http://<OpenIdName>.myopenid.com"/>
+                            <input name="provider" type="text" size="40" value="http://<OpenIdName>.myopenid.com"/>
                             <input type="submit" value="Go!"/>
                         }
                     </div>

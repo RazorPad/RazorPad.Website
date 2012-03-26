@@ -1,0 +1,122 @@
+.bold () {
+	font-weight: bold;
+}
+
+#sidebar {
+    border: 0px;
+    background: #ccc;
+
+	#docs-link {
+		font-size: 130%;
+		.bold;
+	}
+
+	#legal-stuff {
+		margin-top: 10px;
+		padding-top: 10px;
+		border-top: 1px groove;
+
+		h3 {
+			text-decoration: none;
+			font-size: 110%;
+		}
+
+		p {
+			font-style: italic;
+		}
+	}
+
+
+	.bottomLinks
+	{
+		vertical-align:bottom;
+		bottom: 0px;
+		padding:15px 18px;
+		position: absolute;
+	}
+
+	.fiddle
+	{
+		margin-bottom: 5px;
+		border-bottom: 1px dotted #ccc;
+		cursor: pointer;
+
+		:hover 
+		{
+			background: #F7F7F7;
+		}
+
+		span
+		{
+			display: block;
+		}
+
+		.create-date
+		{
+			color: #666;
+			font-size: 80%;
+		}
+	}
+
+	.options {
+
+		label
+		{
+			display:block;
+			margin-bottom: 5px;
+		}
+
+		input,textarea
+		{
+			width:90%;
+		}
+
+		textarea
+		{
+			resize: none;
+			border: 2px inset;
+		}
+	}
+
+
+	/* Overridding layout styles */
+	.ui-layout-toggler-west-open
+	{
+		background: url('../images/sidebar_open.png') no-repeat -2px center;
+	}
+
+	.ui-layout-toggler-west-closed
+	{
+		background: url('../images/sidebar_close.png') no-repeat -2px center;
+	}
+
+	/* Overridding accordion styles */
+	.ui-accordion-icons .ui-accordion-header a
+	{
+		padding-left: 18px;
+		font-size: 1em;
+	}
+
+	.ui-accordion {
+
+		.ui-accordion-header .ui-icon
+		{
+			left: 0px;
+		}
+
+		.ui-state-active a
+		{
+			.bold;
+		}
+
+		.ui-accordion-content
+		{
+			padding: 13px 18px;
+		}
+
+		.ui-accordion-header
+		{
+			margin-top: 0px;
+		}
+	}
+}

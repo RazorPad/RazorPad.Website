@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>RazorPad: The Online Razor Scratch Pad</title>
-    <link href="@Url.Content("~/Content/css/razorpad.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/razorpad.min.css")" rel="stylesheet" type="text/css" />
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.js")"></script>
 @RenderSection("Head", false)
 </head>
@@ -26,7 +26,7 @@
                 if (ViewContext.RouteData.Values["action"].ToString().ToLower() != "login")
                 {
                     <li>
-                        <a href="@Url.Login()">Login</a>
+                        <a href="@Url.Login()">Login / Signup</a>
                     </li>
                 }
             }

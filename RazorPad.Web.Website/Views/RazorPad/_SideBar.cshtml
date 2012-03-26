@@ -1,5 +1,14 @@
 ﻿@model RazorPad.Web.Website.Models.FiddleViewModel
 <div id="accordion">
+    <h3><a href="#">Options</a></h3>
+	<div class="options">
+        <label>Title</label>
+		<input type="text" id="fiddleTitle" value="@Model.Title" />
+        
+        <label>Notes</label>
+		<textarea id="fiddleNotes" rows="3">@Model.Notes</textarea>
+	</div>
+
     @if(User.Identity.IsAuthenticated)
     {
         <h3><a href="#">Saved Fiddles</a></h3>
@@ -7,30 +16,21 @@
             @Html.Action("UserFiddles", "Users", new { username = User.Identity.Name, area = string.Empty })
         </div>
     }
-	<h3><a href="#">Options</a></h3>
+
+    <h3><a href="#">Examples</a></h3>
 	<div>
-		Whats options we will have?
-	</div>
-	<h3><a href="#">Fiddle Info</a></h3>
-	<div class="fiddleInfo">
-        <label>Title
-		    <input type="text" id="fiddleTitle" value="@Model.Title" />
-        </label>
-        <label>Notes<br />
-		    <textarea id="fiddleNotes" rows="3">@Model.Notes</textarea>
-        </label>
-	</div>
-	<h3><a href="#">Examples</a></h3>
-	<div>
-		Basic examples
-	</div>
-	<h3><a href="#">Legal</a></h3>
-	<div>
-		Legal information
+		TODO: Basic examples
 	</div>
 </div>
 <div class="bottomLinks">
-    <a href="#">Documentation</a> <br />
-    <a href="#">Help?</a>
+    <div>
+        <a id="docs-link" href="http://docs.razorpad.net">Documentation</a>
+    </div>
+
+    <div id="legal-stuff">
+	    <h3>Legal Stuff</h3>
+        <p>All code belongs to the poster and no license is enforced.</p>
+        <p>We are not responsible or liable for any loss or damage of any kind during the usage of provided code.</p>
+    </div>
 </div>
     
