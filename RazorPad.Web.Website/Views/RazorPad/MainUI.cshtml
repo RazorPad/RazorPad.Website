@@ -38,97 +38,12 @@
 </div>
 
 @section Tail {
-
-<script type="text/javascript" charset="utf-8">
-    var RazorPad = typeof (RazorPad) == 'undefined' ? {} : RazorPad;
-    RazorPad.siteRoot = "@(Url.Content("~/"))";
-    RazorPad.razorEditor = null;
-    RazorPad.isUserAuthenticated = @(User.Identity.IsAuthenticated ? "true" : "false"); 
-    $(function () {
-
-        function resizeRazorEditor() {
-            $(RazorPad.razorEditor.getScrollerElement()).css({
-                height: $("#razorPane").height() - $("#viewHeader").height(),
-                width: $("#razorPane").width()
-            });
-            RazorPad.razorEditor.refresh();
-            resizeModelProps();
-        }
-
-        function resizeModelProps() {
-            var $modelPane = $('#modelPane');
-            $modelPane.find('.modelProps')
-                         .height(
-                            $modelPane.height()
-                            - $modelPane.find('.paneheader').outerHeight(true)
-                            - $modelPane.find('.propinput').outerHeight(true)
-                            - 10//modelProps top and bottom padding
-                            );
-        }
-
-        var outerLayout = $('body').layout({
-            north__paneSelector: "#toolbar",
-            north__resizable: false,
-            west__paneSelector: "#sidebar",
-            west__size: Math.floor((screen.width / 1.67) - 10),
-            west__resizable: false,
-            west__closable: true,
-            west__maxSize: 230,
-            center__paneSelector: "#panes",
-            resizeWhileDragging: true,
-            closable: false
-        });
-
-        var innerLayout = $('#panes').layout({
-            closable: false,
-            center__paneSelector: "#razorPane",
-            east__paneSelector: "#modelPane",
-            east__maxSize: 600,
-            east__minSize: 400,
-            east__size: 400,
-            south__paneSelector: "#resultsPane",
-            south__maxSize: "70%",
-            south__size: Math.floor((screen.height / 2) - 100),
-            south__minSize: 200,
-            resizeWhileDragging: true,
-            onresize: resizeRazorEditor
-        });
-
-
-        RazorPad.razorEditor = CodeMirror.fromTextArea(document.getElementById("razorEditor"), {
-            mode: "text/html",
-            lineNumbers: true,
-            tabMode: "indent",
-            matchBrackets: true,
-            tabIndex: -1,
-            lineWrapping: true,
-            extraKeys: {
-                "Ctrl-S": function(){ RazorPad.saveTemplate(); },
-                "Ctrl-E": function(){ RazorPad.executeTemplate(); }
-            }
-        });
-
-        $("#mainContainer").css('visibility', 'visible');
-
-        $(window).resize(resizeRazorEditor).resize();
-
-        if($("#fiddleId").val()){
-            //Execute the template (adding timeout to load the layout before ajax calls)
-            setTimeout(function(){
-                RazorPad.executeTemplate();
-            }, 200);
-        }
-
-        $('#savedFiddles').height($("#sidebar").height()/2);
-
-        $('#accordion').accordion({ 
-            autoHeight: false,
-            change: function(){
-                $('#savedFiddles').height($("#sidebar").height()/2);
-            }
-        });
-    });
-</script>
+    <script type="text/javascript" charset="utf-8">
+        RazorPad = { 
+            siteRoot: '@(Url.Content("~/"))',
+            isUserAuthenticated: @(User.Identity.IsAuthenticated ? "true" : "false")
+        };
+    </script>
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery-ui.js")"> </script>
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/underscore.js")"> </script>
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/splitter.js")"> </script>
