@@ -288,7 +288,6 @@
     <Content Include="Views\RazorPad\_RazorPane.cshtml" />
     <Content Include="Views\RazorPad\_ModelPane.cshtml" />
     <Content Include="Views\RazorPad\_ResultsPane.cshtml" />
-    <Content Include="Views\RazorPad\_ModelGrid.cshtml" />
     <Content Include="Views\Shared\Login.cshtml" />
     <Content Include="Areas\Account\Views\Registration\Register.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -308,6 +307,7 @@
     <Content Include="Views\Users\Snippets.cshtml" />
     <Content Include="Views\Users\_Snippets.cshtml" />
     <Content Include="Views\RazorPad\_SideBar.cshtml" />
+    <Content Include="Views\RazorPad\_ModelGrid.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />

@@ -50,10 +50,10 @@ namespace RazorPad.Web.Website.Controllers
 
             var writer = new StringWriter();
 
-            JavaScriptSerializer jss = new JavaScriptSerializer();
-            jss.RegisterConverters(new JavaScriptConverter[] { new DynamicJsonConverter() });
+            //JavaScriptSerializer jss = new JavaScriptSerializer();
+            //jss.RegisterConverters(new JavaScriptConverter[] { new DynamicJsonConverter() });
 
-            dynamic inputModel = jss.Deserialize(request.Model, typeof(object));
+            dynamic inputModel = null;// jss.Deserialize(request.Model, typeof(object));
             
             var templ = request.Template;
             var generatorResults = compiler.GenerateCode(templ, writer, new RazorPadMvcEngineHost(request.RazorLanguage));
