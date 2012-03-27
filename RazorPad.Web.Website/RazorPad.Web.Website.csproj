@@ -224,23 +224,25 @@
     <None Include="Content\css\razorpad.chirp.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Content\css\sidebar.less" />
-    <Content Include="Content\css\errorMessages.css" />
-    <Content Include="Content\css\form.css" />
-    <None Include="Content\css\header.less" />
-    <Content Include="Content\css\razorpad.min.css">
+    <None Include="Content\css\MainUI\sidebar.less" />
+    <Content Include="Content\css\core.css">
       <DependentUpon>razorpad.chirp.config</DependentUpon>
     </Content>
-    <Content Include="Content\css\results.css" />
-    <Content Include="Content\css\editor.css" />
-    <Content Include="Content\css\model.css" />
-    <Content Include="Content\css\global.css" />
+    <Content Include="Content\css\core\jquery-ui.css" />
+    <Content Include="Content\css\core\form.css" />
+    <None Include="Content\css\core\header.less" />
+    <Content Include="Content\css\main-ui.css">
+      <DependentUpon>razorpad.chirp.config</DependentUpon>
+    </Content>
+    <Content Include="Content\css\MainUI\results.css" />
+    <Content Include="Content\css\MainUI\editor.css" />
+    <Content Include="Content\css\core\global.css" />
     <Content Include="Content\images\facebook.jpg" />
     <Content Include="Content\images\google.png" />
     <Content Include="Content\images\openid.png" />
-    <Content Include="Content\css\reset.css" />
-    <Content Include="Content\css\shCore.css" />
-    <Content Include="Content\css\shThemeDefault.css" />
+    <Content Include="Content\css\core\reset.css" />
+    <Content Include="Content\css\MainUI\shCore.css" />
+    <Content Include="Content\css\MainUI\shThemeDefault.css" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\sidebar_close.png" />
     <Content Include="Content\images\sidebar_open.png" />
@@ -256,10 +258,9 @@
     <Content Include="Content\css\images\ui-icons_ef8c08_256x240.png" />
     <Content Include="Content\css\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\css\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Content\css\jquery-ui.css" />
     <Content Include="favicon.ico" />
     <Content Include="Scripts\ace-uncompressed.js" />
-    <Content Include="Content\css\codemirror.css" />
+    <Content Include="Content\css\MainUI\codemirror.css" />
     <Content Include="Scripts\codemirror\codemirror.js" />
     <Content Include="Scripts\codemirror\mode\css.js" />
     <Content Include="Scripts\codemirror\mode\htmlmixed.js" />

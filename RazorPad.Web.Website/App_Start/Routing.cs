@@ -19,7 +19,7 @@ namespace RazorPad.Web.Website.App_Start
             routes.MapRoute(
                 "Home",
                 "",
-                new { controller = "RazorPad", action = "Index", area = string.Empty }
+                new { controller = "RazorPad", action = "Index", area = (string)null }
             );
 
             // Named route to login page
@@ -45,13 +45,13 @@ namespace RazorPad.Web.Website.App_Start
             routes.MapRoute(
                 "User",
                 "users/{username}",
-                new { controller = "Users", action = "Index", area = string.Empty },
+                new { controller = "Users", action = "Index", area = (string)null },
                 new[] { "RazorPad.Web.Website.Controllers" }
             );
             routes.MapRoute(
                 "UserSnippets",
                 "users/{username}/snippets",
-                new { controller = "Users", action = "Snippets", area = string.Empty },
+                new { controller = "Users", action = "Snippets", area = (string)null },
                 new[] { "RazorPad.Web.Website.Controllers" }
             );
 

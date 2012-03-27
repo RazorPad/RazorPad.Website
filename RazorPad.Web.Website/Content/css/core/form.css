@@ -53,11 +53,6 @@
     width: 315px;
 }
 
-.errorMsg, .severErrorMsg {
-    color: Red;
-    margin-bottom: 10px;
-}
-
 .form-button {
     margin: 2em 0;
 }
@@ -73,6 +68,27 @@
 input[type="text"].input-validation-error, input[type="password"].input-validation-error {
     border: solid 1px #e80c4d;
 }
+
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+    display:block;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
 
 .login .half {
     width: 48%;
