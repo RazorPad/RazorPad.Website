@@ -9,13 +9,11 @@
 </head>
 <body>
     
-    <div id="toolbar" class="gradient ui-layout-north">
-        <div id="header">
-            <h1 class="insetType" title="The Online Razor Scratch Pad">
-                @Html.RouteLink("RazorPad", "Home")
-                <span class="beta">beta</span>
-            </h1>
-        </div>
+    <div id="header" class="gradient ui-layout-north">
+        <h1 class="insetType" title="The Online Razor Scratch Pad">
+            @Html.RouteLink("RazorPad", "Home")
+            <span class="beta">beta</span>
+        </h1>
 
         @RenderSection("Actions", false)
 

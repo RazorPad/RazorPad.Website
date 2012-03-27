@@ -30,7 +30,7 @@
 
     $('body').layout({
         enableCursorHotkey: false,
-        north__paneSelector: "#toolbar",
+        north__paneSelector: "#header",
         north__resizable: false,
         west__paneSelector: "#sidebar",
         west__size: 280,
