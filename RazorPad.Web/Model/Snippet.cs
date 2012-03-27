@@ -6,7 +6,7 @@ using RazorPad.Web.Services;
 
 namespace RazorPad.Web
 {
-    public class Fiddle
+    public class Snippet
     {
         public string Id { get; private set; }
 
@@ -41,23 +41,23 @@ namespace RazorPad.Web
         public string Owner { get; set; }
 
 
-        public Fiddle()
+        public Snippet()
         {
             DateCreated = DateTime.UtcNow;
         }
     }
 
-    public static class FiddleRepositoryExtensions
+    public static class SnippetRepositoryExtensions
     {
         
-        public static Fiddle FindFiddle(this IRepository repository, string key)
+        public static Snippet FindSnippet(this IRepository repository, string key)
         {
-            return repository.SingleOrDefault<Fiddle>(x => x.Key == key);
+            return repository.SingleOrDefault<Snippet>(x => x.Key == key);
         }
 
-        public static IEnumerable<Fiddle> FindFiddlesByUsername(this IRepository repository, string username)
+        public static IEnumerable<Snippet> FindSnippetsByUsername(this IRepository repository, string username)
         {
-            return repository.Query<Fiddle>().Where(x => x.CreatedBy == username || x.Owner == username);
+            return repository.Query<Snippet>().Where(x => x.CreatedBy == username || x.Owner == username);
         }
 
     }

@@ -37,7 +37,7 @@ namespace RazorPad.Web.Website.App_Start
             );
 
             routes.MapRoute(
-                "Fiddle",
+                "Snippet",
                 "{id}",
                 new { controller = "RazorPad", action = "Index", id = UrlParameter.Optional, area = string.Empty }
             );
@@ -49,9 +49,9 @@ namespace RazorPad.Web.Website.App_Start
                 new[] { "RazorPad.Web.Website.Controllers" }
             );
             routes.MapRoute(
-                "UserFiddles",
-                "users/{username}/fiddles",
-                new { controller = "Users", action = "Fiddles", area = string.Empty },
+                "UserSnippets",
+                "users/{username}/snippets",
+                new { controller = "Users", action = "Snippets", area = string.Empty },
                 new[] { "RazorPad.Web.Website.Controllers" }
             );
 

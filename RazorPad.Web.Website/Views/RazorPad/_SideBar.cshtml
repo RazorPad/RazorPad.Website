@@ -1,19 +1,19 @@
-﻿@model RazorPad.Web.Website.Models.FiddleViewModel
+﻿@model RazorPad.Web.Website.Models.SnippetViewModel
 <div id="accordion">
     <h3><a href="#">Options</a></h3>
 	<div class="options">
         <label>Title</label>
-		<input type="text" id="fiddleTitle" value="@Model.Title" />
+		<input type="text" id="snippetTitle" value="@Model.Title" />
         
         <label>Notes</label>
-		<textarea id="fiddleNotes" rows="3">@Model.Notes</textarea>
+		<textarea id="snippetNotes" rows="3">@Model.Notes</textarea>
 	</div>
 
     @if(User.Identity.IsAuthenticated)
     {
-        <h3><a href="#">Saved Fiddles</a></h3>
-        <div id="savedFiddles">
-            @Html.Action("UserFiddles", "Users", new { username = User.Identity.Name, area = string.Empty })
+        <h3><a href="#">Saved Snippets</a></h3>
+        <div id="savedSnippets">
+            @Html.Action("UserSnippets", "Users", new { username = User.Identity.Name, area = string.Empty })
         </div>
     }
 

@@ -24,7 +24,7 @@ namespace RazorPad.Web.Website.Models.RazorPad
             set { }
         }
 
-        public string FiddleId { get; set; }
+        public string SnippetId { get; set; }
         public string Title { get; set; }
         public string Notes { get; set; }
     }

@@ -209,7 +209,7 @@
     <Compile Include="Areas\Account\Models\ResetPasswordRequest.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Extensions\AuthenticationExtensions.cs" />
-    <Compile Include="Models\FiddleViewModel.cs" />
+    <Compile Include="Models\SnippetViewModel.cs" />
     <Compile Include="Models\SaveRequest.cs" />
     <Compile Include="Models\ExecuteRequest.cs" />
     <Compile Include="Models\ExecuteResult.cs" />
@@ -217,7 +217,7 @@
     <Compile Include="Models\ParseResult.cs" />
     <Compile Include="Models\TemplateMessage.cs" />
     <Compile Include="Models\TemplateMessageKind.cs" />
-    <Compile Include="Models\UserFiddlesViewModel.cs" />
+    <Compile Include="Models\UserSnippetsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -305,8 +305,8 @@
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\UserManagement\Users.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Views\Users\Fiddles.cshtml" />
-    <Content Include="Views\Users\_Fiddles.cshtml" />
+    <Content Include="Views\Users\Snippets.cshtml" />
+    <Content Include="Views\Users\_Snippets.cshtml" />
     <Content Include="Views\RazorPad\_SideBar.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
@@ -350,7 +350,7 @@
     <Content Include="Scripts\jquery-vsdoc.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.min.js" />
-    <Content Include="Scripts\RazorPad.js" />
+    <Content Include="Scripts\razorpad.js" />
     <Content Include="Scripts\shBrushCSharp.js" />
     <Content Include="Scripts\shBrushXml.js" />
     <Content Include="Scripts\shCore.js" />

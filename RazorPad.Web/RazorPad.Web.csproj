@@ -74,7 +74,7 @@
     <Compile Include="Dynamic\JsonDynamicObject.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />
     <Compile Include="Model\Authentication\Credential.cs" />
-    <Compile Include="Model\Fiddle.cs" />
+    <Compile Include="Model\Snippet.cs" />
     <Compile Include="Model\Authentication\FormsAuthCredential.cs" />
     <Compile Include="Model\Authentication\IntegratedAuthenticationCredential.cs" />
     <Compile Include="Model\Util\MatchesPropertyAttribute.cs" />

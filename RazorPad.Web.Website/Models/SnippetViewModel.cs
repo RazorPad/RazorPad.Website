@@ -5,7 +5,7 @@ using RazorPad.Web.Dynamic;
 
 namespace RazorPad.Web.Website.Models
 {
-    public class FiddleViewModel
+    public class SnippetViewModel
     {
         public string Key { get; set; }
         
@@ -55,7 +55,7 @@ namespace RazorPad.Web.Website.Models
 
         public DateTime? DateCreated { get; set; }
 
-        public FiddleViewModel()
+        public SnippetViewModel()
         {
             Model = string.Empty;
             Owner = string.Empty;
@@ -63,19 +63,19 @@ namespace RazorPad.Web.Website.Models
             View = string.Empty;
         }
 
-        public FiddleViewModel(Fiddle fiddle)
+        public SnippetViewModel(Snippet snippet)
         {
-            if(fiddle == null)
+            if(snippet == null)
                 return;
 
-            CreatedBy = fiddle.CreatedBy;
-            DateCreated = fiddle.DateCreated;
-            Key = fiddle.Key;
-            Model = fiddle.Model;
-            Owner = fiddle.Owner;
-            Title = fiddle.Title;
-            View = fiddle.View;
-            Notes = fiddle.Notes;
+            CreatedBy = snippet.CreatedBy;
+            DateCreated = snippet.DateCreated;
+            Key = snippet.Key;
+            Model = snippet.Model;
+            Owner = snippet.Owner;
+            Title = snippet.Title;
+            View = snippet.View;
+            Notes = snippet.Notes;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model RazorPad.Web.Website.Models.FiddleViewModel
+﻿@model RazorPad.Web.Website.Models.SnippetViewModel
 
 @section Actions {
     <ul class="actions">
@@ -15,7 +15,7 @@
 }
 
 @if (!Model.IsNew) {
-    <input type="hidden" id="fiddleId" value="@Model.Key" />
+    <input type="hidden" id="snippetId" value="@Model.Key" />
 }
 
 <div id="mainContainer">
@@ -60,6 +60,6 @@
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/codemirror/mode/htmlmixed.js")"> </script>
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/hpTabs.js")"> </script>
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.hotkeys.js")"> </script>
-    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/RazorPad.js")"> </script>
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.layout-latest.js")"> </script>
+    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/razorpad.js")"> </script>
 }

@@ -24,9 +24,9 @@ namespace RazorPad.Web.Website.Controllers
 
         public ActionResult Index(string id)
         {
-            var fiddle = _repository.FindFiddle(id);
+            var snippet = _repository.FindSnippet(id);
             
-            return View("MainUI", new FiddleViewModel(fiddle));
+            return View("MainUI", new SnippetViewModel(snippet));
         }
 
 
@@ -80,13 +80,13 @@ namespace RazorPad.Web.Website.Controllers
             
         public JsonResult Save([Bind(Prefix = "")]SaveRequest request)
         {
-            var fiddle = _repository.SingleOrDefault<Fiddle>(f => f.Key == request.FiddleId);
+            var snippet = _repository.SingleOrDefault<Snippet>(f => f.Key == request.SnippetId);
 
-            if (fiddle == null)
+            if (snippet == null)
             {
                 var username = User.Identity.IsAuthenticated ? User.Identity.Name : "Anonymous";
 
-                fiddle = new Fiddle
+                snippet = new Snippet
                 {
                     View = request.Template,
                     Model = request.Model,
@@ -96,19 +96,19 @@ namespace RazorPad.Web.Website.Controllers
                     Notes = request.Notes
                 };
 
-                _repository.Save(fiddle);
+                _repository.Save(snippet);
             }
             else
             {
-                fiddle.View = request.Template;
-                fiddle.Model = request.Model;
-                fiddle.Title = request.Title;
-                fiddle.Notes = request.Notes;
+                snippet.View = request.Template;
+                snippet.Model = request.Model;
+                snippet.Title = request.Title;
+                snippet.Notes = request.Notes;
             }
 
             _repository.SaveChanges();
 
-            return Json(fiddle.Key);
+            return Json(snippet.Key);
         }
 
         protected override void OnException(ExceptionContext filterContext)

@@ -27,36 +27,36 @@ namespace RazorPad.Web.Website.Controllers
             return View("User", user);
         }
 
-        public ActionResult Fiddles(string username = null)
+        public ActionResult Snippets(string username = null)
         {
             if (username == null)
                 return List();
 
-            var viewModel = GetUserFiddlesViewModel(username);
+            var viewModel = GetUserSnippetsViewModel(username);
 
             if (Request.IsAjaxRequest())
                 return Json(viewModel, JsonRequestBehavior.AllowGet);
 
-            return View("Fiddles", viewModel);
+            return View("Snippets", viewModel);
         }
 
-        private UserFiddlesViewModel GetUserFiddlesViewModel(string username)
+        private UserSnippetsViewModel GetUserSnippetsViewModel(string username)
         {
-            var fiddles = _repository.FindFiddlesByUsername(username) ?? Enumerable.Empty<Fiddle>();
+            var snippets = _repository.FindSnippetsByUsername(username) ?? Enumerable.Empty<Snippet>();
 
-            var viewModel = new UserFiddlesViewModel
+            var viewModel = new UserSnippetsViewModel
                                 {
-                                    Fiddles = fiddles.Select(x => new FiddleViewModel(x)),
+                                    Snippets = snippets.Select(x => new SnippetViewModel(x)),
                                     Username = username,
                                 };
             return viewModel;
         }
 
         [ChildActionOnly]
-        public ActionResult UserFiddles(string username)
+        public ActionResult UserSnippets(string username)
         {
-            var viewModel = GetUserFiddlesViewModel(username);
-            return PartialView("_Fiddles", viewModel);
+            var viewModel = GetUserSnippetsViewModel(username);
+            return PartialView("_Snippets", viewModel);
         }
 
 

@@ -23,6 +23,7 @@
     }
 
     var outerLayout = $('body').layout({
+        enableCursorHotkey: false,
         north__paneSelector: "#toolbar",
         north__resizable: false,
         west__paneSelector: "#sidebar",
@@ -60,7 +61,8 @@
         lineWrapping: true,
         extraKeys: {
             "Ctrl-S": function () { RazorPad.saveTemplate(); },
-            "Ctrl-E": function () { RazorPad.executeTemplate(); }
+            "Ctrl-E": function () { RazorPad.executeTemplate(); },
+            "Ctrl-C": function () { RazorPad.saveTemplate(true); }
         }
     });
 
@@ -68,19 +70,19 @@
 
     $(window).resize(resizeRazorEditor).resize();
 
-    if ($("#fiddleId").val()) {
+    if ($("#snippetId").val()) {
         //Execute the template (adding timeout to load the layout before ajax calls)
         setTimeout(function () {
             RazorPad.executeTemplate();
         }, 200);
     }
 
-    $('#savedFiddles').height($("#sidebar").height() / 2);
+    $('#savedSnippets').height($("#sidebar").height() / 2);
 
     $('#accordion').accordion({
         autoHeight: false,
         change: function () {
-            $('#savedFiddles').height($("#sidebar").height() / 2);
+            $('#savedSnippets').height($("#sidebar").height() / 2);
         }
     });
 });
@@ -90,9 +92,9 @@ RazorPad.saveTemplate = function (clone) {
     var data = {
         Template: RazorPad.razorEditor.getValue(),
         Model: JSON.stringify(RazorPad.getModel()),
-        FiddleId: (clone ? '' : ($('#fiddleId').val() || '')),
-        Title: $('#fiddleTitle').val() || '',
-        Notes: $('#fiddleNotes').val() || ''
+        SnippetId: (clone ? '' : ($('#snippetId').val() || '')),
+        Title: $('#snippetTitle').val() || '',
+        Notes: $('#snippetNotes').val() || ''
     };
     $.ajax({
         url: RazorPad.siteRoot + 'RazorPad/Save',
@@ -100,7 +102,7 @@ RazorPad.saveTemplate = function (clone) {
         data: JSON.stringify(data),
         success: function (response) {
             if (!response.Messages) {
-                if (clone || !$('#fiddleId').val()) {
+                if (clone || !$('#snippetId').val()) {
                     location.href = RazorPad.siteRoot + response;
                 }
                 else {
@@ -159,7 +161,8 @@ RazorPad.handleExecuteKey = function(evt) {
     return false;
 };
 
-RazorPad.handleCloneKey = function(evt) {
+RazorPad.handleCloneKey = function (evt) {
+    alert(evt); return;
     RazorPad.saveTemplate(true);
     evt.stopPropagation();
     return false;
@@ -271,7 +274,7 @@ $(function () {
         RazorPad.saveTemplate();
     });
 
-    if ($("#fiddleId").val()) {
+    if ($("#snippetId").val()) {
         $('#clone').click(function (e) {
             e.preventDefault();
             RazorPad.saveTemplate(true);
@@ -284,18 +287,16 @@ $(function () {
         type: 'post'
     });
 
-    $.fn.bindHotkeys = function () {
-        this
-        .bind('keydown', 'ctrl+s', RazorPad.handleSaveKey)
-        .bind('keydown', 'ctrl+e', RazorPad.handleExecuteKey)
-        .bind('keydown', 'ctrl+c', RazorPad.handleCloneKey);
-    };
+    //Bind keyboard shorts
+    $(document)
+    .bind('keydown', 'ctrl+s', RazorPad.handleSaveKey)
+    .bind('keydown', 'ctrl+e', RazorPad.handleExecuteKey)
+    .bind('keydown', 'ctrl+c', RazorPad.handleCloneKey);
 
-    $(document).bindHotkeys();
     RazorPad.razorEditor.focus();
 
     if (RazorPad.isUserAuthenticated) {
-        $('#savedFiddles').delegate('.fiddle', 'click', function () {
+        $('#savedSnippets').delegate('.snippet', 'click', function () {
             location.href = RazorPad.siteRoot + $(this).data('key');
             return false;
         });
