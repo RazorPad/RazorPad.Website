@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace RazorPad.Web.Website.Extensions
 {
@@ -9,7 +8,7 @@ namespace RazorPad.Web.Website.Extensions
         public static string Login(this UrlHelper url, string redirectUrl = null)
         {
             if (redirectUrl == null)
-                redirectUrl = HttpUtility.UrlEncode(url.RequestContext.HttpContext.Request.RawUrl);
+                redirectUrl = url.RequestContext.HttpContext.Request.RawUrl;
 
             return url.RouteUrl("Login", new { redirectUrl });
         }
@@ -17,7 +16,7 @@ namespace RazorPad.Web.Website.Extensions
         public static string Logout(this UrlHelper url, string redirectUrl = null)
         {
             if (redirectUrl == null)
-                redirectUrl = HttpUtility.UrlEncode(url.RequestContext.HttpContext.Request.RawUrl);
+                redirectUrl = url.RequestContext.HttpContext.Request.RawUrl;
 
             return url.RouteUrl("Logout", new { redirectUrl });
         }

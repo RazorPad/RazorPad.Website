@@ -1,6 +1,7 @@
 ﻿using System;
 using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OpenId;
+using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
 using DotNetOpenAuth.OpenId.Extensions.SimpleRegistration;
 using DotNetOpenAuth.OpenId.RelyingParty;
 
@@ -8,18 +9,11 @@ namespace RazorPad.Web.Authentication.OpenId
 {
     public class OpenIdRelyingPartyFacade
     {
-        public Func<ClaimsRequest> ClaimsFactory { get; set; }
-
-
-        public OpenIdRelyingPartyFacade()
-        {
-            ClaimsFactory = () => new ClaimsRequest { Email = DemandLevel.Require, };
-        }
-
+        public const string GoogleProviderUrl = "https://www.google.com/accounts/o8/id";
 
         public OpenIdAuthenticationResponse Google()
         {
-            return Authenticate("https://www.google.com/accounts/o8/id");
+            return Authenticate(GoogleProviderUrl);
         }
 
         public OpenIdAuthenticationResponse Authenticate(string provider)
@@ -44,10 +38,11 @@ namespace RazorPad.Web.Authentication.OpenId
 
                     var authenticationRequest = openid.CreateRequest(providerId);
 
-                    var claims = ClaimsFactory();
+                    authenticationRequest.AddExtension(new ClaimsRequest {Email = DemandLevel.Require});
 
-                    if (claims != null)
-                        authenticationRequest.AddExtension(claims);
+                    var fetch = new FetchRequest();
+                    fetch.Attributes.Add(new AttributeRequest(WellKnownAttributes.Contact.Email, true));
+                    authenticationRequest.AddExtension(fetch);
 
                     return new RedirectResponse(authenticationRequest.RedirectingResponse);
                 }
@@ -59,7 +54,6 @@ namespace RazorPad.Web.Authentication.OpenId
 
             if (response.Status == AuthenticationStatus.Authenticated)
             {
-                var claims = response.GetExtension<ClaimsResponse>();
                 return new SuccessfulResponse(response);
             }
 

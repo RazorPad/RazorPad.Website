@@ -1,3 +1,4 @@
+using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
 using DotNetOpenAuth.OpenId.Extensions.SimpleRegistration;
 using DotNetOpenAuth.OpenId.RelyingParty;
 
@@ -17,12 +18,42 @@ namespace RazorPad.Web.Authentication.OpenId
 
         public string EmailAddress
         {
-            get { return (Credentials == null) ? null : Credentials.Email; }
+            get
+            {
+                string email = null;
+                
+                if(Credentials != null)
+                    email = Credentials.Email;
+
+                if(string.IsNullOrWhiteSpace(email))
+                {
+                    var fetch = Response.GetExtension<FetchResponse>();
+                    if (fetch != null)
+                        email = fetch.GetAttributeValue(WellKnownAttributes.Contact.Email);
+                }
+                
+                return email;
+            }
         }
 
         public string FriendlyIdentifier
         {
-            get { return Response.FriendlyIdentifierForDisplay; }
+            get
+            {
+                string id = Response.FriendlyIdentifierForDisplay;
+
+                // Google returns the same identifier for 
+                // everyone -- ignore it
+                if (id == null || id.StartsWith("www.google"))
+                    return ClaimedIdentifier;
+
+                return id;
+            }
+        }
+
+        public bool HasEmailAddress
+        {
+            get { return !string.IsNullOrWhiteSpace(EmailAddress); }
         }
 
         public IAuthenticationResponse Response { get; private set; }

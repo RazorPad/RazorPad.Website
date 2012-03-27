@@ -45,14 +45,12 @@ namespace RazorPad.Web.Website.Areas.Account.Controllers
                     credential => credential.Token == token);
 
                 if (user == null && !string.IsNullOrWhiteSpace(success.EmailAddress))
-                {
                     user = _repository.FindUserByEmail(success.EmailAddress);
 
-                    if (user == null)
-                        return RegisterNewUser(success);
+                if (user == null)
+                    return RegisterNewUser(success);
 
-                    user.Credentials.Add(new IntegratedAuthenticationCredential { Token = token });
-                }
+                user.Credentials.Add(new IntegratedAuthenticationCredential { Token = token });
 
                 FormsAuthController.AuthenticateUser(user);
 
