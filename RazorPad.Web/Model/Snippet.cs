@@ -7,7 +7,7 @@ using RazorPad.Web.Services;
 
 namespace RazorPad.Web
 {
-    public class Snippet
+    public class Snippet : IEntity
     {
         public long Id { get; private set; }
 

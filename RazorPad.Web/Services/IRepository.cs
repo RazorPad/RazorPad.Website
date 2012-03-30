@@ -5,13 +5,13 @@ namespace RazorPad.Web.Services
 {
     public interface IRepository : IUnitOfWork
     {
-        void Delete<TModel>(long entityId) where TModel : class;
-        void Delete<TModel>(TModel entity) where TModel : class;
+        void Delete<TEntity>(params long[] entityIds) where TEntity : class, IEntity;
+        void Delete<TEntity>(TEntity entity) where TEntity : class, IEntity;
 
-        IQueryable<TModel> Query<TModel>() where TModel : class;
+        IQueryable<TEntity> Query<TEntity>() where TEntity : class, IEntity;
 
-        void Save<TModel>(TModel instance) where TModel : class;
+        void Save<TEntity>(TEntity instance) where TEntity : class, IEntity;
 
-        TModel SingleOrDefault<TModel>(Func<TModel, bool> predicate) where TModel : class;
+        TEntity SingleOrDefault<TEntity>(Func<TEntity, bool> predicate) where TEntity : class, IEntity;
     }
 }

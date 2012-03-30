@@ -11,7 +11,7 @@ namespace RazorPad.Web.Website.Areas.Admin.Filters
 
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if(filterContext.RouteData.Values["area"] == AdminAreaRegistration.Name)
+            if(AdminAreaRegistration.Name == (string)filterContext.RouteData.Values["area"])
                 base.OnAuthorization(filterContext);
         }
     }
