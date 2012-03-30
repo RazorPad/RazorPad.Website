@@ -16,22 +16,20 @@ namespace RazorPad.Web.RavenDb
         }
 
 
-        public TModel Load<TModel>(string id)
-        {
-            return _session.Load<TModel>(id);
-        }
-
-        public IQueryable<TModel> Query<TModel>()
+        public IQueryable<TModel> Query<TModel>(params string[] includePaths)
+            where TModel : class
         {
             return _session.Query<TModel>();
         }
 
         public TModel SingleOrDefault<TModel>(Func<TModel, bool> predicate)
+            where TModel : class
         {
             return _session.Query<TModel>().SingleOrDefault(predicate);
         }
 
         public void Save<TModel>(TModel instance)
+            where TModel : class
         {
             _session.Store(instance);
         }

@@ -67,6 +67,9 @@
     <Reference Include="Elmah">
       <HintPath>..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Esent.Interop, Version=1.7.0.0, Culture=neutral, PublicKeyToken=8dd49bbdae3f61af, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RavenDB-Embedded.1.0.658-Unstable\lib\net40\Esent.Interop.dll</HintPath>
@@ -386,7 +389,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Account\Views\Shared\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
@@ -398,6 +400,10 @@
     <ProjectReference Include="..\RazorPad.Core\RazorPad.Core.csproj">
       <Project>{511d144c-f4c7-40a3-b3b4-80d891fce2f5}</Project>
       <Name>RazorPad.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RazorPad.Web.EntityFramework\RazorPad.Web.EntityFramework.csproj">
+      <Project>{910f8d88-cfe2-4bef-bf16-c22281e0aac1}</Project>
+      <Name>RazorPad.Web.EntityFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\RazorPad.Web.RavenDb\RazorPad.Web.RavenDb.csproj">
       <Project>{d8fdf341-d9de-4c69-9e8c-db910587ed51}</Project>

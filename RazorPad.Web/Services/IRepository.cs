@@ -5,12 +5,10 @@ namespace RazorPad.Web.Services
 {
     public interface IRepository : IUnitOfWork
     {
-        TModel Load<TModel>(string id);
+        IQueryable<TModel> Query<TModel>(params string[] includePaths) where TModel : class;
 
-        IQueryable<TModel> Query<TModel>();
+        void Save<TModel>(TModel instance) where TModel : class;
 
-        void Save<TModel>(TModel instance);
-
-        TModel SingleOrDefault<TModel>(Func<TModel, bool> predicate);
+        TModel SingleOrDefault<TModel>(Func<TModel, bool> predicate) where TModel : class;
     }
 }
