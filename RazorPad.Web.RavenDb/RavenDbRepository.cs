@@ -16,22 +16,28 @@ namespace RazorPad.Web.RavenDb
         }
 
 
-        public TModel Load<TModel>(string id)
+        public void Delete<TModel>(long entityId) where TModel : class
         {
-            return _session.Load<TModel>(id);
+            var key = string.Format("{0}s-{1}", typeof (TModel).Name.ToLower(), entityId);
+            _session.Advanced.DatabaseCommands.Delete(key, null);
         }
 
-        public IQueryable<TModel> Query<TModel>()
+        public void Delete<TModel>(TModel entity) where TModel : class
+        {
+            _session.Delete(entity);
+        }
+
+        public IQueryable<TModel> Query<TModel>() where TModel : class
         {
             return _session.Query<TModel>();
         }
 
-        public TModel SingleOrDefault<TModel>(Func<TModel, bool> predicate)
+        public TModel SingleOrDefault<TModel>(Func<TModel, bool> predicate) where TModel : class
         {
             return _session.Query<TModel>().SingleOrDefault(predicate);
         }
 
-        public void Save<TModel>(TModel instance)
+        public void Save<TModel>(TModel instance) where TModel : class
         {
             _session.Store(instance);
         }
