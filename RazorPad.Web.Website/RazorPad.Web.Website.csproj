@@ -202,6 +202,7 @@
     <Compile Include="Areas\Account\Models\CreateNewUserRequest.cs" />
     <Compile Include="Areas\Account\Models\LoginRequest.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Filters\AdministrationAuthorizationFilter.cs" />
     <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
     <Compile Include="Areas\Account\Models\ForgotPassword.cs" />
@@ -225,6 +226,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Content\css\MainUI\sidebar.less" />
+    <Content Include="App_Data\Roles.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\css\core.css">
       <DependentUpon>razorpad.chirp.config</DependentUpon>
     </Content>

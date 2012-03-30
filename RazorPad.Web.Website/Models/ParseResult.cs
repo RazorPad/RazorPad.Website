@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Razor;
 using System.Web.Razor.Parser.SyntaxTree;
 
-namespace RazorPad.Web.Website.Models.RazorPad
+namespace RazorPad.Web.Website.Models
 {
     [Serializable]
     public class ParseResult

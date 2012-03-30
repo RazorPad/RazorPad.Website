@@ -1,13 +1,10 @@
 ﻿using System.CodeDom.Compiler;
 using System.IO;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using RazorPad.Compilation;
 using RazorPad.Compilation.Hosts;
-using RazorPad.Web.Dynamic;
 using RazorPad.Web.Services;
 using RazorPad.Web.Website.Models;
-using RazorPad.Web.Website.Models.RazorPad;
 
 namespace RazorPad.Web.Website.Controllers
 {
@@ -50,15 +47,11 @@ namespace RazorPad.Web.Website.Controllers
 
             var writer = new StringWriter();
 
-            //JavaScriptSerializer jss = new JavaScriptSerializer();
-            //jss.RegisterConverters(new JavaScriptConverter[] { new DynamicJsonConverter() });
-
-            dynamic inputModel = null;// jss.Deserialize(request.Model, typeof(object));
+            dynamic inputModel = null;
             
             var templ = request.Template;
             var generatorResults = compiler.GenerateCode(templ, writer, new RazorPadMvcEngineHost(request.RazorLanguage));
             result.SetGeneratorResults(generatorResults);
-            // TODO: Extract the right stuff
             result.GeneratedCode = writer.ToString();
 
             if (generatorResults.Success)
@@ -77,8 +70,16 @@ namespace RazorPad.Web.Website.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-            
-        public JsonResult Save([Bind(Prefix = "")]SaveRequest request)
+
+        public ActionResult Clone([Bind(Prefix = "")]SaveRequest request)
+        {
+            request.CloneOf = request.SnippetId;
+            request.SnippetId = null;
+
+            return Save(request);
+        }
+
+        public ActionResult Save([Bind(Prefix = "")]SaveRequest request)
         {
             var snippet = _repository.SingleOrDefault<Snippet>(f => f.Key == request.SnippetId);
 
@@ -88,25 +89,24 @@ namespace RazorPad.Web.Website.Controllers
 
                 snippet = new Snippet
                 {
-                    View = request.Template,
-                    Model = request.Model,
-                    Language = request.Language.ToString(),
+                    CloneOf = request.CloneOf,
                     CreatedBy = username,
+                    Language = request.Language,
+                    Model = request.Model,
+                    Notes = request.Notes,
                     Title = request.Title,
-                    Notes = request.Notes
+                    View = request.Template,
                 };
 
                 _repository.Save(snippet);
             }
             else
             {
-                snippet.View = request.Template;
                 snippet.Model = request.Model;
-                snippet.Title = request.Title;
                 snippet.Notes = request.Notes;
+                snippet.Title = request.Title;
+                snippet.View = request.Template;
             }
-
-            _repository.SaveChanges();
 
             return Json(snippet.Key);
         }

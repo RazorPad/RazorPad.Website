@@ -47,7 +47,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -70,6 +72,7 @@
     <Compile Include="Authentication\OpenId\OpenIdRelyingPartyFacade.cs" />
     <Compile Include="Authentication\OpenId\RedirectResponse.cs" />
     <Compile Include="Authentication\OpenId\SuccessfulResponse.cs" />
+    <Compile Include="Authentication\RoleProvider.cs" />
     <Compile Include="Dynamic\DynamicJsonConverter.cs" />
     <Compile Include="Dynamic\JsonDynamicObject.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />

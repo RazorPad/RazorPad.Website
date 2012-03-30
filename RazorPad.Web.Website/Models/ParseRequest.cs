@@ -1,4 +1,4 @@
-﻿namespace RazorPad.Web.Website.Models.RazorPad
+﻿namespace RazorPad.Web.Website.Models
 {
     public class ParseRequest
     {

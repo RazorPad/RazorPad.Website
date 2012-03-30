@@ -1,7 +1,7 @@
 ﻿using System.Web.Razor;
 using RazorPad.Compilation;
 
-namespace RazorPad.Web.Website.Models.RazorPad
+namespace RazorPad.Web.Website.Models
 {
     public class ExecuteRequest : ParseRequest
     {

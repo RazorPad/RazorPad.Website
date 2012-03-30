@@ -1,17 +1,13 @@
-﻿@using RazorPad.Core
-@model RazorPad.Web.Website.Models.UserSnippetsViewModel
+﻿@model RazorPad.Web.Website.Models.UserSnippetsViewModel
 
 <section class="snippets">
     
     @foreach(var snippet in Model.Snippets)
     {
         <div class="snippet" data-key="@snippet.Key">
-            <span class="title"><a href="#">@snippet.Title</a></span>
-            @if (!string.IsNullOrWhiteSpace(snippet.Notes))
-            {
-                <span class="notes" title="@snippet.Notes">@snippet.Notes.TruncateAtWord(30)</span>
-            }
-            <span class="create-date">@snippet.DateCreated</span>
+            <span class="title"><a href="#">@snippet.DisplayName</a></span>
+            <span class="notes" title="@snippet.Notes">@snippet.Notes</span>
+            <span class="create-date">@snippet.DisplayDate</span>
         </div>
     }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using RazorPad.Web.Authentication;
 using RazorPad.Web.Services;
@@ -13,16 +14,19 @@ namespace RazorPad.Web
 
         public ICollection<Credential> Credentials { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTime DateCreated { get; private set; }
 
+        [Required]
         public string EmailAddress { get; set; }
 
+        [Required]
         public string Username { get; set; }
 
 
         public User()
         {
             Credentials = new Collection<Credential>();
+            DateCreated = DateTime.UtcNow;
         }
 
 

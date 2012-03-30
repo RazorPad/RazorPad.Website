@@ -1,13 +1,17 @@
 ﻿using System.Web.Razor;
 using RazorPad.Compilation;
 
-namespace RazorPad.Web.Website.Models.RazorPad
+namespace RazorPad.Web.Website.Models
 {
     public class SaveRequest : ParseRequest
     {
-        public string Model { get; set; }
+        public string CloneOf { get; set; }
 
         public TemplateLanguage Language { get; set; }
+        
+        public string Model { get; set; }
+
+        public string Notes { get; set; }
 
         public RazorCodeLanguage RazorLanguage
         {
@@ -25,8 +29,8 @@ namespace RazorPad.Web.Website.Models.RazorPad
         }
 
         public string SnippetId { get; set; }
+
         public string Title { get; set; }
-        public string Notes { get; set; }
     }
 
     

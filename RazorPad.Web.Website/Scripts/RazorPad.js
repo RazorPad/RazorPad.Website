@@ -8,25 +8,7 @@
             width: $("#razorPane").width()
         });
         RazorPad.razorEditor.refresh();
-        //resizeModelProps();
     }
-
-//    function resizeModelProps() {
-//        var $modelPane = $('#modelPane');
-//        $modelPane.find('.modelProps')
-//                         .height(
-//                            $modelPane.height()
-//                            - $modelPane.find('.paneheader').outerHeight(true)
-//                            - $modelPane.find('.propinput').outerHeight(true)
-//                            - 10//modelProps top and bottom padding
-//                            );
-//    }
-
-//    function addToModel(txt) {
-//        var parts = txt.replace(/^\s*/, '').replace(/[;\s]*$/, '').split(' ');
-//        var prop = { type: parts[0], name: parts[1], value: parts[parts.length - 1].replace(/^"/, '').replace(/"$/, '') };
-//        $('#modelGrid tbody').prepend(String.format("<tr data-type='{2}'><td><span class='name'>{0}</span></td><td><span class='value'>{1}</span></td></tr>", prop.name, prop.value, prop.type));
-//    }
 
     $('body').layout({
         enableCursorHotkey: false,
@@ -45,10 +27,6 @@
     $('#panes').layout({
         closable: false,
         center__paneSelector: "#razorPane",
-//        east__paneSelector: "#modelPane",
-//        east__maxSize: 600,
-//        east__minSize: 400,
-//        east__size: 400,
         south__paneSelector: "#resultsPane",
         south__maxSize: "70%",
         south__size: Math.floor((screen.height / 2) - 100),
@@ -92,50 +70,20 @@
         }
     });
 
-//    $('#modelHeader').hpTabs().watermark('model');
-
-//    $('#propinput').bind('keypress blur', function (e) {
-//        if (this.value.replace(/^\s*/, '').replace(/[;\s]*$/, '').length === 0) { return; }
-//        if (e.type === 'keypress' && e.keyCode !== 13) { return; }
-//        addToModel(this.value);
-//        this.value = '';
-//        return false;
-//    });
-
-//    $('#propinput').val('string Name "world"');
-
-//    $('#modelGrid > tbody')
-//    .delegate('td', 'click', function () {
-//        $(this).children('span').attr('contentEditable', 'true').focus();
-//    })
-//    .delegate('td span', 'keypress blur', function (e) {
-//        if (e.type === 'keypress' && e.keyCode !== 13) { return; }
-//        $(this).attr('contentEditable', 'false');
-//    })
-//    .delegate('tr', 'hover', function (e) {
-//        if ($(this).is(':last')) {
-//            if (e.type == 'mouseleave') {
-//                $('#modelPropClose').show();
-//            }
-//            else {
-//                var $this = $(this);
-//                $this.find('td:last').append($('#modelPropClose').show());
-//            }
-//        }
-//    });
 });
 
 RazorPad.saveTemplate = function (clone) {
     RazorPad.showLoading();
+
     var data = {
         Template: RazorPad.razorEditor.getValue(),
-        //Model: JSON.stringify(RazorPad.getModel()),
-        SnippetId: (clone ? '' : ($('#snippetId').val() || '')),
-        Title: $('#snippetTitle').val() || '',
-        Notes: $('#snippetNotes').val() || ''
+        SnippetId: $('#snippetId').val(),
+        Title: $('#snippetTitle').val(),
+        Notes: $('#snippetNotes').val()
     };
+
     $.ajax({
-        url: RazorPad.siteRoot + 'RazorPad/Save',
+        url: RazorPad.siteRoot + 'RazorPad/' + (clone ? 'Clone' : 'Save'),
         cache: false,
         data: JSON.stringify(data),
         success: function (response) {
@@ -162,7 +110,6 @@ RazorPad.executeTemplate = function() {
     RazorPad.showLoading();
     var data = {
         Template: RazorPad.razorEditor.getValue()
-        //Model: JSON.stringify(RazorPad.getModel())
     };
 
     $.ajax({
@@ -200,7 +147,6 @@ RazorPad.handleExecuteKey = function(evt) {
 };
 
 RazorPad.handleCloneKey = function (evt) {
-    alert(evt); return;
     RazorPad.saveTemplate(true);
     evt.stopPropagation();
     return false;
@@ -217,35 +163,6 @@ RazorPad.showLoading = function() {
 RazorPad.hideLoading = function() {
     $('#loading').fadeOut('slow');
 };
-
-//RazorPad.getModel = function() {
-//    var model = { }, $this, name, val, type;
-//    $('#modelGrid > tbody > tr').each(function() {
-//        $this = $(this);
-//        name = $this.find('span.name').text();
-//        val = $this.find('span.value').text();
-//        type = $this.data('type') || "string"; //If type is not specified consider it as string
-//        if (name && val) {
-//            model[$.trim(name)] = RazorPad.parsePropValue($.trim(val), $.trim(type));
-//        }
-//    });
-//    return model;
-//};
-
-//RazorPad.parsePropValue = function(val, type) {
-//    if (type && val) {
-//        switch (type.toLowerCase()) {
-//        case "int":
-//            return parseInt(val);
-//        case "float":
-//        case "double":
-//            return parseFloat(val);
-//        case "string":
-//            return val;
-//        }
-//    }
-//    return val;
-//};
 
 RazorPad.onParseError = function(err) {
     RazorPad.updateStatus('fail');

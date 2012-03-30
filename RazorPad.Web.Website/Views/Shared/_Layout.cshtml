@@ -17,20 +17,21 @@
 
         @RenderSection("Actions", false)
 
-
-        <ul id="login-actions" class="actions">
+        <ul id="secondary-actions" class="actions">
             @if (!User.Identity.IsAuthenticated)
             {
-                if (ViewContext.RouteData.Values["action"].ToString().ToLower() != "login")
-                {
-                    <li>
-                        <a href="@Url.Login()">Login / Signup</a>
-                    </li>
-                }
+                <li>
+                    <a href="@Url.Login()">Login / Signup</a>
+                </li>
             }
             else
             {
-                <li>Welcome, <strong>@User.Identity.Name</strong>
+                <li>
+                    <span>Welcome, <strong>@User.Identity.Name</strong></span>
+                    @if(User.IsInRole("Admin"))
+                    {
+                        <span class="admin">{Admin}</span>
+                    }
                     <a href="@Url.Logout()">Logout</a>
                 </li>
             }

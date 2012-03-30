@@ -1,21 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using RazorPad.Core;
 using RazorPad.Web.Dynamic;
 
 namespace RazorPad.Web.Website.Models
 {
     public class SnippetViewModel
     {
-        public string Key { get; set; }
-        
-        public string View { get; set; }
-        
-        public string Model { get; set; }
-        
-        public string Owner { get; set; }
-        
         public string CreatedBy { get; set; }
+        
+        public DateTime? DateCreated { get; set; }
+        
+        public string DisplayName
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(Title) ? Key : Title;
+            }
+        }
+
+        public string DisplayDate
+        {
+            get
+            {
+                if(DateCreated == null)
+                    return string.Empty;
+                
+                return DateCreated.Value.ToString("G");
+            }
+        }
+
+        public bool IsNew
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(Key);
+            }
+        }
+
+        public string Key { get; set; }
+
+        public string Model { get; set; }
 
         public IDictionary<string, object> ModelProperties
         {
@@ -32,28 +58,23 @@ namespace RazorPad.Web.Website.Models
                 return model.GetProperties();
             }
         }
-
-        public bool IsNew
-        {
-            get
-            {
-                return string.IsNullOrWhiteSpace(Key);
-            }
-        }
-
-        public string Title
-        {
-            get
-            {
-                return string.IsNullOrEmpty(_title) ? Key : _title;
-            }
-            set { _title = value; }
-        }
-        private string _title;
-
+        
         public string Notes { get; set; }
+        
+        public string NotesSummary
+        {
+            get
+            {
+                return (Notes ?? string.Empty).TruncateAtWord(30);
+            }
+        }
+        
+        public string Owner { get; set; }
+        
+        public string Title { get; set; }
 
-        public DateTime? DateCreated { get; set; }
+        public string View { get; set; }
+
 
         public SnippetViewModel()
         {
@@ -72,7 +93,6 @@ namespace RazorPad.Web.Website.Models
             DateCreated = snippet.DateCreated;
             Key = snippet.Key;
             Model = snippet.Model;
-            Owner = snippet.Owner;
             Title = snippet.Title;
             View = snippet.View;
             Notes = snippet.Notes;
