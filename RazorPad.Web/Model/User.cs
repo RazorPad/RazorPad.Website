@@ -8,7 +8,7 @@ using RazorPad.Web.Services;
 
 namespace RazorPad.Web
 {
-    public class User
+    public class User : IEntity
     {
         public long Id { get; private set; }
 

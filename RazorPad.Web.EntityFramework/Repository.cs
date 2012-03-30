@@ -1,12 +1,10 @@
 using System;
-using System.Data.Entity.Infrastructure;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using RazorPad.Web.Services;
 
 namespace RazorPad.Web.EntityFramework
 {
-    public class Repository : IRepository
+    public class Repository : Services.Repository
     {
         private readonly RazorPadContext _context;
         private readonly bool _isSharedContext;
@@ -26,7 +24,12 @@ namespace RazorPad.Web.EntityFramework
         }
 
 
-        public void Dispose()
+        public override void Delete<TEntity>(TEntity entity)
+        {
+            _context.Set<TEntity>().Remove(entity);
+        }
+
+        public override void Dispose()
         {
             // If this is a shared (or null) context then
             // we're not responsible for disposing it
@@ -36,41 +39,32 @@ namespace RazorPad.Web.EntityFramework
             _context.Dispose();
         }
 
-        public IQueryable<TModel> Query<TModel>(params string[] includePaths)
-            where TModel : class
+        public override IQueryable<TEntity> Query<TEntity>()
         {
-            DbQuery<TModel> items = _context.Set<TModel>();
-
-            foreach (var path in includePaths ?? Enumerable.Empty<string>())
-            {
-                items = items.Include(path);
-            }
-
+            var items = _context.Set<TEntity>();
             return items;
         }
 
-        public void Save<TModel>(TModel instance)
-            where TModel : class
+        public override void Save<TEntity>(TEntity instance)
         {
             Contract.Requires(instance != null);
 
-            _context.Set<TModel>().Add(instance);
+            _context.Set<TEntity>().Add(instance);
             
             if (_isSharedContext == false)
                 _context.SaveChanges();
         }
 
-        public void SaveChanges()
+        public override void SaveChanges()
         {
             _context.SaveChanges();
         }
 
-        public TModel SingleOrDefault<TModel>(Func<TModel, bool> predicate)
-            where TModel : class
+        public override TEntity SingleOrDefault<TEntity>(Func<TEntity, bool> predicate)
         {
             Contract.Requires(predicate != null);
 
-            return Query<TModel>().SingleOrDefault(predicate);
+            return Query<TEntity>().SingleOrDefault(predicate);
         }
     }
 }

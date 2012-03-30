@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -77,6 +78,7 @@
     <Compile Include="Dynamic\JsonDynamicObject.cs" />
     <Compile Include="Extensions\UrlExtensions.cs" />
     <Compile Include="Model\Authentication\Credential.cs" />
+    <Compile Include="Model\IEntity.cs" />
     <Compile Include="Model\Snippet.cs" />
     <Compile Include="Model\Authentication\FormsAuthCredential.cs" />
     <Compile Include="Model\Authentication\IntegratedAuthenticationCredential.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Services\IRepository.cs" />
     <Compile Include="Services\IUnitOfWork.cs" />
     <Compile Include="Services\MembershipService.cs" />
+    <Compile Include="Services\Repository.cs" />
     <Compile Include="Services\Sandbox.cs" />
     <Compile Include="Services\UniqueKeyGenerator.cs" />
   </ItemGroup>

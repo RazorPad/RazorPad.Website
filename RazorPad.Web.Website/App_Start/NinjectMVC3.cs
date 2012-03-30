@@ -52,7 +52,6 @@ namespace RazorPad.Web.Website.App_Start
             kernel.Scan(scanner => {
                 scanner.FromAssembliesMatching("RazorPad.*");
                 scanner.BindWithDefaultConventions();
-
                 scanner.Excluding<EntityFramework.Repository>();
             });
 

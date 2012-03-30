@@ -5,7 +5,7 @@ using RazorPad.Web.Services;
 
 namespace RazorPad.Web.RavenDb
 {
-    public class RavenDbRepository : IRepository
+    public class RavenDbRepository : Repository
     {
         private readonly IDocumentSession _session;
 
@@ -16,30 +16,32 @@ namespace RazorPad.Web.RavenDb
         }
 
 
-        public IQueryable<TModel> Query<TModel>(params string[] includePaths)
-            where TModel : class
+        public override void Delete<TEntity>(TEntity entity)
+        {
+            _session.Delete(entity);
+        }
+
+        public override IQueryable<TModel> Query<TModel>()
         {
             return _session.Query<TModel>();
         }
 
-        public TModel SingleOrDefault<TModel>(Func<TModel, bool> predicate)
-            where TModel : class
+        public override TModel SingleOrDefault<TModel>(Func<TModel, bool> predicate)
         {
             return _session.Query<TModel>().SingleOrDefault(predicate);
         }
 
-        public void Save<TModel>(TModel instance)
-            where TModel : class
+        public override void Save<TModel>(TModel instance)
         {
             _session.Store(instance);
         }
 
-        public void SaveChanges()
+        public override void SaveChanges()
         {
             _session.SaveChanges();
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             _session.Dispose();
         }
