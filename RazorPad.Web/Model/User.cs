@@ -19,8 +19,11 @@ namespace RazorPad.Web
         [Required]
         public string EmailAddress { get; set; }
 
+        public DateTime? LastSeen { get; set; }
+
         [Required]
         public string Username { get; set; }
+
 
 
         public User()
