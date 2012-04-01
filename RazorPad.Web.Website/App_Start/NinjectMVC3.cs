@@ -1,7 +1,4 @@
 using System.Web.Mvc;
-using Ninject.Extensions.Conventions;
-using RazorPad.Web.Authentication.Facebook;
-using RazorPad.Web.Services;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(RazorPad.Web.Website.App_Start.NinjectMVC3), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(RazorPad.Web.Website.App_Start.NinjectMVC3), "Stop")]
@@ -11,6 +8,7 @@ namespace RazorPad.Web.Website.App_Start
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Mvc;
+    using Ninject.Extensions.Conventions;
 
     public static class NinjectMVC3 
     {
@@ -54,31 +52,20 @@ namespace RazorPad.Web.Website.App_Start
             kernel.Scan(scanner => {
                 scanner.FromAssembliesMatching("RazorPad.*");
                 scanner.BindWithDefaultConventions();
+                scanner.Excluding<EntityFramework.Repository>();
             });
 
-            kernel.Bind<IRepository>()
-                .To<RavenDb.RavenDbRepository>()
+            kernel.Bind<Services.IRepository>()
+                .To<EntityFramework.Repository>()
+                .InRequestScope()
+                .WithConstructorArgument("isSharedContext", false);
+
+            kernel.Bind<EntityFramework.RazorPadContext>()
+                .ToSelf()
                 .InRequestScope();
 
-            kernel.Bind<Raven.Client.IDocumentSession>()
-                .ToMethod(ctx => ctx.Kernel.Get<RavenDb.DocumentSessionFactory>().Create())
-                .InRequestScope()
-                .OnDeactivation(session => {
-                    session.SaveChanges();
-                    session.Dispose();
-                });
 
-            kernel.Bind<Raven.Client.IDocumentStore>()
-#if(AppHarbor)
-                .To<Raven.Client.Document.DocumentStore>()
-#else
-                .To<Raven.Client.Embedded.EmbeddableDocumentStore>()
-#endif
-                .InSingletonScope()
-                .WithPropertyValue("ConnectionStringName", "RavenDB")
-                .OnActivation(RavenDb.DocumentStoreFactory.Initialize);
-
-            kernel.Bind<FacebookService>().ToSelf()
+            kernel.Bind<Authentication.Facebook.FacebookService>().ToSelf()
                 .InSingletonScope()
                 .WithPropertyValue("LocalEndpoint", x => x.Kernel.Get<UrlHelper>().ExternalAction("Authorize", "Facebook"));
         }        

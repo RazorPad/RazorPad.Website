@@ -29,7 +29,7 @@ namespace RazorPad.Web
 
                 return _key;
             }
-            private set { _key = value; }
+            protected set { _key = value; }
         }
         private string _key;
 
