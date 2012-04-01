@@ -1,6 +1,8 @@
-﻿using System.CodeDom.Compiler;
+﻿using System;
+using System.CodeDom.Compiler;
 using System.IO;
 using System.Web.Mvc;
+using System.Web.Razor;
 using RazorPad.Compilation;
 using RazorPad.Compilation.Hosts;
 using RazorPad.Web.Services;
@@ -11,6 +13,7 @@ namespace RazorPad.Web.Website.Controllers
     [ValidateInput(false)]
     public class RazorPadController : Controller
     {
+        private const string AnonymousUsername = "Anonymous";
         private readonly IRepository _repository;
 
         public RazorPadController(IRepository repository)
@@ -22,39 +25,43 @@ namespace RazorPad.Web.Website.Controllers
         public ActionResult Index(string id)
         {
             var snippet = _repository.FindSnippet(id);
-            
-            return View("MainUI", new SnippetViewModel(snippet));
-        }
 
+            return MainUI(snippet);
+        }
 
         public ActionResult Parse([Bind(Prefix = "")]ParseRequest request)
         {
-            ParseResult result = new ParseResult();
-            var writer = new StringWriter();
-            var generatorResults = new TemplateCompiler().GenerateCode(request.Template, writer);
-            result.SetGeneratorResults(generatorResults);
-            result.GeneratedCode = writer.ToString();
+            var result = new ParseResult();
+
+            using (var writer = new StringWriter())
+            {
+                var generatorResults = new TemplateCompiler().GenerateCode(request.Template, writer);
+                result.SetGeneratorResults(generatorResults);
+                result.GeneratedCode = writer.ToString();
+            }
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Execute([Bind(Prefix = "")]ExecuteRequest request)
         {
-            ExecuteResult result = new ExecuteResult();
+            var result = new ExecuteResult();
 
+            var template = request.Template;
             var templateParams = TemplateCompilationParameters.CreateFromLanguage(request.Language);
             var compiler = new TemplateCompiler(templateParams);
 
-            var writer = new StringWriter();
-
             dynamic inputModel = null;
-            
-            var templ = request.Template;
-            var generatorResults = compiler.GenerateCode(templ, writer, new RazorPadMvcEngineHost(request.RazorLanguage));
-            result.SetGeneratorResults(generatorResults);
-            result.GeneratedCode = writer.ToString();
 
-            if (generatorResults.Success)
+            GeneratorResults generatorResults;
+            using (var writer = new StringWriter())
+            {
+                generatorResults = compiler.GenerateCode(template, writer, new RazorPadMvcEngineHost(request.RazorLanguage));
+                result.SetGeneratorResults(generatorResults);
+                result.GeneratedCode = writer.ToString();
+            }
+
+            if (generatorResults != null && generatorResults.Success)
             {
                 CompilerResults compilerResults = compiler.Compile(generatorResults);
 
@@ -62,7 +69,7 @@ namespace RazorPad.Web.Website.Controllers
 
                 if (!compilerResults.Errors.HasErrors)
                 {
-                    result.TemplateOutput = Sandbox.Execute(request.Language, templ, inputModel);
+                    result.TemplateOutput = Sandbox.Execute(request.Language, template, inputModel);
                 }
 
                 result.Success = true;
@@ -73,30 +80,62 @@ namespace RazorPad.Web.Website.Controllers
 
         public ActionResult Clone([Bind(Prefix = "")]SaveRequest request)
         {
-            request.CloneOf = request.SnippetId;
-            request.SnippetId = null;
-
-            return Save(request);
+            return Save(request, clone: true);
         }
 
-        public ActionResult Save([Bind(Prefix = "")]SaveRequest request)
+        public ActionResult Save([Bind(Prefix = "")]SaveRequest request, bool clone = false)
         {
-            var snippet = _repository.SingleOrDefault<Snippet>(f => f.Key == request.SnippetId);
+            Snippet snippet = null;
 
-            if (snippet == null)
+            var snippetExists = !string.IsNullOrWhiteSpace(request.SnippetId);
+
+            if (snippetExists)
             {
-                var username = User.Identity.IsAuthenticated ? User.Identity.Name : "Anonymous";
+                snippet = _repository.FindSnippet(request.SnippetId);
+                snippetExists = (snippet != null);
+            }
+
+            var username = User.Identity.IsAuthenticated ? User.Identity.Name : AnonymousUsername;
+
+            // See if we are cloning or not
+            if (snippetExists)
+            {
+                bool userOwnsSnippet;
+
+                if (User.Identity.IsAuthenticated)
+                {
+                    userOwnsSnippet = snippet.CreatedBy.Equals(username, StringComparison.OrdinalIgnoreCase);
+                }
+                else
+                {
+                    // Anonymous users can't own each other's snippets 
+                    // (and we haven't implemented a way to track our own anonymous snippets)
+                    // TODO: Update this when Anonymous users track their own snippets
+                    userOwnsSnippet = false;
+                }
+
+                clone = clone || !userOwnsSnippet;
+            }
+            
+            var shouldCreateNewSnippet = !snippetExists || clone;
+
+            if (shouldCreateNewSnippet)
+            {
+                if(clone)
+                {
+                    request.CloneOf = request.SnippetId;
+                }
 
                 snippet = new Snippet
-                {
-                    CloneOf = request.CloneOf,
-                    CreatedBy = username,
-                    Language = request.Language,
-                    Model = request.Model,
-                    Notes = request.Notes,
-                    Title = request.Title,
-                    View = request.Template,
-                };
+                              {
+                                  CloneOf = request.CloneOf,
+                                  CreatedBy = username,
+                                  Language = request.Language,
+                                  Model = request.Model,
+                                  Notes = request.Notes,
+                                  Title = request.Title,
+                                  View = request.Template,
+                              };
 
                 _repository.Save(snippet);
             }
@@ -108,7 +147,17 @@ namespace RazorPad.Web.Website.Controllers
                 snippet.View = request.Template;
             }
 
-            return Json(snippet.Key);
+            return MainUI(snippet);
+        }
+
+        protected ActionResult MainUI(Snippet snippet)
+        {
+            var viewModel = new SnippetViewModel(snippet);
+
+            if (Request.IsAjaxRequest())
+                return Json(viewModel);
+
+            return View("MainUI", viewModel);
         }
 
         protected override void OnException(ExceptionContext filterContext)

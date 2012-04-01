@@ -78,9 +78,11 @@
 RazorPad.saveTemplate = function (clone) {
     RazorPad.showLoading();
 
+    var snippetId = $('#snippetId').val();
+
     var data = {
         Template: RazorPad.razorEditor.getValue(),
-        SnippetId: $('#snippetId').val(),
+        SnippetId: snippetId,
         Title: $('#snippetTitle').val(),
         Notes: $('#snippetNotes').val()
     };
@@ -90,12 +92,13 @@ RazorPad.saveTemplate = function (clone) {
         cache: false,
         data: JSON.stringify(data),
         success: function (response) {
-            if (!response.Messages) {
-                if (clone || !$('#snippetId').val()) {
-                    location.href = RazorPad.siteRoot + response;
+            if (response && !response.Messages) {
+                var newSnippetId = response.Key;
+                if (snippetId === newSnippetId) {
+                    RazorPad.hideLoading();
                 }
                 else {
-                    RazorPad.hideLoading();
+                    location.href = RazorPad.siteRoot + newSnippetId;
                 }
             }
             else {
