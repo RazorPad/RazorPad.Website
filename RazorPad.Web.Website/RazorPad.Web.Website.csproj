@@ -162,13 +162,13 @@
     <Content Include="App_Data\Roles.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\css\core.css">
+    <Content Include="Content\css\core.min.css">
       <DependentUpon>razorpad.chirp.config</DependentUpon>
     </Content>
     <Content Include="Content\css\core\jquery-ui.css" />
     <Content Include="Content\css\core\form.css" />
     <None Include="Content\css\core\header.less" />
-    <Content Include="Content\css\main-ui.css">
+    <Content Include="Content\css\main-ui.min.css">
       <DependentUpon>razorpad.chirp.config</DependentUpon>
     </Content>
     <Content Include="Content\css\MainUI\results.css" />
