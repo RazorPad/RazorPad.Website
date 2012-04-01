@@ -35,8 +35,7 @@
         onresize: resizeRazorEditor
     });
 
-
-    RazorPad.razorEditor = CodeMirror.fromTextArea(document.getElementById("razorEditor"), {
+    var editorConfig = {
         mode: "text/html",
         lineNumbers: true,
         tabMode: "indent",
@@ -45,10 +44,14 @@
         lineWrapping: true,
         extraKeys: {
             "Ctrl-S": function () { RazorPad.saveTemplate(); },
-            "Ctrl-E": function () { RazorPad.executeTemplate(); },
-            "Ctrl-C": function () { RazorPad.saveTemplate(true); }
+            "Ctrl-E": function () { RazorPad.executeTemplate(); }
         }
-    });
+    };
+    if($('#snippetId').val()){
+        editorConfig.extraKeys["Ctrl-L"] = function () { RazorPad.saveTemplate(true); };
+    }
+
+    RazorPad.razorEditor = CodeMirror.fromTextArea(document.getElementById("razorEditor"), editorConfig);
 
     $("#mainContainer").css('visibility', 'visible');
 
@@ -245,8 +248,10 @@ $(function () {
     //Bind keyboard shorts
     $(document)
     .bind('keydown', 'ctrl+s', RazorPad.handleSaveKey)
-    .bind('keydown', 'ctrl+e', RazorPad.handleExecuteKey)
-    .bind('keydown', 'ctrl+c', RazorPad.handleCloneKey);
+    .bind('keydown', 'ctrl+e', RazorPad.handleExecuteKey);
+    if ($('#snippetId').val()) {
+        document.bind('keydown', 'ctrl+l', RazorPad.handleCloneKey);
+    }
 
     RazorPad.razorEditor.focus();
 
