@@ -1,0 +1,78 @@
+﻿@model IEnumerable<RazorPad.Web.Website.Models.SnippetViewModel>
+
+@{
+    ViewBag.Title = "Snippets";
+}
+
+<h2>Snippets</h2>
+
+<table>
+    <tr>
+        <th>
+            CreatedBy
+        </th>
+        <th>
+            DateCreated
+        </th>
+        <th>
+            DisplayName
+        </th>
+        <th>
+            DisplayDate
+        </th>
+        <th>
+            IsNew
+        </th>
+        <th>
+            Key
+        </th>
+        <th>
+            Model
+        </th>
+        <th>
+            Notes
+        </th>
+        <th>
+            NotesSummary
+        </th>
+        <th>
+            Owner
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            View
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr data-key="@item.Key">
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NotesSummary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {  id=item.Key  }) |
+            @Html.ActionLink("Details", "Details", new {  id=item.Key  }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=item.Key  })
+        </td>
+    </tr>
+}
+
+</table>
