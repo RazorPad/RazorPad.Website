@@ -3,9 +3,11 @@ bin
 obj
 **.user
 **.suo
+**.cache
 TestResults
 _UpgradeReport_Files
 UpgradeLog.XML
 
 RazorPad.Web.Website/App_Data/Database
 packages
+**.ncrunch*
