@@ -15,8 +15,8 @@
 
 .tabBar {
     background-color: #BCC7D8;
-    height: 20px;
-    padding: 2px 0 2px 0px;
+    padding: 2px 0px 0px 0px;
+    border-bottom: 2px solid #465A7D;
 }
 
 .tabContainer {
@@ -25,11 +25,6 @@
 
 .tabPanels {
     width: 100%;
-    position: absolute;
-    top: 24px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
 }
 
 .tabPanels > div {
@@ -51,22 +46,26 @@
     text-decoration: none;
     color: #000;
     outline: none;
-}
-
-.tabBar a.selected {
-    background-color: #FFEFBB;
-    border: 1px solid #E5C365;
-    position: relative;
+    padding: 3px 10px;
+    font-weight: bold;
+    margin-right: 5px;
 }
 
 .tabBar a:hover {
     background-color: #FFFCF4;
 }
 
+.tabBar a.selected, .tabBar a.selected:hover {
+    background-color: #465A7D;
+    font-weight:bold;
+    color: #ffffff;
+}
+
 .tabBar span.separator {
     margin: 0 2px;
     color: #8591A2;
     vertical-align: inherit;
+    display: none;
 }
 
 #resultsPane {

@@ -62,6 +62,7 @@ iframe {
     color: White;
     height: 16px;
     padding: 3px 7px;
+    font-weight: bold;
 }
 
 .paneheader .tabBar {
