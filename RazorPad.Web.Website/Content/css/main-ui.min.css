@@ -149,7 +149,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 #template-output-container{overflow-y:auto}
 .tabBar{background-color:#BCC7D8;padding:2px 0 0 0;border-bottom:2px solid #465A7D}
 .tabContainer{position:relative}
-.tabPanels{width:100%}
+.tabPanels{width:100%;height:100%}
 .tabPanels>div{display:none}
 .tabPanels div{height:100%;width:100%}
 .tabBar a,span{padding:1px;vertical-align:bottom;display:inline-block}
