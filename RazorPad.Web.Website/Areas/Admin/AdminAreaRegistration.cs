@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Security.Principal;
+using System.Web.Mvc;
 using RazorPad.Web.Website.Areas.Admin.Filters;
 
 namespace RazorPad.Web.Website.Areas.Admin
@@ -19,7 +21,7 @@ namespace RazorPad.Web.Website.Areas.Admin
                 "Admin/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
-
+            
             GlobalFilters.Filters.Add(new AdministrationAuthorizationFilter());
         }
     }

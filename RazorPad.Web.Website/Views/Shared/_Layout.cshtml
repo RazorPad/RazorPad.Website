@@ -30,7 +30,7 @@
                     <span>Welcome, <strong>@User.Identity.Name</strong></span>
                     @if(User.IsInRole("Admin"))
                     {
-                        <span class="admin">{Admin}</span>
+                        @Html.ActionLink("Admin","Index", "Home", new { area = "Admin" }, null)
                     }
                     <a href="@Url.Logout()">Logout</a>
                 </li>

@@ -6,12 +6,12 @@ namespace RazorPad.Web.Website.Areas.Admin.Filters
     {
         public AdministrationAuthorizationFilter()
         {
-            Roles = "Administrator";
+            Roles = "Admin";
         }
 
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if(AdminAreaRegistration.Name == (string)filterContext.RouteData.Values["area"])
+            if(AdminAreaRegistration.Name == (string)filterContext.RouteData.DataTokens["area"])
                 base.OnAuthorization(filterContext);
         }
     }

@@ -10,6 +10,7 @@ namespace RazorPad.Web.EntityFramework
         public RazorPadContext()
             : base("RazorPad")
         {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<RazorPadContext>());
         }
     }
 }

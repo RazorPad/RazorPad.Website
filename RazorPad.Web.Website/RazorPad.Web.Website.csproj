@@ -135,6 +135,7 @@
     <Compile Include="Areas\Account\Models\CreateNewUserRequest.cs" />
     <Compile Include="Areas\Account\Models\LoginRequest.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Filters\AdministrationAuthorizationFilter.cs" />
     <Compile Include="Areas\Admin\Controllers\UserManagementController.cs" />
     <Compile Include="Controllers\RazorPadController.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <None Include="Content\css\razorpad.chirp.config">
       <SubType>Designer</SubType>
     </None>
