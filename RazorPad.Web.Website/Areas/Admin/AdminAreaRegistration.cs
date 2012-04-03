@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Security.Principal;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using RazorPad.Web.Website.Areas.Admin.Filters;
 
 namespace RazorPad.Web.Website.Areas.Admin
@@ -19,7 +17,8 @@ namespace RazorPad.Web.Website.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "RazorPad.Web.Website.Areas.Admin.Controllers" }
             );
             
             GlobalFilters.Filters.Add(new AdministrationAuthorizationFilter());

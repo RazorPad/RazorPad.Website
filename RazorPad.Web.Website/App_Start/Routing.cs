@@ -59,7 +59,8 @@ namespace RazorPad.Web.Website.App_Start
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
-                new { controller = "RazorPad", action = "Index", id = UrlParameter.Optional }
+                new { controller = "RazorPad", action = "Index", id = UrlParameter.Optional },
+                new[] { "RazorPad.Web.Website.Controllers" }
             );
         }
     }

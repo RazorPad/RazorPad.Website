@@ -4,11 +4,11 @@ using RazorPad.Web.Services;
 namespace RazorPad.Web.Website.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class UserManagementController : Controller
+    public class UsersController : Controller
     {
         private readonly IRepository _repository;
 
-        public UserManagementController(IRepository repository)
+        public UsersController(IRepository repository)
         {
             _repository = repository;
         }

@@ -4,49 +4,33 @@
     ViewBag.Title = "Snippets";
 }
 
-@* TODO: Move this to CSS! *@
-<style>
-    .snippets {
-        height: initial !important;
-        min-width: 900px;
-        max-width: 900px;
-    }
-        .snippets th {
-            min-width: 10em;
-            border-bottom: 1px groove;
-            font-weight: bold;
-            font-size: 120%;
-            text-align: left;
-        }
-</style>
-
-<h2>Snippets</h2>
+<h2>@Html.ActionLink((string)ViewBag.Title, "Snippets")</h2>
 
 <div class="pager">
     @if(ViewBag.Page > 0) {
-        @Html.ActionLink("<< Prev", "Snippets", new { page = ViewBag.Page-1, count = ViewBag.Count })
+        @Html.ActionLink("<< Prev", "Snippets", new { page = ViewBag.Page-1, count = ViewBag.Count, username = ViewBag.Username })
     }
     else {
         @:<< Prev
     }
-    @Html.ActionLink("Next >>", "Snippets", new { page = ViewBag.Page+1, count = ViewBag.Count })
+    @Html.ActionLink("Next >>", "Snippets", new { page = ViewBag.Page+1, count = ViewBag.Count, username = ViewBag.Username })
 </div>
 <table class="snippets">
     <tr>
         <th>
-            Username
+            ID
         </th>
         <th>
-            DisplayName
+            User
         </th>
         <th>
-            Create Date
+            Name
+        </th>
+        <th>
+            Created
         </th>
         <th>
             Notes
-        </th>
-        <th>
-            Title
         </th>
         <th>
             @* Commands *@
@@ -56,7 +40,10 @@
     @foreach (var item in Model) {
         <tr data-key="@item.Key">
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
+                @Html.RouteLink(item.Key, "Snippet", new { id=item.Key },  new { target = "_blank" })
+            </td>
+            <td>
+                @Html.ActionLink(item.CreatedBy, "Snippets", new { username = item.CreatedBy })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DisplayName)
@@ -66,9 +53,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NotesSummary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new {  id=item.Key  }) |
