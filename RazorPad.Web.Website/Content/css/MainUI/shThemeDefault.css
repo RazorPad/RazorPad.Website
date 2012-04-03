@@ -17,6 +17,12 @@
 .syntaxhighlighter {
   background-color: white !important;
 }
+.syntaxhighlighter .gutter .line.alt1 {
+  background-color: #F7F7F7 !important;
+}
+.syntaxhighlighter .gutter .line.alt2 {
+  background-color: #F7F7F7 !important;
+}
 .syntaxhighlighter .line.alt1 {
   background-color: white !important;
 }

@@ -57,7 +57,7 @@
   margin: .1em 0 .1em 0 !important;
 
   position: relative !important;
-  overflow: auto !important;
+  /*overflow: auto !important;*/
   font-size: 1em !important;
 }
 .syntaxhighlighter.source {
@@ -79,9 +79,6 @@
   text-align: left !important;
   padding: .5em 0 0.5em 1em !important;
 }
-.syntaxhighlighter table td.code {
-  width: 100% !important;
-}
 .syntaxhighlighter table td.code .container {
   position: relative !important;
 }
@@ -98,9 +95,13 @@
   overflow: hidden !important;
   white-space: pre !important;
 }
+.syntaxhighlighter table td.gutter {
+    width: 40px !important;
+}
+
 .syntaxhighlighter table td.gutter .line {
   text-align: right !important;
-  padding: 0 0.5em 0 1em !important;
+  padding: 0 0.5em 0 0.7em !important;
 }
 .syntaxhighlighter table td.code .line {
   padding: 0 1em !important;

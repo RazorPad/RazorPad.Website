@@ -2,12 +2,17 @@
 
     RazorPad.razorEditor = null;
 
-    function resizeRazorEditor() {
+    function onLayoutResize() {
         $(RazorPad.razorEditor.getScrollerElement()).css({
             height: $("#razorPane").height() - $("#viewHeader").height(),
             width: $("#razorPane").width()
         });
         RazorPad.razorEditor.refresh();
+
+        var $resultsPane = $('#resultsPane');
+        var $tabContainer = $resultsPane.children('.tabContainer');
+        $tabContainer.children('.tabPanels').height($resultsPane.outerHeight(true)
+                                                    - $tabContainer.children('.tabBar').outerHeight(true));
     }
 
     $('body').layout({
@@ -22,6 +27,7 @@
         center__closable: false,
         resizeWhileDragging: true,
         resizable: false,
+        onresize: onLayoutResize,
         useStateCookie: true
     });
 
@@ -35,7 +41,7 @@
         south__size: Math.floor((screen.height / 2) - 100),
         south__minSize: 200,
         resizeWhileDragging: true,
-        onresize: resizeRazorEditor,
+        onresize: onLayoutResize,
         useStateCookie: true
     });
 
@@ -51,7 +57,7 @@
             "Ctrl-E": function () { RazorPad.executeTemplate(); }
         }
     };
-    if($('#snippetId').val()){
+    if ($('#snippetId').val()) {
         editorConfig.extraKeys["Ctrl-L"] = function () { RazorPad.saveTemplate(true); };
     }
 
@@ -59,7 +65,7 @@
 
     $("#mainContainer").css('visibility', 'visible');
 
-    $(window).resize(resizeRazorEditor).resize();
+    $(window).resize(onLayoutResize).resize();
 
     if ($("#snippetId").val()) {
         //Execute the template (adding timeout to load the layout before ajax calls)
@@ -257,7 +263,7 @@ $(function () {
     .bind('keydown', 'ctrl+s', RazorPad.handleSaveKey)
     .bind('keydown', 'ctrl+e', RazorPad.handleExecuteKey);
     if ($('#snippetId').val()) {
-        document.bind('keydown', 'ctrl+l', RazorPad.handleCloneKey);
+        $(document).bind('keydown', 'ctrl+l', RazorPad.handleCloneKey);
     }
 
     RazorPad.razorEditor.focus();

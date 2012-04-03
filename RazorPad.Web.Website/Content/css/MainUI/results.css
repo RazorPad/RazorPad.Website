@@ -23,18 +23,15 @@
     position: relative;
 }
 
-.tabPanels {
+.tabPanels
+{
     width: 100%;
-    height: 100%;
-    
+    overflow: auto;
 }
 
-.tabPanels > div {
+.tabPanels > div 
+{
     display: none;
-}
-
-.tabPanels div {
-    height: 100%;
     width: 100%;
 }
 
@@ -73,4 +70,8 @@
 #resultsPane {
     border-top: 1px solid #aaa;
     background: #fff;
+}
+
+table tbody > tr > td:first-child {
+    white-space: nowrap;
 }
