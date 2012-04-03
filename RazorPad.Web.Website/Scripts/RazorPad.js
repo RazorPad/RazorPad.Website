@@ -12,27 +12,31 @@
 
     $('body').layout({
         enableCursorHotkey: false,
+        name: 'bodyLayout',
         north__paneSelector: "#header",
-        north__resizable: false,
+        north__closable: false,
         west__paneSelector: "#sidebar",
-        west__size: 280,
-        west__resizable: false,
+        west__size: 260,
         west__closable: true,
-        west__maxSize: 280,
         center__paneSelector: "#panes",
+        center__closable: false,
         resizeWhileDragging: true,
-        closable: false
+        resizable: false,
+        useStateCookie: true
     });
 
     $('#panes').layout({
+        enableCursorHotkey: false,
         closable: false,
+        name: 'panesLayout',
         center__paneSelector: "#razorPane",
         south__paneSelector: "#resultsPane",
         south__maxSize: "70%",
         south__size: Math.floor((screen.height / 2) - 100),
         south__minSize: 200,
         resizeWhileDragging: true,
-        onresize: resizeRazorEditor
+        onresize: resizeRazorEditor,
+        useStateCookie: true
     });
 
     var editorConfig = {
