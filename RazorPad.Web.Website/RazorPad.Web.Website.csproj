@@ -143,6 +143,7 @@
     <Compile Include="Areas\Account\Models\ForgotPassword.cs" />
     <Compile Include="Areas\Account\Models\PasswordRequest.cs" />
     <Compile Include="Areas\Account\Models\ResetPasswordRequest.cs" />
+    <Compile Include="Controllers\SnippetsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Extensions\AuthenticationExtensions.cs" />
     <Compile Include="Models\SnippetViewModel.cs" />

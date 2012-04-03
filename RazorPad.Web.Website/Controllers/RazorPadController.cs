@@ -1,7 +1,5 @@
-﻿using System;
-using System.CodeDom.Compiler;
+﻿using System.CodeDom.Compiler;
 using System.IO;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor;
 using RazorPad.Compilation;
@@ -14,11 +12,6 @@ namespace RazorPad.Web.Website.Controllers
     [ValidateInput(false)]
     public class RazorPadController : Controller
     {
-        internal static Func<HttpContextBase, string> GetCurrentUserId =
-            context => (context.User.Identity.IsAuthenticated) 
-                            ? context.User.Identity.Name 
-                            : context.Request.UserHostAddress;
-
         private readonly IRepository _repository;
 
         public RazorPadController(IRepository repository)
@@ -31,7 +24,12 @@ namespace RazorPad.Web.Website.Controllers
         {
             var snippet = _repository.FindSnippet(id);
 
-            return MainUI(snippet);
+            var viewModel = new SnippetViewModel(snippet);
+
+            if (Request.IsAjaxRequest())
+                return Json(viewModel);
+
+            return View("MainUI", viewModel);
         }
 
         public ActionResult Parse([Bind(Prefix = "")]ParseRequest request)
@@ -81,75 +79,6 @@ namespace RazorPad.Web.Website.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Clone([Bind(Prefix = "")]SaveRequest request)
-        {
-            return Save(request, clone: true);
-        }
-
-        public ActionResult Save([Bind(Prefix = "")]SaveRequest request, bool clone = false)
-        {
-            var createdBy = GetCurrentUserId(HttpContext);
-
-            Snippet snippet = null;
-
-            var snippetExists = !string.IsNullOrWhiteSpace(request.SnippetId);
-
-            if (snippetExists)
-            {
-                snippet = _repository.FindSnippet(request.SnippetId);
-                snippetExists = (snippet != null);
-            }
-
-            // See if we are cloning or not
-            if (snippetExists)
-            {
-                var userOwnsSnippet = snippet.CreatedBy.Equals(createdBy, StringComparison.OrdinalIgnoreCase);
-                clone = clone || !userOwnsSnippet;
-            }
-
-            var shouldCreateNewSnippet = !snippetExists || clone;
-
-            if (shouldCreateNewSnippet)
-            {
-                if(clone)
-                {
-                    request.CloneOf = request.SnippetId;
-                }
-
-                snippet = new Snippet
-                              {
-                                  CloneOf = request.CloneOf,
-                                  CreatedBy = createdBy,
-                                  Language = request.Language,
-                                  Model = request.Model,
-                                  Notes = request.Notes,
-                                  Title = request.Title,
-                                  View = request.Template,
-                              };
-
-                _repository.Save(snippet);
-            }
-            else
-            {
-                snippet.Model = request.Model;
-                snippet.Notes = request.Notes;
-                snippet.Title = request.Title;
-                snippet.View = request.Template;
-            }
-            
-            return MainUI(snippet);
-        }
-
-        protected ActionResult MainUI(Snippet snippet)
-        {
-            var viewModel = new SnippetViewModel(snippet);
-
-            if (Request.IsAjaxRequest())
-                return Json(viewModel);
-
-            return View("MainUI", viewModel);
         }
 
         protected override void OnException(ExceptionContext filterContext)

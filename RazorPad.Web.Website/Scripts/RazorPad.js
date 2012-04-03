@@ -98,7 +98,7 @@ RazorPad.saveTemplate = function (clone) {
     };
 
     $.ajax({
-        url: RazorPad.siteRoot + 'RazorPad/' + (clone ? 'Clone' : 'Save'),
+        url: RazorPad.siteRoot + 'Snippets/' + (clone ? 'Clone' : 'Save'),
         cache: false,
         data: JSON.stringify(data),
         success: function (response) {
