@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom.Compiler;
 using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Razor;
 using RazorPad.Compilation;
@@ -13,7 +14,11 @@ namespace RazorPad.Web.Website.Controllers
     [ValidateInput(false)]
     public class RazorPadController : Controller
     {
-        private const string AnonymousUsername = "Anonymous";
+        internal static Func<HttpContextBase, string> GetCurrentUserId =
+            context => (context.User.Identity.IsAuthenticated) 
+                            ? context.User.Identity.Name 
+                            : context.Request.UserHostAddress;
+
         private readonly IRepository _repository;
 
         public RazorPadController(IRepository repository)
@@ -85,6 +90,8 @@ namespace RazorPad.Web.Website.Controllers
 
         public ActionResult Save([Bind(Prefix = "")]SaveRequest request, bool clone = false)
         {
+            var createdBy = GetCurrentUserId(HttpContext);
+
             Snippet snippet = null;
 
             var snippetExists = !string.IsNullOrWhiteSpace(request.SnippetId);
@@ -95,28 +102,13 @@ namespace RazorPad.Web.Website.Controllers
                 snippetExists = (snippet != null);
             }
 
-            var username = User.Identity.IsAuthenticated ? User.Identity.Name : AnonymousUsername;
-
             // See if we are cloning or not
             if (snippetExists)
             {
-                bool userOwnsSnippet;
-
-                if (User.Identity.IsAuthenticated)
-                {
-                    userOwnsSnippet = snippet.CreatedBy.Equals(username, StringComparison.OrdinalIgnoreCase);
-                }
-                else
-                {
-                    // Anonymous users can't own each other's snippets 
-                    // (and we haven't implemented a way to track our own anonymous snippets)
-                    // TODO: Update this when Anonymous users track their own snippets
-                    userOwnsSnippet = false;
-                }
-
+                var userOwnsSnippet = snippet.CreatedBy.Equals(createdBy, StringComparison.OrdinalIgnoreCase);
                 clone = clone || !userOwnsSnippet;
             }
-            
+
             var shouldCreateNewSnippet = !snippetExists || clone;
 
             if (shouldCreateNewSnippet)
@@ -129,7 +121,7 @@ namespace RazorPad.Web.Website.Controllers
                 snippet = new Snippet
                               {
                                   CloneOf = request.CloneOf,
-                                  CreatedBy = username,
+                                  CreatedBy = createdBy,
                                   Language = request.Language,
                                   Model = request.Model,
                                   Notes = request.Notes,
@@ -146,7 +138,7 @@ namespace RazorPad.Web.Website.Controllers
                 snippet.Title = request.Title;
                 snippet.View = request.Template;
             }
-
+            
             return MainUI(snippet);
         }
 
