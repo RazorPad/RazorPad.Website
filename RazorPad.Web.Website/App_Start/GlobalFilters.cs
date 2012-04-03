@@ -10,7 +10,7 @@ namespace RazorPad.Web.Website.App_Start
         {
             var filters = System.Web.Mvc.GlobalFilters.Filters;
 
-            filters.Add(new HandleErrorAttribute());
+            //filters.Add(new HandleErrorAttribute());
         }
     }
 }
