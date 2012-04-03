@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Web.Script.Serialization;
 
 namespace RazorPad.Web.Authentication
 {
@@ -20,13 +21,10 @@ namespace RazorPad.Web.Authentication
         }
     }
 
-    [DataContract(Namespace = "")]
     public class Role
     {
-        [DataMember]
         public string Name { get; set; }
 
-        [DataMember]
         public List<string> Users { get; set; }
 
         public Role()
@@ -55,26 +53,17 @@ namespace RazorPad.Web.Authentication
         {
             get
             {
-                if(_roles != null)
-                    return _roles;
-
-                try
-                {
-                    using (var stream = File.OpenRead(ConfigFilePath))
-                        return _roles = (Roles)new DataContractSerializer(typeof(Roles)).ReadObject(stream);
-                }
-                catch (Exception)
-                {
-                    return new Roles();
-                }
+                return _roles = _roles ?? Load();
             }
         }
-        private Roles _roles;
+        private static volatile Roles _roles;
+
 
         public RoleProvider()
         {
-            ConfigFile = @"~\App_Data\Roles.xml";
+            ConfigFile = @"~\App_Data\Roles.json";
         }
+
 
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
@@ -167,10 +156,24 @@ namespace RazorPad.Web.Authentication
             Save();
         }
 
+
+        private Roles Load()
+        {
+            try
+            {
+                var serialized = File.ReadAllText(ConfigFilePath);
+                return new JavaScriptSerializer().Deserialize<Roles>(serialized);
+            }
+            catch (Exception)
+            {
+                return new Roles();
+            }
+        }
+
         private void Save()
         {
-            using(var stream = File.OpenWrite(ConfigFilePath))
-                new DataContractSerializer(typeof(Roles)).WriteObject(stream, Roles);
+            var serialized = new JavaScriptSerializer().Serialize(Roles);
+            File.WriteAllText(ConfigFilePath, serialized);
         }
     }
 }
