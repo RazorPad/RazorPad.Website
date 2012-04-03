@@ -1,0 +1,12 @@
+﻿.snippets {
+  height: initial !important;
+  min-width: 900px;
+  max-width: 900px;
+}
+.snippets th {
+  min-width: 10em;
+  border-bottom: 1px groove;
+  font-weight: bold;
+  font-size: 120%;
+  text-align: left;
+}

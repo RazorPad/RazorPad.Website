@@ -69,8 +69,6 @@ namespace RazorPad.Web.Website.Models
             }
         }
         
-        public string Owner { get; set; }
-        
         public string Title { get; set; }
 
         public string View { get; set; }
@@ -79,7 +77,6 @@ namespace RazorPad.Web.Website.Models
         public SnippetViewModel()
         {
             Model = string.Empty;
-            Owner = string.Empty;
             Title = string.Empty;
             View = string.Empty;
         }

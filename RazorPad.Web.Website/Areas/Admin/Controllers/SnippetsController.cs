@@ -14,8 +14,16 @@ namespace RazorPad.Web.Website.Areas.Admin.Controllers
             _repository = repository;
         }
 
-        public ActionResult Index(int page = 0, int count = 50)
+        public ActionResult Index()
         {
+            return Snippets();
+        }
+
+        public ActionResult Snippets(int page = 0, int count = 50)
+        {
+            ViewBag.Page = page;
+            ViewBag.Count = count;
+
             var snippets = 
                 _repository.Query<Snippet>()
                     .OrderByDescending(x => x.DateCreated)

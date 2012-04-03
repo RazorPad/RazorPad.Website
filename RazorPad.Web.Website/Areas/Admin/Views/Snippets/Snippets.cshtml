@@ -4,75 +4,78 @@
     ViewBag.Title = "Snippets";
 }
 
+@* TODO: Move this to CSS! *@
+<style>
+    .snippets {
+        height: initial !important;
+        min-width: 900px;
+        max-width: 900px;
+    }
+        .snippets th {
+            min-width: 10em;
+            border-bottom: 1px groove;
+            font-weight: bold;
+            font-size: 120%;
+            text-align: left;
+        }
+</style>
+
 <h2>Snippets</h2>
 
-<table>
+<div class="pager">
+    @if(ViewBag.Page > 0) {
+        @Html.ActionLink("<< Prev", "Snippets", new { page = ViewBag.Page-1, count = ViewBag.Count })
+    }
+    else {
+        @:<< Prev
+    }
+    @Html.ActionLink("Next >>", "Snippets", new { page = ViewBag.Page+1, count = ViewBag.Count })
+</div>
+<table class="snippets">
     <tr>
         <th>
-            CreatedBy
-        </th>
-        <th>
-            DateCreated
+            Username
         </th>
         <th>
             DisplayName
         </th>
         <th>
-            DisplayDate
-        </th>
-        <th>
-            IsNew
-        </th>
-        <th>
-            Key
-        </th>
-        <th>
-            Model
+            Create Date
         </th>
         <th>
             Notes
         </th>
         <th>
-            NotesSummary
-        </th>
-        <th>
-            Owner
-        </th>
-        <th>
             Title
         </th>
         <th>
-            View
+            @* Commands *@
         </th>
-        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr data-key="@item.Key">
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateCreated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DisplayName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DisplayDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NotesSummary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.Key  }) |
-            @Html.ActionLink("Details", "Details", new {  id=item.Key  }) |
-            @Html.ActionLink("Delete", "Delete", new {  id=item.Key  })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr data-key="@item.Key">
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NotesSummary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.Key  }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.Key  }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Key  })
+            </td>
+        </tr>
+    }
 
 </table>
