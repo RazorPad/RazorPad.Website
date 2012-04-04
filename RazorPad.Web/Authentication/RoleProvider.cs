@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Web.Script.Serialization;
 
 namespace RazorPad.Web.Authentication
 {
-    [CollectionDataContractAttribute(Namespace = "")]
     public class Roles : List<Role>
     {
+        public Roles(IEnumerable<Role> roles = null)
+            : base(roles ?? Enumerable.Empty<Role>())
+        {
+        }
+
         public Role FindByName(string name)
         {
             return this.FirstOrDefault(x => x.Name == name);
@@ -162,7 +165,8 @@ namespace RazorPad.Web.Authentication
             try
             {
                 var serialized = File.ReadAllText(ConfigFilePath);
-                return new JavaScriptSerializer().Deserialize<Roles>(serialized);
+                var roles = new JavaScriptSerializer().Deserialize<Role[]>(serialized);
+                return new Roles(roles);
             }
             catch (Exception)
             {
