@@ -13,13 +13,13 @@
     {
         <h3><a href="#">Saved Snippets</a></h3>
         <div id="savedSnippets">
-            @Html.Action("UserSnippets", "Users", new { username = User.Identity.Name, area = string.Empty })
+            @Html.Action("ByUser", "Snippets", new { username = User.Identity.Name, area = string.Empty })
         </div>
     }
 
     <h3><a href="#">Examples</a></h3>
-	<div>
-		TODO: Basic examples
+	<div id="examples">
+		@Html.Action("Examples", "Snippets")
 	</div>
 </div>
 <div class="bottomLinks">

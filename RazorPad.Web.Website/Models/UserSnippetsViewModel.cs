@@ -12,7 +12,17 @@ namespace RazorPad.Web.Website.Models
 
         public UserSnippetsViewModel()
         {
-            Snippets = Enumerable.Empty<SnippetViewModel>();
+        }
+
+        public UserSnippetsViewModel(string username, IEnumerable<Snippet> snippets)
+            : this(username, (snippets ?? Enumerable.Empty<Snippet>()).Select(x => new SnippetViewModel(x)))
+        {
+        }
+
+        public UserSnippetsViewModel(string username, IEnumerable<SnippetViewModel> snippets)
+        {
+            Username = username;
+            Snippets = snippets ?? Enumerable.Empty<SnippetViewModel>();
         }
     }
 }

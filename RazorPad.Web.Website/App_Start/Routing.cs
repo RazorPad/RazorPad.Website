@@ -43,15 +43,9 @@ namespace RazorPad.Web.Website.App_Start
             );
 
             routes.MapRoute(
-                "User",
-                "users/{username}",
-                new { controller = "Users", action = "Index", area = (string)null },
-                new[] { "RazorPad.Web.Website.Controllers" }
-            );
-            routes.MapRoute(
                 "UserSnippets",
                 "users/{username}/snippets",
-                new { controller = "Users", action = "Snippets", area = (string)null },
+                new { controller = "Snippets", action = "ByUser", area = (string)null },
                 new[] { "RazorPad.Web.Website.Controllers" }
             );
 

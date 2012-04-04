@@ -65,6 +65,9 @@ namespace RazorPad.Web
 
         public static IEnumerable<Snippet> FindSnippetsByUsername(this IRepository repository, string username)
         {
+            if (string.IsNullOrWhiteSpace(username))
+                return Enumerable.Empty<Snippet>();
+
             return repository.Query<Snippet>().Where(x => x.CreatedBy == username);
         }
 

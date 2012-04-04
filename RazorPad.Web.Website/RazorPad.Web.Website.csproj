@@ -145,7 +145,6 @@
     <Compile Include="Areas\Account\Models\PasswordRequest.cs" />
     <Compile Include="Areas\Account\Models\ResetPasswordRequest.cs" />
     <Compile Include="Controllers\SnippetsController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Extensions\AuthenticationExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -176,9 +175,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Content\css\MainUI\sidebar.less" />
-    <Content Include="App_Data\Roles.xml">
+    <None Include="App_Data\Roles.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="Content\css\core.min.css">
       <DependentUpon>razorpad.chirp.config</DependentUpon>
     </Content>
@@ -260,12 +259,15 @@
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\Users\Users.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Views\Users\Snippets.cshtml" />
-    <Content Include="Views\Users\_Snippets.cshtml" />
     <Content Include="Views\RazorPad\_SideBar.cshtml" />
     <Content Include="Views\RazorPad\_ModelGrid.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Error\Test.cshtml" />
+    <Content Include="Views\Snippets\Snippets.cshtml">
+      <SubType>
+      </SubType>
+    </Content>
+    <Content Include="Views\Snippets\_Snippets.cshtml" />
     <None Include="_bin_deployableAssemblies\Microsoft.Web.Infrastructure.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.Razor.dll" />
     <None Include="_bin_deployableAssemblies\System.Web.WebPages.dll" />

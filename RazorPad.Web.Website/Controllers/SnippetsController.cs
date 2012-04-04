@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RazorPad.Web.Services;
@@ -16,14 +18,29 @@ namespace RazorPad.Web.Website.Controllers
 
         private readonly IRepository _repository;
 
+
         public SnippetsController(IRepository repository)
         {
             _repository = repository;
         }
 
+
+        public ActionResult ByUser(string username = null)
+        {
+            var snippets = _repository.FindSnippetsByUsername(username);
+            return Snippets(username, snippets);
+        }
+
+
         public ActionResult Clone([Bind(Prefix = "")]SaveRequest request)
         {
             return Save(request, clone: true);
+        }
+
+        public ActionResult Examples()
+        {
+            var snippets = _repository.Query<ExampleSnippet>();
+            return Snippets("Examples", snippets);
         }
 
         public ActionResult Save([Bind(Prefix = "")]SaveRequest request, bool clone = false)
@@ -78,6 +95,20 @@ namespace RazorPad.Web.Website.Controllers
             }
 
             return Json(snippet);
+        }
+
+
+        protected ActionResult Snippets(string username, IEnumerable<Snippet> snippets)
+        {
+            var viewModel = new UserSnippetsViewModel(username, (snippets ?? Enumerable.Empty<Snippet>().ToArray()));
+
+            if (Request.IsAjaxRequest())
+                return Json(viewModel, JsonRequestBehavior.AllowGet);
+
+            if (ControllerContext.IsChildAction)
+                return PartialView("_Snippets", viewModel);
+
+            return View("Snippets", viewModel);
         }
     }
 }
