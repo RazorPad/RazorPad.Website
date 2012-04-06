@@ -226,6 +226,7 @@
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\sidebar_close.png" />
     <Content Include="Content\images\sidebar_open.png" />
+    <Content Include="Content\images\site.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\MainUI\codemirror.css" />
