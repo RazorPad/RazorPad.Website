@@ -5,44 +5,35 @@
     <title>RazorPad: The Online Razor Scratch Pad</title>
     <link href="@Url.Content("~/Content/css/core.min.css")" rel="stylesheet" type="text/css" />
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.js")"></script>
-@RenderSection("Head", false)
+    @RenderSection("Head", false)
 </head>
 <body>
-    
     <div id="header" class="gradient ui-layout-north">
-        <h1 class="insetType" title="The Online Razor Scratch Pad">
-            @Html.RouteLink("RazorPad", "Home")
-            <span class="beta">beta</span>
-        </h1>
-
+        <a href="@Url.Action("Index", "Home")">
+            <h1 title="The Online Razor Scratch Pad">
+            </h1>
+        </a><span class="beta">beta</span>
         @RenderSection("Actions", false)
-
         <ul id="secondary-actions" class="actions">
             @if (!User.Identity.IsAuthenticated)
             {
-                <li>
-                    <a href="@Url.Login()">Login / Signup</a>
-                </li>
+                <li><a href="@Url.Login()">Login / Signup</a> </li>
             }
             else
             {
-                <li>
-                    <span>Welcome, <strong>@User.Identity.Name</strong></span>
-                    @if(User.IsInRole("Admin"))
+                <li><span>Welcome, <strong>@User.Identity.Name</strong></span>
+                    @if (User.IsInRole("Admin"))
                     {
-                        @Html.ActionLink("Admin","Index", "Home", new { area = "Admin" }, null)
+                        @Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, null)
                     }
-                    <a href="@Url.Logout()">Logout</a>
-                </li>
+                    <a href="@Url.Logout()">Logout</a> </li>
             }
         </ul>
-        <div class="clear"></div>
+        <div class="clear">
+        </div>
     </div>
-
     @RenderBody()
-
     @RenderSection("Tail", false)
-
     <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-26932248-1']);
@@ -50,12 +41,11 @@
         _gaq.push(['_setAllowLinker', true]);
         _gaq.push(['_trackPageview']);
 
-        (function() {
+        (function () {
             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
     </script>
-
 </body>
 </html>
