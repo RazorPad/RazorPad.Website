@@ -12,3 +12,4 @@ Thumbs.db
 RazorPad.Web.Website/App_Data/Database
 packages
 **.ncrunch*
+/RazorPad.Web.Website/App_Data/RazorPad10.sdf
