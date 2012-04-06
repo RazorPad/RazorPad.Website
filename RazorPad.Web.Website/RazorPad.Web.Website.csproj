@@ -171,6 +171,7 @@
     <Content Include="Areas\Admin\Views\Snippets\Snippets.cshtml" />
     <None Include="Areas\Admin\Content\Admin.chirp.less" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <None Include="Content\css\core\sprites.less" />
     <None Include="Content\css\razorpad.chirp.config">
       <SubType>Designer</SubType>
     </None>

@@ -44,7 +44,7 @@ header h1{display:inline-block;text-decoration:none;background-image:url('../ima
 header .beta{color:#CB4B4B;font-size:80%;font-style:italic;vertical-align:top}
 header .actions{padding:0 0 0 15px}
 header .actions li{list-style:none;float:left;margin-left:-1px}
-header .actions li a{border:1px solid #465A7D;background:#BCC7D8;padding:3px 7px;text-decoration:none;text-align:center;color:#465A7D;font-weight:bold}
+header .actions li a{border:1px solid #465A7D;background-color:#BCC7D8;padding:3px 7px;text-decoration:none;text-align:center;color:#465A7D;font-weight:bold}
 header .secondary{padding-right:10px;float:right}
 header .secondary span{margin-top:3px;float:right}
 header .secondary a{margin-left:10px;float:right}
@@ -416,3 +416,12 @@ input[type="text"].input-validation-error,input[type="password"].input-validatio
 .login .half{width:48%;display:inline-block;vertical-align:top}
 .openid-provider{margin:20px}
 #openid-form{margin:30px 0 0 20px}
+.book{background:url('../images/site.png') no-repeat left center;background-position:4px 2;padding-left:24px!important}
+.clone{background:url('../images/site.png') no-repeat left center;background-position:4px -60px;padding-left:24px!important}
+.documentation{background:url('../images/site.png') no-repeat left center;background-position:0 -133px;padding-left:20px;line-height:2em}
+.examples{background:url('../images/site.png') no-repeat left center;background-position:4px -198px;padding-left:24px!important}
+.info{background:url('../images/site.png') no-repeat left center;background-position:4px -262px;padding-left:24px!important}
+.legal{background:url('../images/site.png') no-repeat left center;background-position:0 -328px;padding-left:20px;line-height:2em}
+.login{background:url('../images/site.png') no-repeat left center;background-position:4px -394px;padding-left:24px!important}
+.run{background:url('../images/site.png') no-repeat left center;background-position:4px -460px;padding-left:24px!important}
+.save{background:url('../images/site.png') no-repeat left center;background-position:4px -526px;padding-left:24px!important}

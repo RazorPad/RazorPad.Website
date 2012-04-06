@@ -17,14 +17,14 @@
 						<span class="beta">beta</span>
 					</a>
 			</td>
-			<td width="30%">
+			<td>
 				@RenderSection("Actions", false)
 			</td>
-			<td width="70%">
+			<td>
 				<ul class="actions secondary">
 					@if (!User.Identity.IsAuthenticated)
 					{
-						<li><a href="@Url.Login()">Login / Signup</a> </li>
+						<li><a href="@Url.Login()" class="login">Login / Signup</a> </li>
 					}
 					else
 					{

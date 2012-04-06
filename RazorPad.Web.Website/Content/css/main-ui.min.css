@@ -120,10 +120,10 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 .syntaxhighlighter.printing .color2,.syntaxhighlighter.printing .color2 a{color:#ff1493!important}
 .syntaxhighlighter.printing .color3,.syntaxhighlighter.printing .color3 a{color:red!important}
 .syntaxhighlighter.printing .break,.syntaxhighlighter.printing .break a{color:black!important}
-#sidebar{border:0;background:#ccc}
-#sidebar #docs-link{font-size:130%;font-weight:bold}
-#sidebar #legal-stuff{margin-top:10px;padding-top:10px;border-top:1px groove}
-#sidebar #legal-stuff h3{text-decoration:none;font-size:110%}
+#sidebar{border:0;background:#f5f5f5}
+#sidebar #docs-link{font-weight:bold}
+#sidebar #legal-stuff{margin-top:10px;padding-top:10px;border-top:1px groove;color:gray}
+#sidebar #legal-stuff h3{text-decoration:none;font-size:100%}
 #sidebar #legal-stuff p{font-style:italic}
 #sidebar .bottomLinks{vertical-align:bottom;bottom:0;padding:15px 18px;position:absolute}
 #sidebar .snippet{border-bottom:1px dotted #ccc;cursor:pointer;padding:3px}

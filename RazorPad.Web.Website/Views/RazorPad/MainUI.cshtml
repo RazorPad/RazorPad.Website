@@ -7,13 +7,13 @@
 @section Actions {
     <ul class="actions">
         <li>
-            <a id="execute" href="#" title="Execute the snippet (Ctrl+E)">Execute</a>
+            <a id="execute" href="#" title="Execute the snippet (Ctrl+E)" class="run">Execute</a>
         </li>
         <li>
-            <a id="save" href="#" title="Save the snippet (Ctrl+S)">Save</a>
+            <a id="save" href="#" title="Save the snippet (Ctrl+S)" class="save">Save</a>
         </li>
         <li style="@(Model.IsNew ? "display:none;" : "")">
-            <a id="clone" href="#" title="Clone the snippet (Ctrl+L)">Clone</a>
+            <a id="clone" href="#" title="Clone the snippet (Ctrl+L)" class="clone">Clone</a>
         </li>
     </ul>
 }
