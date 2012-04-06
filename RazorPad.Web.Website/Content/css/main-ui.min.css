@@ -130,16 +130,16 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 #sidebar .snippet :hover{background:#F7F7F7}
 #sidebar .snippet span{display:block}
 #sidebar .snippet .create-date{color:#666;font-size:80%}
-#sidebar .info label{display:block}
-#sidebar .info input{margin-bottom:10px}
-#sidebar .info input,#sidebar .info textarea{width:98%}
-#sidebar .info textarea{resize:none;border:1px solid}
+#sidebar .infoContent label{display:block}
+#sidebar .infoContent input{margin-bottom:10px}
+#sidebar .infoContent input,#sidebar .infoContent textarea{width:98%}
+#sidebar .infoContent textarea{resize:none;border:1px solid}
 #sidebar .ui-accordion-icons .ui-accordion-header a{padding-left:18px;font-size:1em}
 #sidebar .ui-accordion .ui-accordion-header .ui-icon{left:0}
 #sidebar .ui-accordion .ui-state-active a{font-weight:bold}
 #sidebar .ui-accordion .ui-accordion-content{padding:0 15px}
 #sidebar .ui-accordion .ui-accordion-header{margin-top:0}
-#sidebar .info,#sidebar .examples,#sidebar .savedSnippets{padding:10px 0 15px 0}
+#sidebar .infoContent,#sidebar .examplesContent,#sidebar .savedSnippets{padding:10px 0 15px 0}
 .ui-layout-toggler-west-open{background:#bbb url('../images/sidebar_open.png') no-repeat -2px center}
 .ui-layout-toggler-west-closed{background:#bbb url('../images/sidebar_close.png') no-repeat -2px center}
 .editorContainer{position:relative;height:100%;width:100%}

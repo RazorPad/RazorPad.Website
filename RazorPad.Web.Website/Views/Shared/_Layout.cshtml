@@ -29,12 +29,12 @@
 					else
 					{
 						<li>
-                            <a href="@Url.Logout()">Logout</a> 
+						<a href="@Url.Logout()" class="login">Logout</a> 
 							@if (User.IsInRole("Admin"))
 							{
 								@Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, null)
 							}
-                            <span>Welcome, <strong>@User.Identity.Name</strong></span>
+						<span>Welcome, <strong>@User.Identity.Name</strong></span>	
 						</li>
 					}
 				</ul>

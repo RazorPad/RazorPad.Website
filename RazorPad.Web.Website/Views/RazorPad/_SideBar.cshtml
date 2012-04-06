@@ -1,42 +1,47 @@
 ﻿@model RazorPad.Web.Website.Models.SnippetViewModel
 <div id="accordion">
-    <h3><a href="#">Info</a></h3>
-    <div>
-        <div class="info">
-            <label>Title</label>
-            <input type="text" id="snippetTitle" value="@Model.Title" />
-        
-            <label>Notes</label>
-            <textarea id="snippetNotes" rows="3">@Model.Notes</textarea>
-        </div>
-    </div>
-
-    @if(User.Identity.IsAuthenticated)
-    {
-        <h3><a href="#">Saved Snippets</a></h3>
-        <div>
-            <div class="savedSnippets" id="savedSnippets">
-                @Html.Action("ByUser", "Snippets", new { username = User.Identity.Name, area = string.Empty })
-            </div>
-        </div>
-    }
-
-    <h3><a href="#">Examples</a></h3>
-    <div>
-	    <div class="examples">
-		    @Html.Action("Examples", "Snippets")
-	    </div>
-    </div>
+	<h3>
+		<a href="#" class="info">Info</a></h3>
+	<div>
+		<div class="infoContent">
+			<label>
+				Title</label>
+			<input type="text" id="snippetTitle" value="@Model.Title" />
+			<label>
+				Notes</label>
+			<textarea id="snippetNotes" rows="3">@Model.Notes</textarea>
+		</div>
+	</div>
+	@if (User.Identity.IsAuthenticated)
+ {
+		<h3>
+			<a href="#">Saved Snippets</a></h3>
+		<div>
+			<div class="savedSnippets" id="savedSnippets">
+				@Html.Action("ByUser", "Snippets", new { username = User.Identity.Name, area = string.Empty })
+				@Html.Action("ByUser", "Snippets", new { username = User.Identity.Name, area = string.Empty })
+			</div>
+		</div>
+ }
+	<h3>
+		<a href="#" class="examples">Examples</a></h3>
+	<div>
+		<div class="examplesContent">
+			@Html.Action("Examples", "Snippets")
+		</div>
+	</div>
 </div>
 <div class="bottomLinks">
-    <div>
-        <a id="docs-link" href="http://docs.razorpad.net" class="documentation">Documentation</a>
-    </div>
-
-    <div id="legal-stuff">
-	    <h3 class="legal">Legal Stuff</h3>
-        <p>All code belongs to the poster and no license is enforced.</p>
-        <p>We are not responsible or liable for any loss or damage of any kind during the usage of provided code.</p>
-    </div>
+	<div>
+		<a id="docs-link" href="http://docs.razorpad.net" class="documentation">Documentation</a>
+	</div>
+	<div id="legal-stuff">
+		<h3 class="legal">
+			Legal Stuff</h3>
+		<p>
+			All code belongs to the poster and no license is enforced.</p>
+		<p>
+			We are not responsible or liable for any loss or damage of any kind during the usage
+			of provided code.</p>
+	</div>
 </div>
-    
