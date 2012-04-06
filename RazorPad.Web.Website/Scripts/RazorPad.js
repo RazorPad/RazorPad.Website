@@ -79,7 +79,9 @@
     $('#accordion').accordion({
         autoHeight: false,
         change: function () {
-            $('#savedSnippets').height($("#sidebar").height() / 2);
+            if ($('#savedSnippets').length) {
+                $('#savedSnippets').height($("#sidebar").height() / 2);
+            }
         }
     });
 

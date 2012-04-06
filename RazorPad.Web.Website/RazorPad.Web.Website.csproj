@@ -244,15 +244,14 @@
     <Content Include="Scripts\codemirror\util\searchcursor.js" />
     <Content Include="Scripts\codemirror\util\simple-hint.css" />
     <Content Include="Scripts\codemirror\util\simple-hint.js" />
+    <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery.hotkeys.js" />
     <Content Include="Scripts\jquery.layout-latest.js" />
     <Content Include="Scripts\hpTabs.js" />
-    <Content Include="Scripts\jquery.hotkeys.js" />
-    <Content Include="Scripts\jquery.watermark.js" />
-    <Content Include="Scripts\mode-csharp.js" />
-    <Content Include="Scripts\mode-c_cpp.js" />
-    <Content Include="Scripts\mode-html.js" />
-    <Content Include="Scripts\splitter.js" />
     <Content Include="Scripts\stringformat.js" />
+    <Content Include="Scripts\XRegExp.js" />
     <Content Include="Views\RazorPad\_RazorPane.cshtml" />
     <Content Include="Views\RazorPad\_ModelPane.cshtml" />
     <Content Include="Views\RazorPad\_ResultsPane.cshtml" />
@@ -307,16 +306,11 @@
     <Content Include="Scripts\grid\jquery.fmatter.js" />
     <Content Include="Scripts\grid\jquery.jqGrid.js" />
     <Content Include="Scripts\grid\JsonXml.js" />
-    <Content Include="Scripts\jquery-vsdoc.js" />
-    <Content Include="Scripts\jquery.js" />
-    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\razorpad.js" />
     <Content Include="Scripts\shBrushCSharp.js" />
     <Content Include="Scripts\shBrushXml.js" />
     <Content Include="Scripts\shCore.js" />
     <Content Include="Scripts\shCore.min.js" />
-    <Content Include="Scripts\underscore.js" />
-    <Content Include="Scripts\XRegExp.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

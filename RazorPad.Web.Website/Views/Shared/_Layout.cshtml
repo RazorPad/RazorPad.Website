@@ -4,7 +4,7 @@
 <head>
 	<title>RazorPad: The Online Razor Scratch Pad</title>
 	<link href="@Url.Content("~/Content/css/core.min.css")" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.js")"></script>
+	<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery-1.7.1.js")"></script>
 	@RenderSection("Head", false)
 </head>
 <body>
@@ -13,7 +13,7 @@
 			<tr>
 			<td width="267">
 				<a href="@Url.Action("Index", "Home")">
-						<img src="../../Content/images/Logo.jpg" alt="RazorPad" height="35px" width="247px" title="The Online Razor Scratch Pad" />
+						<img src="@Url.Content("~/Content/images/Logo.jpg")" alt="RazorPad" height="35px" width="247px" title="The Online Razor Scratch Pad" />
 						<span class="beta">beta</span>
 					</a>
 			</td>
@@ -28,12 +28,13 @@
 					}
 					else
 					{
-						<li><span>Welcome, <strong>@User.Identity.Name</strong></span>
+						<li>
+                            <a href="@Url.Logout()">Logout</a> 
 							@if (User.IsInRole("Admin"))
 							{
 								@Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, null)
 							}
-							<a href="@Url.Logout()">Logout</a> 
+                            <span>Welcome, <strong>@User.Identity.Name</strong></span>
 						</li>
 					}
 				</ul>
