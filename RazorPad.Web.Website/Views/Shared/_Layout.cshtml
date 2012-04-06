@@ -2,50 +2,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RazorPad: The Online Razor Scratch Pad</title>
-    <link href="@Url.Content("~/Content/css/core.min.css")" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.js")"></script>
-    @RenderSection("Head", false)
+	<title>RazorPad: The Online Razor Scratch Pad</title>
+	<link href="@Url.Content("~/Content/css/core.min.css")" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery.js")"></script>
+	@RenderSection("Head", false)
 </head>
 <body>
-    <div id="header" class="gradient ui-layout-north">
-        <a href="@Url.Action("Index", "Home")">
-            <h1 title="The Online Razor Scratch Pad">
-            </h1>
-        </a><span class="beta">beta</span>
-        @RenderSection("Actions", false)
-        <ul id="secondary-actions" class="actions">
-            @if (!User.Identity.IsAuthenticated)
-            {
-                <li><a href="@Url.Login()">Login / Signup</a> </li>
-            }
-            else
-            {
-                <li><span>Welcome, <strong>@User.Identity.Name</strong></span>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, null)
-                    }
-                    <a href="@Url.Logout()">Logout</a> </li>
-            }
-        </ul>
-        <div class="clear">
-        </div>
-    </div>
-    @RenderBody()
-    @RenderSection("Tail", false)
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-26932248-1']);
-        _gaq.push(['_setDomainName', 'razorpad.net']);
-        _gaq.push(['_setAllowLinker', true]);
-        _gaq.push(['_trackPageview']);
+	<header class="ui-layout-north">
+		<table cellpadding="0" cellspacing="0">
+			<tr>
+			<td width="267">
+				<a href="@Url.Action("Index", "Home")">
+						<img src="../../Content/images/Logo.jpg" alt="RazorPad" height="35px" width="247px" title="The Online Razor Scratch Pad" />
+						<span class="beta">beta</span>
+					</a>
+			</td>
+			<td width="30%">
+				@RenderSection("Actions", false)
+			</td>
+			<td width="70%">
+				<ul class="actions secondary">
+					@if (!User.Identity.IsAuthenticated)
+					{
+						<li><a href="@Url.Login()">Login / Signup</a> </li>
+					}
+					else
+					{
+						<li><span>Welcome, <strong>@User.Identity.Name</strong></span>
+							@if (User.IsInRole("Admin"))
+							{
+								@Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, null)
+							}
+							<a href="@Url.Logout()">Logout</a> 
+						</li>
+					}
+				</ul>
+			</td>
+			</tr>
+		</table>
+    </header>
+	@RenderBody()
+	@RenderSection("Tail", false)
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-26932248-1']);
+		_gaq.push(['_setDomainName', 'razorpad.net']);
+		_gaq.push(['_setAllowLinker', true]);
+		_gaq.push(['_trackPageview']);
 
-        (function () {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
+		(function () {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 </body>
 </html>

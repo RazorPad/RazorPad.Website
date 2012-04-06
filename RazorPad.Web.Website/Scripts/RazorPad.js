@@ -18,7 +18,7 @@
     $('body').layout({
         enableCursorHotkey: false,
         name: 'bodyLayout',
-        north__paneSelector: "#header",
+        north__paneSelector: "header",
         north__closable: false,
         west__paneSelector: "#sidebar",
         west__size: 260,

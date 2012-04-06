@@ -1,9 +1,23 @@
-#header {
-    /*padding: 5px 10px;
-*/
+header {
+    padding: 5px 0;
+	background: rgb(245,245,245); 
+    border: 1px solid gray;
+
+	table {
+		border: 0;
+		width: 100%;
+	}
+
+	td {
+		vertical-align: middle;
+	}
+
 	 a {
             color: #000;
             text-decoration: none;
+			float: left;
+			position: relative;
+			zoom: 1;
     }
     
     h1 {
@@ -19,13 +33,14 @@
 
     .beta {
         color: #CB4B4B;
-        font-size: 60%;
+        font-size: 80%;
         font-style: italic;
+		vertical-align: top;
     }
     
     .actions {
-        padding: 15px 0px 0 15px;
-		display: inline-block;
+        padding: 0px 0px 0 15px;
+		
     }
 
     .actions li {
@@ -45,18 +60,11 @@
         font-weight: bold;
     }
 
-    #secondary-actions {
-        float: right;
+    .secondary {
         padding-right: 10px;
-
+		float: right;
 		a {
 			margin-left: 10px;
 		}
     }
-}
-
-.gradient
-{
-    background: rgb(245,245,245); 
-    border: 1px solid gray; 
 }
