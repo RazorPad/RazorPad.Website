@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Configuration;
+using System.Data.Entity;
 
 namespace RazorPad.Web.EntityFramework
 {
@@ -10,7 +12,30 @@ namespace RazorPad.Web.EntityFramework
         public RazorPadContext()
             : base("RazorPad")
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<RazorPadContext>());
+            Database.SetInitializer(new RazorPadContextInitializer());
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+/*
+ *          Cascade User->Credentials delete:
+            modelBuilder.Entity<User>()
+                .HasRequired(x => x.Credentials)
+                .WithRequiredPrincipal()
+                .WillCascadeOnDelete(true);
+*/
+        }
+
+        public class RazorPadContextInitializer : IDatabaseInitializer<RazorPadContext>
+        {
+            static Lazy<bool> IsAppHarbor = new Lazy<bool>(() =>
+                !string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["appharbor.commit_id"]));
+
+            public void InitializeDatabase(RazorPadContext context)
+            {
+                if (!IsAppHarbor.Value)
+                    new DropCreateDatabaseIfModelChanges<RazorPadContext>().InitializeDatabase(context);
+            }
         }
     }
 }
