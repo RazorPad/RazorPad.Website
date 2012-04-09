@@ -74,29 +74,24 @@
         }, 200);
     }
 
-    $('#savedSnippets').height($("#sidebar").height() / 2);
+    $('#savedSnippets').height(($("#sidebar").height() / 2) - $('#exampleSnippets').height());
 
     $('#sideBarTabs').delegate('a', 'click', function (e) {
         e.preventDefault();
         var $this = $(this), $span = $this.prev();
         $this.parent().next().slideToggle('fast', function () {
             if ($(this).is(':visible')) {
-                $span.removeClass('expanded').addClass('collapsed');
+                $span.addClass('expanded').removeClass('collapsed');
             }
             else {
-                $span.removeClass('collapsed').addClass('expanded');
+                $span.addClass('collapsed').removeClass('expanded');
             }
         });
     });
 
-    //    $('#accordion').accordion({
-    //        autoHeight: false,
-    //        change: function () {
-    //            if ($('#savedSnippets').length) {
-    //                $('#savedSnippets').height($("#sidebar").height() / 2);
-    //            }
-    //        }
-    //    });
+    //Watermark text for Info
+    $('#snippetTitle').waterMark({ waterMarkClass: 'watermark', waterMarkText: "Title" });
+    $('#snippetNotes').waterMark({ waterMarkClass: 'watermark', waterMarkText: "Notes" });
 
 });
 

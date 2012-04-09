@@ -1,7 +1,6 @@
 ﻿@model RazorPad.Web.Website.Models.UserSnippetsViewModel
 
 <section class="snippets">
-    Examples
     @foreach(var snippet in Model.Snippets)
     {
         <div class="snippet" data-key="@snippet.Key">

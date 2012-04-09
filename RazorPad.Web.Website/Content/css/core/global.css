@@ -161,3 +161,7 @@ iframe {
     background: #ccc;
 }
 
+.watermark
+{
+    color: #ccc !important;
+}

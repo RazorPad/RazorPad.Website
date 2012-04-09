@@ -227,6 +227,7 @@
     <Content Include="Content\images\sidebar_close.png" />
     <Content Include="Content\images\sidebar_open.png" />
     <Content Include="Content\images\site.png" />
+    <Content Include="Content\images\ui-icons.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\MainUI\codemirror.css" />
@@ -246,6 +247,7 @@
     <Content Include="Scripts\codemirror\util\searchcursor.js" />
     <Content Include="Scripts\codemirror\util\simple-hint.css" />
     <Content Include="Scripts\codemirror\util\simple-hint.js" />
+    <Content Include="Scripts\jquery.watermark.js" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />

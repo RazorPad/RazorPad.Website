@@ -3,11 +3,7 @@
 	<h3><span class="expanded"></span><a href="#" class="info">Info</a></h3>
     <div>
 	    <div class="tabContent">
-		    <label>
-			    Title</label>
 		    <input type="text" id="snippetTitle" value="@Model.Title" />
-		    <label>
-			    Notes</label>
 		    <textarea id="snippetNotes" rows="3">@Model.Notes</textarea>
 	    </div>
     </div>
@@ -22,7 +18,8 @@
     }
 	<h3><span class="expanded"></span><a href="#" class="examples">Examples</a></h3>
 	<div>
-        <div class="tabContent">
+        <div class="tabContent" id="exampleSnippets">
+            Examples
 		    @Html.Action("Examples", "Snippets")
 	    </div>
     </div>

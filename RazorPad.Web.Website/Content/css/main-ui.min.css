@@ -127,14 +127,14 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 #sidebar #legal-stuff p{font-style:italic}
 #sidebar .bottomLinks{vertical-align:bottom;bottom:0;padding:15px 18px;position:absolute}
 #sidebar .snippet{border-bottom:1px dotted #ccc;cursor:pointer;padding:3px}
-#sidebar .snippet :hover{background:#F7F7F7}
 #sidebar .snippet span{display:block}
 #sidebar .snippet .create-date{color:#666;font-size:80%}
+#sidebar .snippet:hover{background:#F7F7F7}
 #sidebar .tabs h3{font-weight:normal;color:#212121;text-decoration:none;border-top:1px solid #ddd;border-bottom:1px solid #ddd;margin-top:-1px}
 #sidebar .tabs h3 a{padding:7px 18px;font-size:.7em;font-weight:bold;color:#212121;text-decoration:none;display:block}
 #sidebar .tabs h3 .expanded,#sidebar .tabs h3 .collapsed{display:block;text-indent:-99999px;overflow:hidden;background-repeat:no-repeat;background-image:url('../images/ui-icons.png');width:16px;height:16px;position:absolute;margin-top:7px}
-#sidebar .tabs h3 .expanded{background-position:-32px -16px}
-#sidebar .tabs h3 .collapsed{background-position:-64px -16px}
+#sidebar .tabs h3 .expanded{background-position:-64px -16px}
+#sidebar .tabs h3 .collapsed{background-position:-32px -16px}
 #sidebar .tabs .tabContent{background:#fff;padding:10px 18px;overflow:auto;zoom:1;color:#222;font-size:100%;border-bottom:1px solid #ddd}
 #sidebar .tabs .tabContent label{display:block}
 #sidebar .tabs .tabContent input{margin-bottom:10px}
