@@ -30,7 +30,7 @@ namespace RazorPad.Web.Website.Controllers
         {
             var roles = new Roles {new Role("Admin") {Users = new List<string> {"jchadwick"}}};
             var serialized = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(roles);
-            System.IO.File.WriteAllText(@"~\App_Data\Roles.json", serialized);
+            System.IO.File.WriteAllText(System.Web.HttpContext.Current.Server.MapPath(@"~\App_Data\Roles.json"), serialized);
 
             return 1;
         }
