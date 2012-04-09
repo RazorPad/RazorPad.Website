@@ -58,72 +58,86 @@
 		}
 	}
 
-	.infoContent {
-		
-		label
-		{
-			display:block;
-		}
+    .tabs{
+        h3{
+            font-weight: normal;
+            color: #212121;
+            text-decoration: none;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            margin-top: -1px;
 
-		input{
-			margin-bottom: 10px;
-		}
+            a{
+                padding: 7px 18px;
+                font-size: 0.7em;
+                font-weight: bold;
+                color: #212121;
+                text-decoration: none;
+                display: block;
+            }
 
-		input,textarea
-		{
-			width:98%;
-		}
+            .expanded, .collapsed{
+                display: block;
+                text-indent: -99999px;
+                overflow: hidden;
+                background-repeat: no-repeat;
+                background-image: url('../images/ui-icons.png');
+                width: 16px;
+                height: 16px;
+                position: absolute;
+                margin-top: 7px;
+            }
 
-		textarea
-		{
-			resize: none;
-			border: 1px solid;
-		}
-	}
+            .expanded{
+                background-position: -32px -16px;
+            }
 
+            .collapsed{
+                background-position: -64px -16px;
+            }
+        }
+        
+        .tabContent {
+            background: #fff;
+		    padding: 10px 18px;
+            overflow: auto;
+            zoom: 1;
+            color: #222;
+            font-size: 100%;
+            border-bottom: 1px solid #ddd;
 
-	/* Overridding accordion styles */
-	.ui-accordion-icons .ui-accordion-header a
-	{
-		padding-left: 18px;
-		font-size: 1em;
-	}
+		    label
+		    {
+			    display:block;
+		    }
 
-	.ui-accordion {
+		    input{
+			    margin-bottom: 10px;
+		    }
 
-		.ui-accordion-header .ui-icon
-		{
-			left: 0px;
-		}
+		    input,textarea
+		    {
+			    width:98%;
+		    }
 
-		.ui-state-active a
-		{
-			.bold;
-		}
+		    textarea
+		    {
+			    resize: none;
+			    border: 1px solid;
+		    }
+	    }
+    }
 
-		.ui-accordion-content
-		{
-			padding: 0px 15px;
-		}
-
-		.ui-accordion-header
-		{
-			margin-top: 0px;
-		}
-	}
-
-	.infoContent, .examplesContent, .savedSnippets{
-		padding: 10px 0px 15px 0px;
-	}
+	
 }
 
 /* Overridding layout styles */
-.ui-layout-toggler-west-open
+.ui-layout-toggler-east-closed
 {
 	background: #bbb url('../images/sidebar_open.png') no-repeat -2px center;
 }
 
-.ui-layout-toggler-west-closed
+.ui-layout-toggler-east-open
 {
 	background: #bbb url('../images/sidebar_close.png') no-repeat -2px center;
 }

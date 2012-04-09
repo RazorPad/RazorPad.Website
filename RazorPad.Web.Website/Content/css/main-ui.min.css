@@ -130,24 +130,24 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 #sidebar .snippet :hover{background:#F7F7F7}
 #sidebar .snippet span{display:block}
 #sidebar .snippet .create-date{color:#666;font-size:80%}
-#sidebar .infoContent label{display:block}
-#sidebar .infoContent input{margin-bottom:10px}
-#sidebar .infoContent input,#sidebar .infoContent textarea{width:98%}
-#sidebar .infoContent textarea{resize:none;border:1px solid}
-#sidebar .ui-accordion-icons .ui-accordion-header a{padding-left:18px;font-size:1em}
-#sidebar .ui-accordion .ui-accordion-header .ui-icon{left:0}
-#sidebar .ui-accordion .ui-state-active a{font-weight:bold}
-#sidebar .ui-accordion .ui-accordion-content{padding:0 15px}
-#sidebar .ui-accordion .ui-accordion-header{margin-top:0}
-#sidebar .infoContent,#sidebar .examplesContent,#sidebar .savedSnippets{padding:10px 0 15px 0}
-.ui-layout-toggler-west-open{background:#bbb url('../images/sidebar_open.png') no-repeat -2px center}
-.ui-layout-toggler-west-closed{background:#bbb url('../images/sidebar_close.png') no-repeat -2px center}
+#sidebar .tabs h3{font-weight:normal;color:#212121;text-decoration:none;border-top:1px solid #ddd;border-bottom:1px solid #ddd;margin-top:-1px}
+#sidebar .tabs h3 a{padding:7px 18px;font-size:.7em;font-weight:bold;color:#212121;text-decoration:none;display:block}
+#sidebar .tabs h3 .expanded,#sidebar .tabs h3 .collapsed{display:block;text-indent:-99999px;overflow:hidden;background-repeat:no-repeat;background-image:url('../images/ui-icons.png');width:16px;height:16px;position:absolute;margin-top:7px}
+#sidebar .tabs h3 .expanded{background-position:-32px -16px}
+#sidebar .tabs h3 .collapsed{background-position:-64px -16px}
+#sidebar .tabs .tabContent{background:#fff;padding:10px 18px;overflow:auto;zoom:1;color:#222;font-size:100%;border-bottom:1px solid #ddd}
+#sidebar .tabs .tabContent label{display:block}
+#sidebar .tabs .tabContent input{margin-bottom:10px}
+#sidebar .tabs .tabContent input,#sidebar .tabs .tabContent textarea{width:98%}
+#sidebar .tabs .tabContent textarea{resize:none;border:1px solid}
+.ui-layout-toggler-east-closed{background:#bbb url('../images/sidebar_open.png') no-repeat -2px center}
+.ui-layout-toggler-east-open{background:#bbb url('../images/sidebar_close.png') no-repeat -2px center}
 .editorContainer{position:relative;height:100%;width:100%}
 #razorEditor{position:relative;height:100%;width:100%}
-#razorPane{border-right:1px solid #aaa;border-bottom:1px solid #aaa;border-left:1px solid #aaa;background:#fff}
+#razorPane{border-right:1px solid #aaa;border-bottom:1px solid #aaa;border-left:0 solid #aaa;background:#fff}
 .CodeMirror{font-size:13px!important}
 .CodeMirror span{padding:0!important}
-#resultsPane{border-top:1px solid #aaa;border-left:1px solid #aaa}
+#resultsPane{border-top:1px solid #aaa;border-right:1px solid #aaa}
 #resultsPane,.tabContainer,#content{height:100%;width:100%}
 #template-output-container{overflow-y:auto}
 .tabBar{background-color:#BCC7D8;padding:2px 0 0 0;border-bottom:2px solid #465A7D}

@@ -1,35 +1,31 @@
 ﻿@model RazorPad.Web.Website.Models.SnippetViewModel
-<div id="accordion">
-	<h3>
-		<a href="#" class="info">Info</a></h3>
-	<div>
-		<div class="infoContent">
-			<label>
-				Title</label>
-			<input type="text" id="snippetTitle" value="@Model.Title" />
-			<label>
-				Notes</label>
-			<textarea id="snippetNotes" rows="3">@Model.Notes</textarea>
-		</div>
-	</div>
+<div id="sideBarTabs" class="tabs">
+	<h3><span class="expanded"></span><a href="#" class="info">Info</a></h3>
+    <div>
+	    <div class="tabContent">
+		    <label>
+			    Title</label>
+		    <input type="text" id="snippetTitle" value="@Model.Title" />
+		    <label>
+			    Notes</label>
+		    <textarea id="snippetNotes" rows="3">@Model.Notes</textarea>
+	    </div>
+    </div>
 	@if (User.Identity.IsAuthenticated)
- {
-		<h3>
-			<a href="#">Saved Snippets</a></h3>
-		<div>
-			<div class="savedSnippets" id="savedSnippets">
-				@Html.Action("ByUser", "Snippets", new { username = User.Identity.Name, area = string.Empty })
-				@Html.Action("ByUser", "Snippets", new { username = User.Identity.Name, area = string.Empty })
-			</div>
-		</div>
- }
-	<h3>
-		<a href="#" class="examples">Examples</a></h3>
+    {
+		<h3><span class="expanded"></span><a href="#">Saved Snippets</a></h3>
+        <div>
+		    <div class="tabContent" id="savedSnippets">
+			    @Html.Action("ByUser", "Snippets", new { username = User.Identity.Name, area = string.Empty })
+		    </div>
+        </div>
+    }
+	<h3><span class="expanded"></span><a href="#" class="examples">Examples</a></h3>
 	<div>
-		<div class="examplesContent">
-			@Html.Action("Examples", "Snippets")
-		</div>
-	</div>
+        <div class="tabContent">
+		    @Html.Action("Examples", "Snippets")
+	    </div>
+    </div>
 </div>
 <div class="bottomLinks">
 	<div>

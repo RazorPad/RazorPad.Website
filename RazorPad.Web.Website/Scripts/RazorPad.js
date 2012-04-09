@@ -20,9 +20,9 @@
         name: 'bodyLayout',
         north__paneSelector: "header",
         north__closable: false,
-        west__paneSelector: "#sidebar",
-        west__size: 260,
-        west__closable: true,
+        east__paneSelector: "#sidebar",
+        east__size: 260,
+        east__closable: true,
         center__paneSelector: "#panes",
         center__closable: false,
         resizeWhileDragging: true,
@@ -76,14 +76,27 @@
 
     $('#savedSnippets').height($("#sidebar").height() / 2);
 
-    $('#accordion').accordion({
-        autoHeight: false,
-        change: function () {
-            if ($('#savedSnippets').length) {
-                $('#savedSnippets').height($("#sidebar").height() / 2);
+    $('#sideBarTabs').delegate('a', 'click', function (e) {
+        e.preventDefault();
+        var $this = $(this), $span = $this.prev();
+        $this.parent().next().slideToggle('fast', function () {
+            if ($(this).is(':visible')) {
+                $span.removeClass('expanded').addClass('collapsed');
             }
-        }
+            else {
+                $span.removeClass('collapsed').addClass('expanded');
+            }
+        });
     });
+
+    //    $('#accordion').accordion({
+    //        autoHeight: false,
+    //        change: function () {
+    //            if ($('#savedSnippets').length) {
+    //                $('#savedSnippets').height($("#sidebar").height() / 2);
+    //            }
+    //        }
+    //    });
 
 });
 
@@ -179,7 +192,7 @@ RazorPad.showLoading = function() {
 };
 
 RazorPad.hideLoading = function() {
-    $('#loading').fadeOut('slow');
+    $('#loading').fadeOut('fast');
 };
 
 RazorPad.onParseError = function(err) {

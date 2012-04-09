@@ -46,6 +46,9 @@ header .actions{padding:0 0 0 15px}
 header .actions li{list-style:none;float:left;margin-right:10px}
 header .actions li a{border:1px solid #465A7D;background-color:#BCC7D8;padding:3px 7px;text-decoration:none;text-align:center;color:#465A7D;font-weight:bold}
 header .secondary{padding-right:10px;float:right}
+header .secondary span{margin-top:3px;float:right}
+header .secondary a{margin-left:10px;float:right}
+header .secondary li{margin-right:0;margin-left:10px}
 .ui-helper-hidden{display:none}
 .ui-helper-hidden-accessible{position:absolute!important;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px)}
 .ui-helper-reset{margin:0;padding:0;border:0;outline:0;line-height:1.3;text-decoration:none;font-size:100%;list-style:none}
@@ -417,8 +420,6 @@ input[type="text"].input-validation-error,input[type="password"].input-validatio
 .book{background:url('../images/site.png') no-repeat left center;background-position:4px 2;padding-left:24px!important}
 .clone{background:url('../images/site.png') no-repeat left center;background-position:4px -60px;padding-left:24px!important}
 .documentation{background:url('../images/site.png') no-repeat left center;background-position:0 -133px;padding-left:20px;line-height:2em}
-.examples{background:url('../images/site.png') no-repeat left center;background-position:4px -198px;padding-left:24px!important}
-.info{background:url('../images/site.png') no-repeat left center;background-position:4px -262px;padding-left:24px!important}
 .legal{background:url('../images/site.png') no-repeat left center;background-position:0 -328px;padding-left:20px;line-height:2em}
 .login{background:url('../images/site.png') no-repeat left center;background-position:4px -394px;padding-left:24px!important}
 .run{background:url('../images/site.png') no-repeat left center;background-position:4px -460px;padding-left:24px!important}

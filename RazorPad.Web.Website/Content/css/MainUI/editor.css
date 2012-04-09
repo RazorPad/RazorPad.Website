@@ -13,7 +13,7 @@
 #razorPane {
     border-right: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
-    border-left: 1px solid #aaa;
+    border-left: 0px solid #aaa;
     background: #fff;
 }
 
