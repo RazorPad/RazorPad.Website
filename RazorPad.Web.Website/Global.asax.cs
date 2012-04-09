@@ -1,20 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
 using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
 
 namespace RazorPad.Web.Website
 {
-	public class Global : System.Web.HttpApplication
+	public class Global : HttpApplication
 	{
+	    public static string Version
+	    {
+            get
+            {
+                var appHarborCommit = ConfigurationManager.AppSettings["appharbor.commit_id"];
+
+                if (string.IsNullOrWhiteSpace(appHarborCommit))
+                    return typeof (Global).Assembly.GetName().Version.ToString();
+                
+                return appHarborCommit;
+            }
+	    }
+
 		// Need this for error controller
 		protected void Application_Error(object sender, EventArgs e)
 		{
 			Exception ex = Server.GetLastError();
 
-			Application[HttpContext.Current.Request.UserHostAddress.ToString()] = ex;
+			Application[HttpContext.Current.Request.UserHostAddress] = ex;
 		}
 	}
 }
