@@ -38,7 +38,8 @@ namespace RazorPad.Web.Website.App_Start
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
+            var settings = new NinjectSettings {LoadExtensions = false};
+            var kernel = new StandardKernel(settings);
             RegisterServices(kernel);
             return kernel;
         }
