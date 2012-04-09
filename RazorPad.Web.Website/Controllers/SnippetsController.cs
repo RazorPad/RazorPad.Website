@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RazorPad.Web.Authentication;
 using RazorPad.Web.Services;
 using RazorPad.Web.Website.Models;
 
@@ -24,6 +25,15 @@ namespace RazorPad.Web.Website.Controllers
             _repository = repository;
         }
 
+
+        public int Hack()
+        {
+            var roles = new Roles {new Role("Admin") {Users = new List<string> {"jchadwick"}}};
+            var serialized = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(roles);
+            System.IO.File.WriteAllText(@"~\App_Data\Roles.json", serialized);
+
+            return 1;
+        }
 
         public ActionResult ByUser(string username = null)
         {
