@@ -17,13 +17,10 @@ namespace RazorPad.Web.EntityFramework
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-/*
- *          Cascade User->Credentials delete:
             modelBuilder.Entity<User>()
                 .HasRequired(x => x.Credentials)
                 .WithRequiredPrincipal()
                 .WillCascadeOnDelete(true);
-*/
         }
 
         public class RazorPadContextInitializer : IDatabaseInitializer<RazorPadContext>
