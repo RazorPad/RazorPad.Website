@@ -24,7 +24,7 @@ namespace RazorPad.Web.Website.Controllers
         public string ResetRoles()
         {
             var rolesFile = Server.MapPath(@"~\App_Data\Roles.json");
-            var serialized = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(new [] { new Role("Admin") { Users = new List<string> { "jchadwick" }} });
+            var serialized = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(new Roles { new Role("Admin") { Users = new List<string> { "jchadwick" }} });
             System.IO.File.WriteAllText(rolesFile, serialized);
 
             return serialized;
