@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Diagnostics;
 using System.Linq;
-using System.Web.Script.Serialization;
 
 namespace RazorPad.Web.Authentication
 {
@@ -45,27 +44,15 @@ namespace RazorPad.Web.Authentication
     {
         public override string ApplicationName { get; set; }
 
-        public string ConfigFile { get; set; }
-
-        protected string ConfigFilePath
-        {
-            get { return System.Web.HttpContext.Current.Server.MapPath(ConfigFile); }
-        }
-
-        protected Roles Roles
+        protected internal Roles Roles
         {
             get
             {
                 return _roles = _roles ?? Load();
             }
+            set { _roles = value; }
         }
-        private static volatile Roles _roles;
-
-
-        public RoleProvider()
-        {
-            ConfigFile = @"~\App_Data\Roles.json";
-        }
+        private Roles _roles;
 
 
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
@@ -162,22 +149,14 @@ namespace RazorPad.Web.Authentication
 
         private Roles Load()
         {
-            try
-            {
-                var serialized = File.ReadAllText(ConfigFilePath);
-                var roles = new JavaScriptSerializer().Deserialize<Role[]>(serialized);
-                return new Roles(roles);
-            }
-            catch (Exception)
-            {
-                return new Roles();
-            }
+            return new Roles {
+                    new Role("Admin") { Users = new List<string> { "jchadwick", "shankars", "mrchief" } }
+                };
         }
 
         private void Save()
         {
-            var serialized = new JavaScriptSerializer().Serialize(Roles);
-            File.WriteAllText(ConfigFilePath, serialized);
+            Trace.WriteLine("Saving of roles is not implemented...");
         }
     }
 }

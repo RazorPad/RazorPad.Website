@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using System.Web.Razor;
 using RazorPad.Compilation;
 using RazorPad.Compilation.Hosts;
-using RazorPad.Web.Authentication;
 using RazorPad.Web.Services;
 using RazorPad.Web.Website.Models;
 
@@ -19,15 +18,6 @@ namespace RazorPad.Web.Website.Controllers
         public RazorPadController(IRepository repository)
         {
             _repository = repository;
-        }
-
-        public string ResetRoles()
-        {
-            var rolesFile = Server.MapPath(@"~\App_Data\Roles.json");
-            var serialized = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(new Roles { new Role("Admin") { Users = new List<string> { "jchadwick" }} });
-            System.IO.File.WriteAllText(rolesFile, serialized);
-
-            return serialized;
         }
 
         public ActionResult Index(string id)
