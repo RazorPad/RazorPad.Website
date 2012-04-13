@@ -24,7 +24,10 @@
 				<ul class="actions secondary">
 					@if (!User.Identity.IsAuthenticated)
 					{
-						<li><a href="@Url.Login()" class="login">Login / Signup</a> </li>
+                        if (ViewContext.RouteData.Values["action"].ToString().ToLower() != "login")
+                        {
+						    <li><a href="@Url.Login()" class="login">Login / Signup</a> </li>
+                        }
 					}
 					else
 					{

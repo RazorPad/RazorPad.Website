@@ -410,18 +410,18 @@ button.ui-button::-moz-focus-inner{border:0;padding:0}
 .form-box .form-field{width:315px}
 .form-button{margin:2em 0}
 .form-button input[type="button"],.form-button input[type="submit"]{height:32px;font-size:13px;font-weight:bold;line-height:29px;vertical-align:bottom;border:1px solid #384A6F;color:white;text-shadow:0 1px rgba(0,0,0,0.1);background-color:#486AA9;padding:0 15px;margin-left:0}
-.form-box .links{width:280px}
-.form-box .sign-up{float:right}
-.form-box .sign-up a{text-decoration:none;font-weight:bold;background:#486AA9;padding:3px 8px;color:#fff}
+.form-box a.sign-up{border:1px solid #384A6F;text-decoration:none;font-weight:bold;background:#486AA9;padding:7px 15px;color:#fff;display:inline-block}
 .form-box .info{margin-bottom:20px}
 input[type="text"].input-validation-error,input[type="password"].input-validation-error{border:solid 1px #e80c4d}
 .field-validation-error{color:#e80c4d;font-weight:bold;display:block}
 .field-validation-valid{display:none}
 .validation-summary-errors{color:#e80c4d;font-weight:bold;font-size:1.1em}
 .validation-summary-valid{display:none}
-.login-form .half{width:48%;display:inline-block;vertical-align:top}
+.login-form .column{width:37%;display:inline-block;vertical-align:top;float:left}
+.login-form .column.last{width:20%}
 .openid-provider{margin:20px}
 #openid-form{margin:30px 0 0 20px}
+.box .facebook{margin-left:0!important}
 .book{background:url('../images/site.png') no-repeat left center;background-position:4px 2;padding-left:24px!important}
 .clone{background:url('../images/site.png') no-repeat left center;background-position:4px -64px;padding-left:24px!important}
 .documentation{background:url('../images/site.png') no-repeat left center;background-position:0 -133px;padding-left:20px;line-height:2em}
