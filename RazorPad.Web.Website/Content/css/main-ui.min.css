@@ -140,6 +140,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 #sidebar .tabs .tabContent input{margin-bottom:10px}
 #sidebar .tabs .tabContent input,#sidebar .tabs .tabContent textarea{width:98%}
 #sidebar .tabs .tabContent textarea{resize:none;border:1px solid}
+#sidebar .tabs #savedSnippets{padding:0!important}
 .ui-layout-toggler-east-closed{background:#bbb url('../images/sidebar_open.png') no-repeat -2px center}
 .ui-layout-toggler-east-open{background:#bbb url('../images/sidebar_close.png') no-repeat -2px center}
 .editorContainer{position:relative;height:100%;width:100%}

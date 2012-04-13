@@ -19,15 +19,15 @@
                 </div>
                 <div class="form-button">
                     <input tabindex="3" type="submit" id="loginBtn" value="Login" />
-                    <span class="sign-up">
-                        Not registered? 
-                        @Html.ActionLink("Register Now", "Register", "Registration", new { area = "Account" }, null)
-                    </span>
                 </div>
                 <div class="links">
                     <span class="forgot-password">
-                        @Html.ActionLink("Forgot Password", "ForgotPassword", "Password", new { area = "Account" }, null)
+                        @Html.ActionLink("Forgot Password?", "ForgotPassword", "Password", new { area = "Account" }, null)
                     </span>
+                    <span class="sign-up">
+                        @Html.ActionLink("Sign Up", "Register", "Registration", new { area = "Account" }, null)
+                    </span>
+                    <div class="clear"></div>
                 </div>
             }
             </div>

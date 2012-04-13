@@ -3,14 +3,17 @@
     margin: 40px 40px;
 }
 
-.form-box {
-    width: 800px;
+.form-box 
+{
+    width: 100%;
     float: left;
 }
 
 .form-box .box {
+    margin: 12px 0 0;
     padding: 20px 25px 15px;
-    border: 1px solid #ddd;
+    background: whiteSmoke;
+    border: 1px solid #E5E5E5;
 }
 
 .form-box h2 {
@@ -19,6 +22,9 @@
     height: 16px;
     margin: 0 0 1.2em;
     position: relative;
+    text-decoration: none;
+    color: #222;
+    font-weight:normal;
 }
 
 .form .content {
@@ -29,12 +35,30 @@
 
 .form-box .text-box, input[type="password"]
 {
-    width: 220px;
+    width: 280px;
+    height: 32px;
+    font-size: 15px;
+    display: inline-block;
+    margin: 0;
+    padding: 0 8px;
+    background: white;
+    border: 1px solid #D9D9D9;
+    border-top: 1px solid silver;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
 }
 
 .form-box label {
     display: block;
-    margin: 1.5em 0 0;
+    margin: 1.5em 0 0.5em;
+    font-weight: bold;
+    height: 16px;
+    overflow: visible;
+    color: #222;
 }
 
 .form-label {
@@ -57,10 +81,38 @@
     margin: 2em 0;
 }
 
-.form-button .sign-up {
-    margin: 5px 0px 0px 10px;
+.form-button input[type="button"], .form-button input[type="submit"]
+{
+    height: 32px;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 29px;
+    vertical-align: bottom;
+    border: 1px solid #384A6F;
+    color: white;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    background-color: #486AA9;
+    padding: 0px 15px;
+    margin-left: 0px;
 }
 
+.form-box .links
+{
+    width: 280px;
+}
+
+.form-box .sign-up {
+    float: right;
+}
+
+.form-box .sign-up a
+{
+    text-decoration: none;
+    font-weight: bold;
+    background: #486AA9;
+    padding: 3px 8px;
+    color: #fff;
+}
 .form-box .info {
     margin-bottom: 20px;
 }
