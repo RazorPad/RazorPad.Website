@@ -89,9 +89,9 @@
     line-height: 29px;
     vertical-align: bottom;
     border: 1px solid #384A6F;
-    color: white;
+    color: #384A6F;
     text-shadow: 0 1px rgba(0, 0, 0, 0.1);
-    background-color: #486AA9;
+    background-color: #BCC7D8;
     padding: 0px 15px;
     margin-left: 0px;
 }
@@ -101,9 +101,9 @@
     border: 1px solid #384A6F;
     text-decoration: none;
     font-weight: bold;
-    background: #486AA9;
+    background: #BCC7D8;
     padding: 7px 15px;
-    color: #fff;
+    color: #384A6F;
     display: inline-block;
 }
 

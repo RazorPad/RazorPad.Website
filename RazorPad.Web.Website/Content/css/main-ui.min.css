@@ -126,7 +126,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 #sidebar #legal-stuff h3{text-decoration:none;font-size:100%}
 #sidebar #legal-stuff p{font-style:italic}
 #sidebar .bottomLinks{vertical-align:bottom;bottom:0;padding:15px 18px;position:absolute}
-#sidebar .snippet{border-bottom:1px dotted #ccc;cursor:pointer;padding:3px}
+#sidebar .snippet{border-bottom:1px dotted #ccc;cursor:pointer;padding:3px;min-height:32px}
 #sidebar .snippet span{display:block}
 #sidebar .snippet .create-date{color:#666;font-size:80%}
 #sidebar .snippet:hover{background:#F7F7F7}

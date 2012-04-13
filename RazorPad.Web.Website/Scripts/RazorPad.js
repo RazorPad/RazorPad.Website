@@ -96,11 +96,16 @@
 });
 
 RazorPad.saveTemplate = function (clone) {
-    RazorPad.showLoading();
-
     var snippetId = $('#snippetId').val(),
         title = $('#snippetTitle').val(),
-        notes = $('#snippetNotes').val();
+        notes = $('#snippetNotes').val(),
+        template = RazorPad.razorEditor.getValue();
+
+    if (!template) {
+        return;//There is nothing to save
+    }
+
+    RazorPad.showLoading();
 
     var data = {
         Template: RazorPad.razorEditor.getValue(),
