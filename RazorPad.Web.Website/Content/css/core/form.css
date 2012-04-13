@@ -149,9 +149,9 @@ input[type="text"].input-validation-error, input[type="password"].input-validati
 {
     width:1px;
     background: #ccc;
-    height: 100%;
+    height: 78%;
     right: 15%;
-    top: 0px;
+    top: 30px;
     position: absolute;
 }
 
