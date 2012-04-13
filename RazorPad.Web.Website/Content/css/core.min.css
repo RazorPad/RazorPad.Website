@@ -43,6 +43,7 @@ header table{border:0;width:100%}
 header td{vertical-align:middle}
 header a{color:#000;text-decoration:none;float:left;position:relative;zoom:1}
 header h1{display:inline-block;text-decoration:none;background-image:url('../images/logo.jpg');background-repeat:no-repeat;width:247px;height:35px}
+header .logo{text-decoration:none}
 header .beta{color:#CB4B4B;font-size:80%;font-style:italic;vertical-align:top}
 header .actions{padding:0 0 0 15px}
 header .actions li{list-style:none;float:left;margin-right:10px}
@@ -417,7 +418,8 @@ input[type="text"].input-validation-error,input[type="password"].input-validatio
 .field-validation-valid{display:none}
 .validation-summary-errors{color:#e80c4d;font-weight:bold;font-size:1.1em}
 .validation-summary-valid{display:none}
-.login-form .column{width:37%;display:inline-block;vertical-align:top;float:left}
+.login-form .column{width:37%;display:inline-block;vertical-align:top;float:left;position:relative;height:260px}
+.login-form .column .seperator{width:1px;background:#ccc;height:100%;right:15%;top:0;position:absolute}
 .login-form .column.last{width:20%}
 .openid-provider{margin:20px}
 #openid-form{margin:30px 0 0 20px}

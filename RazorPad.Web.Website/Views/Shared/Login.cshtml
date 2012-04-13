@@ -26,25 +26,27 @@
                         </span>
                     </div>
                 }
+                <div class="seperator"></div>
             </div>
 
             <div class="column">
                 <h2>Login with</h2>
-                    <a href="@Url.Action("Login", "Facebook", new { area = "Account" })" class="openid-provider facebook"><img width="60" height="60" title="Login with Facebook" src="@Url.Content("~/content/images/facebook.jpg")"/></a>
+                <a href="@Url.Action("Login", "Facebook", new { area = "Account" })" class="openid-provider facebook"><img width="60" height="60" title="Login with Facebook" src="@Url.Content("~/content/images/facebook.jpg")"/></a>
                 
-                    <a href="@Url.Action("Google", "OpenId", new { area = "Account" })" class="openid-provider google"><img width="64" height="64" title="Login with Google" src="@Url.Content("~/content/images/google.png")"/></a>
+                <a href="@Url.Action("Google", "OpenId", new { area = "Account" })" class="openid-provider google"><img width="64" height="64" title="Login with Google" src="@Url.Content("~/content/images/google.png")"/></a>
 
-                    <a class="openid-provider generic" onclick="$('#openid-form').toggle()" href="#"><img width="64" height="64" title="Login with OpenID" src="@Url.Content("~/content/images/openid.png")"/></a>
-                    <div class="generic-openid-container">
-                        <div id="openid-form" style="display: none">
-                            <h3>Open ID Url</h3>
-                            @using (Html.BeginForm("Authenticate", "OpenId", new { area = "Account" }))
-                            {
-                                <input name="provider" type="text" size="40" value="http://<OpenIdName>.myopenid.com"/>
-                                <input type="submit" value="Go!"/>
-                            }
-                        </div>
+                <a class="openid-provider generic" onclick="$('#openid-form').toggle()" href="#"><img width="64" height="64" title="Login with OpenID" src="@Url.Content("~/content/images/openid.png")"/></a>
+                <div class="generic-openid-container">
+                    <div id="openid-form" style="display: none">
+                        <h3>Open ID Url</h3>
+                        @using (Html.BeginForm("Authenticate", "OpenId", new { area = "Account" }))
+                        {
+                            <input name="provider" type="text" size="40" value="http://<OpenIdName>.myopenid.com"/>
+                            <input type="submit" value="Go!"/>
+                        }
                     </div>
+                </div>
+                <div class="seperator"></div>
             </div>
 
             <div class="column last">

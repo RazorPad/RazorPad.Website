@@ -141,6 +141,18 @@ input[type="text"].input-validation-error, input[type="password"].input-validati
     display: inline-block;
     vertical-align: top;
     float: left;
+    position: relative;
+    height: 260px;
+}
+
+.login-form .column .seperator
+{
+    width:1px;
+    background: #ccc;
+    height: 100%;
+    right: 15%;
+    top: 0px;
+    position: absolute;
 }
 
 .login-form .column.last
