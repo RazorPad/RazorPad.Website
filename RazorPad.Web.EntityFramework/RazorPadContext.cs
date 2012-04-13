@@ -16,11 +16,12 @@ namespace RazorPad.Web.EntityFramework
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
+        {/*
             modelBuilder.Entity<User>()
                 .HasRequired(x => x.Credentials)
                 .WithRequiredPrincipal()
                 .WillCascadeOnDelete(true);
+           */
         }
 
         public class RazorPadContextInitializer : IDatabaseInitializer<RazorPadContext>

@@ -98,13 +98,15 @@
 RazorPad.saveTemplate = function (clone) {
     RazorPad.showLoading();
 
-    var snippetId = $('#snippetId').val();
+    var snippetId = $('#snippetId').val(),
+        title = $('#snippetTitle').val(),
+        notes = $('#snippetNotes').val();
 
     var data = {
         Template: RazorPad.razorEditor.getValue(),
         SnippetId: snippetId,
-        Title: $('#snippetTitle').val(),
-        Notes: $('#snippetNotes').val()
+        Title: title != "Title" ? title : "",
+        Notes: notes != "Notes" ? notes : ""
     };
 
     $.ajax({
@@ -122,11 +124,12 @@ RazorPad.saveTemplate = function (clone) {
                 }
             }
             else {
-                alert("Save failed, please try again later");
                 RazorPad.hideLoading();
+                alert("Save failed, please try again later");
             }
         },
         error: function (error) {
+            RazorPad.hideLoading();
             alert("Save failed, please try again later");
         }
     });
