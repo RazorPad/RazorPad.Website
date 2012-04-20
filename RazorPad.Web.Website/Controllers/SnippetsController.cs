@@ -32,6 +32,12 @@ namespace RazorPad.Web.Website.Controllers
             return Snippets(username, snippets);
         }
 
+        public ActionResult Recent()
+        {
+            var snippets = _repository.FindRecentSnippets();
+            return Snippets("anonymous", snippets);
+        }
+
 
         public ActionResult Clone([Bind(Prefix = "")]SaveRequest request)
         {

@@ -128,7 +128,8 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 #sidebar .bottomLinks{vertical-align:bottom;bottom:0;padding:15px 18px;position:absolute}
 #sidebar .snippet{border-bottom:1px dotted #ccc;cursor:pointer;padding:3px;min-height:32px}
 #sidebar .snippet span{display:block}
-#sidebar .snippet .create-date{color:#666;font-size:80%}
+#sidebar .snippet .create-date,#sidebar .snippet .created-by{color:#666;font-size:80%;float:left}
+#sidebar .snippet .created-by{float:right}
 #sidebar .snippet:hover{background:#F7F7F7}
 #sidebar .tabs h3{font-weight:normal;color:#212121;text-decoration:none;border-top:1px solid #bbb;border-bottom:1px solid #bbb;margin-top:-1px;background:#ddd}
 #sidebar .tabs h3 a{padding:7px 18px;font-size:.7em;font-weight:bold;color:#212121;text-decoration:none;display:block}
@@ -140,7 +141,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 #sidebar .tabs .tabContent input{margin-bottom:10px}
 #sidebar .tabs .tabContent input,#sidebar .tabs .tabContent textarea{width:98%}
 #sidebar .tabs .tabContent textarea{resize:none;border:1px solid}
-#sidebar .tabs #savedSnippets{padding:0!important}
+#sidebar .tabs .tabContent.snippets{padding:0!important}
 .ui-layout-toggler-east-closed{background:#bbb url('../images/sidebar_open.png') no-repeat -2px center}
 .ui-layout-toggler-east-open{background:#bbb url('../images/sidebar_close.png') no-repeat -2px center}
 .editorContainer{position:relative;height:100%;width:100%}

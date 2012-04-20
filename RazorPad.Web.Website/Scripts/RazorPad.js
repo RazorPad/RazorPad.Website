@@ -1,101 +1,4 @@
-﻿$(function () {
-
-    RazorPad.razorEditor = null;
-
-    function onLayoutResize() {
-        $(RazorPad.razorEditor.getScrollerElement()).css({
-            height: $("#razorPane").height() - $("#viewHeader").height(),
-            width: $("#razorPane").width()
-        });
-        RazorPad.razorEditor.refresh();
-
-        var $resultsPane = $('#resultsPane');
-        var $tabContainer = $resultsPane.children('.tabContainer');
-        $tabContainer.children('.tabPanels').height($resultsPane.outerHeight(true)
-                                                    - $tabContainer.children('.tabBar').outerHeight(true));
-    }
-
-    $('body').layout({
-        enableCursorHotkey: false,
-        name: 'bodyLayout',
-        north__paneSelector: "header",
-        north__closable: false,
-        east__paneSelector: "#sidebar",
-        east__size: 260,
-        east__closable: true,
-        center__paneSelector: "#panes",
-        center__closable: false,
-        resizeWhileDragging: true,
-        resizable: false,
-        onresize: onLayoutResize,
-        useStateCookie: true
-    });
-
-    $('#panes').layout({
-        enableCursorHotkey: false,
-        closable: false,
-        name: 'panesLayout',
-        center__paneSelector: "#razorPane",
-        south__paneSelector: "#resultsPane",
-        south__maxSize: "70%",
-        south__size: Math.floor((screen.height / 2) - 100),
-        south__minSize: 200,
-        resizeWhileDragging: true,
-        onresize: onLayoutResize,
-        useStateCookie: true
-    });
-
-    var editorConfig = {
-        mode: "text/html",
-        lineNumbers: true,
-        tabMode: "indent",
-        matchBrackets: true,
-        tabIndex: -1,
-        lineWrapping: true,
-        extraKeys: {
-            "Ctrl-S": function () { RazorPad.saveTemplate(); },
-            "Ctrl-E": function () { RazorPad.executeTemplate(); }
-        }
-    };
-    if ($('#snippetId').val()) {
-        editorConfig.extraKeys["Ctrl-L"] = function () { RazorPad.saveTemplate(true); };
-    }
-
-    RazorPad.razorEditor = CodeMirror.fromTextArea(document.getElementById("razorEditor"), editorConfig);
-
-    $("#mainContainer").css('visibility', 'visible');
-
-    $(window).resize(onLayoutResize).resize();
-
-    if ($("#snippetId").val()) {
-        //Execute the template (adding timeout to load the layout before ajax calls)
-        setTimeout(function () {
-            RazorPad.executeTemplate();
-        }, 200);
-    }
-
-    $('#savedSnippets').height(($("#sidebar").height() / 2) - $('#exampleSnippets').height());
-
-    $('#sideBarTabs').delegate('a', 'click', function (e) {
-        e.preventDefault();
-        var $this = $(this), $span = $this.prev();
-        $this.parent().next().slideToggle('fast', function () {
-            if ($(this).is(':visible')) {
-                $span.addClass('expanded').removeClass('collapsed');
-            }
-            else {
-                $span.addClass('collapsed').removeClass('expanded');
-            }
-        });
-    });
-
-    //Watermark text for Info
-    $('#snippetTitle').waterMark({ waterMarkClass: 'watermark', waterMarkText: "Title" });
-    $('#snippetNotes').waterMark({ waterMarkClass: 'watermark', waterMarkText: "Notes" });
-
-});
-
-RazorPad.saveTemplate = function (clone) {
+﻿RazorPad.saveTemplate = function (clone) {
     var snippetId = $('#snippetId').val(),
         title = $('#snippetTitle').val(),
         notes = $('#snippetNotes').val(),
@@ -244,9 +147,106 @@ RazorPad.updateStatus = function(status) {
     $('#template-container').attr('class', status);
 };
 
-
+RazorPad.loadSnippet = function () {
+    location.href = RazorPad.siteRoot + $(this).data('key');
+    return false;
+}
 
 $(function () {
+
+    RazorPad.razorEditor = null;
+
+    function onLayoutResize() {
+        $(RazorPad.razorEditor.getScrollerElement()).css({
+            height: $("#razorPane").height() - $("#viewHeader").height(),
+            width: $("#razorPane").width()
+        });
+        RazorPad.razorEditor.refresh();
+
+        var $resultsPane = $('#resultsPane');
+        var $tabContainer = $resultsPane.children('.tabContainer');
+        $tabContainer.children('.tabPanels').height($resultsPane.outerHeight(true)
+                                                    - $tabContainer.children('.tabBar').outerHeight(true));
+    }
+
+    $('body').layout({
+        enableCursorHotkey: false,
+        name: 'bodyLayout',
+        north__paneSelector: "header",
+        north__closable: false,
+        east__paneSelector: "#sidebar",
+        east__size: 260,
+        east__closable: true,
+        center__paneSelector: "#panes",
+        center__closable: false,
+        resizeWhileDragging: true,
+        resizable: false,
+        onresize: onLayoutResize,
+        useStateCookie: true
+    });
+
+    $('#panes').layout({
+        enableCursorHotkey: false,
+        closable: false,
+        name: 'panesLayout',
+        center__paneSelector: "#razorPane",
+        south__paneSelector: "#resultsPane",
+        south__maxSize: "70%",
+        south__size: Math.floor((screen.height / 2) - 100),
+        south__minSize: 200,
+        resizeWhileDragging: true,
+        onresize: onLayoutResize,
+        useStateCookie: true
+    });
+
+    var editorConfig = {
+        mode: "text/html",
+        lineNumbers: true,
+        tabMode: "indent",
+        matchBrackets: true,
+        tabIndex: -1,
+        lineWrapping: true,
+        extraKeys: {
+            "Ctrl-S": function () { RazorPad.saveTemplate(); },
+            "Ctrl-E": function () { RazorPad.executeTemplate(); }
+        }
+    };
+    if ($('#snippetId').val()) {
+        editorConfig.extraKeys["Ctrl-L"] = function () { RazorPad.saveTemplate(true); };
+    }
+
+    RazorPad.razorEditor = CodeMirror.fromTextArea(document.getElementById("razorEditor"), editorConfig);
+
+    $("#mainContainer").css('visibility', 'visible');
+
+    $(window).resize(onLayoutResize).resize();
+
+    if ($("#snippetId").val()) {
+        //Execute the template (adding timeout to load the layout before ajax calls)
+        setTimeout(function () {
+            RazorPad.executeTemplate();
+        }, 200);
+    }
+
+    $('#savedSnippets').height(($("#sidebar").height() / 2) - $('#exampleSnippets').height());
+
+    $('#sideBarTabs').delegate('a', 'click', function (e) {
+        e.preventDefault();
+        var $this = $(this), $span = $this.prev();
+        $this.parent().next().slideToggle('fast', function () {
+            if ($(this).is(':visible')) {
+                $span.addClass('expanded').removeClass('collapsed');
+            }
+            else {
+                $span.addClass('collapsed').removeClass('expanded');
+            }
+        });
+    });
+
+    //Watermark text for Info
+    $('#snippetTitle').waterMark({ waterMarkClass: 'watermark', waterMarkText: "Title" });
+    $('#snippetNotes').waterMark({ waterMarkClass: 'watermark', waterMarkText: "Notes" });
+
     $('#execute')
 	.click(function (e) {
 	    e.preventDefault();
@@ -284,14 +284,11 @@ $(function () {
         $(document).bind('keydown', 'ctrl+l', RazorPad.handleCloneKey);
     }
 
-    RazorPad.razorEditor.focus();
+    $(RazorPad.isUserAuthenticated ? '#savedSnippets' : '#recentSnippets')
+    .height(($("#sidebar").height() / 2) - $('#exampleSnippets').height())
+    .delegate('.snippet', 'click', RazorPad.loadSnippet);
 
-    if (RazorPad.isUserAuthenticated) {
-        $('#savedSnippets').delegate('.snippet', 'click', function () {
-            location.href = RazorPad.siteRoot + $(this).data('key');
-            return false;
-        });
-    }
+    RazorPad.razorEditor.focus();
 });
 
 

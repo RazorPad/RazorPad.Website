@@ -68,7 +68,15 @@ namespace RazorPad.Web
             if (string.IsNullOrWhiteSpace(username))
                 return Enumerable.Empty<Snippet>();
 
-            return repository.Query<Snippet>().Where(x => x.CreatedBy == username);
+            return repository.Query<Snippet>().OrderByDescending(x => x.DateCreated).Where(x => x.CreatedBy == username);
+        }
+
+        public static IEnumerable<Snippet> FindRecentSnippets(this IRepository repository, int maxSnippets = 10)
+        {
+            if (maxSnippets < 0)
+                return Enumerable.Empty<Snippet>();
+
+            return repository.Query<Snippet>().OrderByDescending(x => x.DateCreated).Take(maxSnippets);
         }
 
     }
