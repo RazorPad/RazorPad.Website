@@ -93,6 +93,8 @@ namespace RazorPad.Web.Website.Controllers
                 snippet.Notes = request.Notes;
                 snippet.Title = request.Title;
                 snippet.View = request.Template;
+
+                _repository.SaveChanges();
             }
 
             return Json(snippet);
