@@ -144,19 +144,10 @@ RazorPad.showMessages = function(messages) {
 };
 
 RazorPad.showRenderedTemplateOutput = function (templateOutput) {
-    var $iframe = $('iframe', '#browser-view-container');
-
-    if (!$iframe.get(0))
-        $iframe = $('<iframe id="browser-view-iframe" name="browser-view-iframe">').appendTo('#browser-view-container');
-
-    //$iframe.contents().find('body').html(templateOutput);
-    var $form = $('#browserViewPostForm');
-    if (!$form.length) {
-        $form = $('<form id="browserViewPostForm" target="browser-view-iframe" method="post" />').appendTo(document.body);
-        $form.attr('action', RazorPad.executeDomainUrl + '/Razorpad/BrowserView').append('<input type="hidden" name="template" />');
-    }
-    $form.find('[name=template]').val(templateOutput);
-    $form.submit();
+    $('#browserViewPostForm')
+    .find('[name=template]').val(templateOutput)
+    .end()
+    .submit();
 };
 
 RazorPad.updateStatus = function(status) {
@@ -171,19 +162,24 @@ RazorPad.loadSnippet = function () {
 $(function () {
 
     RazorPad.razorEditor = null;
+    var $resultsPane = $('#resultsPane'),
+        $tabContainer = $resultsPane.children('.tabContainer'),
+        $browserViewIframe = $('#browser-view-iframe'),
+        $tabPanels = $tabContainer.children('.tabPanels'),
+        $tabBar = $tabContainer.children('.tabBar'),
+        $razorPane = $("#razorPane"),
+        viewHeaderHeight = $("#viewHeader").height();
 
     function onLayoutResize() {
         $(RazorPad.razorEditor.getScrollerElement()).css({
-            height: $("#razorPane").height() - $("#viewHeader").height(),
-            width: $("#razorPane").width()
+            height: $razorPane.height() - viewHeaderHeight,
+            width: $razorPane.width()
         });
         RazorPad.razorEditor.refresh();
 
-        var $resultsPane = $('#resultsPane');
-        var $tabContainer = $resultsPane.children('.tabContainer');
-        var h = $resultsPane.outerHeight(true) - $tabContainer.children('.tabBar').outerHeight(true);
-        $tabContainer.children('.tabPanels').height(h);
-        $('#browser-view-iframe').width('100%').height(h);
+        var h = $resultsPane.outerHeight(true) - $tabBar.outerHeight(true);
+        $tabPanels.height(h);
+        $browserViewIframe.width('100%').height(h);
     }
 
     $('body').layout({
@@ -311,13 +307,13 @@ $(function () {
     $(document).bind('hptabshow', function (e, $panel, $anchor) {
         if ($panel.is('#browser-view-container')) {
             $panel.parent().removeClass('overflowAuto');
-            $('#browser-view-iframe').width($('#resultsPane').outerWidth() - 1);
+            $browserViewIframe.width($('#resultsPane').outerWidth() - 1);
         }
         else {
             $panel.parent().addClass('overflowAuto');
         }
     });
-    $('div.tabContainer').hpTabs();
+    $tabContainer.hpTabs();
 });
 
 

@@ -45,8 +45,7 @@
     <script type="text/javascript" charset="utf-8">
         RazorPad = { 
             siteRoot: '@(Url.Content("~/"))',
-            isUserAuthenticated: @(User.Identity.IsAuthenticated ? "true" : "false"),
-            executeDomainUrl: '@(System.Configuration.ConfigurationManager.AppSettings["ExecuteDomainUrl"])'
+            isUserAuthenticated: @(User.Identity.IsAuthenticated ? "true" : "false")
         };
     </script>
     <script type="text/javascript" language="javascript" src="@Url.Content("~/Scripts/jquery-ui.js")"> </script>

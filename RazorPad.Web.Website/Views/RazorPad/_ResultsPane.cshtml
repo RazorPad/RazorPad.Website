@@ -8,6 +8,10 @@
     </div>
     <div class="tabPanels">
         <div id="browser-view-container">
+            <iframe id="browser-view-iframe" name="browser-view-iframe" style="height:0px;width:0px;" frameborder="0"></iframe>
+            <form id="browserViewPostForm" target="browser-view-iframe" method="post" action="@(System.Configuration.ConfigurationManager.AppSettings["ExecuteDomainUrl"])/Razorpad/BrowserView">
+                <input type="hidden" name="template" />
+            </form>
         </div>
         <div id="template-output-container">
             <pre id="template-output" class="prettyprint"></pre>
