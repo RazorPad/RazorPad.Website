@@ -1,12 +1,13 @@
 ﻿(function ($) {
     $.fn.extend({
         hpTabs: function (options) {
-            
+
             var ShowTab = function (lnk) {
                 var $lnk = $(lnk),
     	            $panel = $($lnk.attr("href"));
                 $lnk.addClass("selected").siblings("a").removeClass("selected");
                 $panel.show().siblings("div").hide();
+                $(document).trigger('hptabshow', [$panel, $lnk]);
             };
 
             if (arguments.length == 2) {
@@ -15,14 +16,14 @@
                 }
                 return;
             }
-            
+
             var defaults = {},
                 options = $.extend(defaults, options);
 
             return this.each(function () {
                 var o = options;
                 var $this = $(this);
-                $this.find(".tabBar > a").click(function () {
+                $this.find(".tabBar > a").unbind('click.hpTabs').bind('click.hpTabs', function () {
                     ShowTab(this);
                     return false;
                 });

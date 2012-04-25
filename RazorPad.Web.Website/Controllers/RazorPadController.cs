@@ -81,6 +81,13 @@ namespace RazorPad.Web.Website.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult BrowserView(string template)
+        {
+            //This is required otherwise Chrom does not executes the script thinking it as cross-site attack
+            Response.Headers.Add("X-XSS-Protection", "0");
+            return View("BrowserView", "", template);
+        }
+
         protected override void OnException(ExceptionContext filterContext)
         {
             var error = new TemplateMessage { Kind = TemplateMessageKind.Error, Text = filterContext.Exception.ToString() };

@@ -56,12 +56,15 @@ RazorPad.executeTemplate = function() {
             RazorPad.onParseSuccess(resp);
             RazorPad.showRenderedTemplateOutput(resp.TemplateOutput);
             $('#template-output').text(resp.TemplateOutput);
-            $('div.tabContainer').hpTabs("select", resp.Success ? 0 : 4); //Select Output tab
+            //Select Browser View tab
+            $('div.tabContainer').hpTabs("select", resp.Success ? 0 : 4, function () {
+                
+            }); 
         },
         error: function(resp) {
             RazorPad.onParseError(resp);
             var message = ' [[**** EXECUTION ERROR ****]] \r\n' + JSON.stringify(resp);
-            $('#rendered-output-container').empty().text(message);
+            $('#browser-view-container').empty().text(message);
             $('#template-output').text(message);
             $('div.tabContainer').hpTabs("select", 4); //Select Message tab
         },
@@ -107,7 +110,7 @@ RazorPad.onParseError = function(err) {
     $('#generated-code').html(' [[**** PARSE ERROR ****]] ');
 };
 
-RazorPad.onParseSuccess = function(resp) {
+RazorPad.onParseSuccess = function (resp) {
     if (resp.Success) {
         RazorPad.updateStatus('success');
     } else {
@@ -115,10 +118,16 @@ RazorPad.onParseSuccess = function(resp) {
     }
 
     RazorPad.showMessages(resp.Messages);
-    $('#generated-code-container').empty().append($('<pre id="generated-code" class="brush: csharp"></pre>').text(resp.GeneratedCode));
 
-    $('#parser-result-container').empty().append($('<pre id="parser-results" class="brush: html"></pre>').text(resp.ParsedDocument));
-    SyntaxHighlighter.highlight({ toolbar: false });
+    var $generatedCode = $('<pre id="generated-code" class="brush: csharp"></pre>').text(resp.GeneratedCode);
+    var $parsedDoc = $('<pre id="parser-results" class="brush: html"></pre>').text(resp.ParsedDocument);
+
+    $('#generated-code-container').html($generatedCode);
+
+    $('#parser-result-container').html($parsedDoc);
+
+    SyntaxHighlighter.highlight({ toolbar: false }, $generatedCode[0]);
+    SyntaxHighlighter.highlight({ toolbar: false }, $parsedDoc[0]);
 };
 
 
@@ -134,13 +143,20 @@ RazorPad.showMessages = function(messages) {
     });
 };
 
-RazorPad.showRenderedTemplateOutput = function(templateOutput) {
-    var iframe = $('iframe', '#rendered-output-container');
+RazorPad.showRenderedTemplateOutput = function (templateOutput) {
+    var $iframe = $('iframe', '#browser-view-container');
 
-    if (!iframe.get(0))
-        iframe = $('<iframe>').appendTo('#rendered-output-container');
+    if (!$iframe.get(0))
+        $iframe = $('<iframe name = "browser-view-iframe">').appendTo('#browser-view-container');
 
-    iframe.contents().find('body').html(templateOutput);
+    //$iframe.contents().find('body').html(templateOutput);
+    var $form = $('#browserViewPostForm');
+    if (!$form.length) {
+        $form = $('<form id="browserViewPostForm" target="browser-view-iframe" method="post" />').appendTo(document.body);
+        $form.attr('action', RazorPad.executeDomainUrl + '/Razorpad/BrowserView').append('<input type="hidden" name="template" />');
+    }
+    $form.find('[name=template]').val(templateOutput);
+    $form.submit();
 };
 
 RazorPad.updateStatus = function(status) {
@@ -289,6 +305,17 @@ $(function () {
     .delegate('.snippet', 'click', RazorPad.loadSnippet);
 
     RazorPad.razorEditor.focus();
+
+    //hptabshow
+    $(document).bind('hptabshow', function (e, $panel, $anchor) {
+        if ($panel.is('#browser-view-container')) {
+            $panel.parent().removeClass('overflowAuto');
+        }
+        else {
+            $panel.parent().addClass('overflowAuto');
+        }
+    });
+    $('div.tabContainer').hpTabs();
 });
 
 

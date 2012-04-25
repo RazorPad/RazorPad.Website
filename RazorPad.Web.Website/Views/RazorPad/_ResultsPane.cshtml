@@ -1,13 +1,13 @@
 ﻿<div class="tabContainer">
     <div class="tabBar">
-        <a href="#rendered-output-container" title="The way it would appear in a browser">Browser View</a><span class="separator">|</span><a
+        <a href="#browser-view-container" title="The way it would appear in a browser">Browser View</a><span class="separator">|</span><a
             href="#template-output-container" title="The way it would appear in browser's view source">Html Source View</a><span class="separator">|</span><a
                 href="#parser-result-container" title="This is how Razor engine sees it">Parser Results</a><span class="separator">|</span><a
                     href="#generated-code-container" title="Generated class by Razor engine">Generated Code</a><span class="separator">|</span><a
                         href="#messages-container" title="If something went wrong, it would appear here">Messages</a>
     </div>
     <div class="tabPanels">
-        <div id="rendered-output-container">
+        <div id="browser-view-container">
         </div>
         <div id="template-output-container">
             <pre id="template-output" class="prettyprint"></pre>
@@ -19,9 +19,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript" charset="utf-8">
-    $(function () {
-        $('div.tabContainer').hpTabs(); 
-    });
-</script>

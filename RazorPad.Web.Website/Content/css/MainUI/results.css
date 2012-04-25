@@ -26,7 +26,6 @@
 .tabPanels
 {
     width: 100%;
-    overflow: auto;
 }
 
 .tabPanels > div 
