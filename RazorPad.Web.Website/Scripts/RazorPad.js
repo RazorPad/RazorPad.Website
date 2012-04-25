@@ -147,7 +147,7 @@ RazorPad.showRenderedTemplateOutput = function (templateOutput) {
     var $iframe = $('iframe', '#browser-view-container');
 
     if (!$iframe.get(0))
-        $iframe = $('<iframe name = "browser-view-iframe">').appendTo('#browser-view-container');
+        $iframe = $('<iframe id="browser-view-iframe" name="browser-view-iframe">').appendTo('#browser-view-container');
 
     //$iframe.contents().find('body').html(templateOutput);
     var $form = $('#browserViewPostForm');
@@ -181,8 +181,9 @@ $(function () {
 
         var $resultsPane = $('#resultsPane');
         var $tabContainer = $resultsPane.children('.tabContainer');
-        $tabContainer.children('.tabPanels').height($resultsPane.outerHeight(true)
-                                                    - $tabContainer.children('.tabBar').outerHeight(true));
+        var h = $resultsPane.outerHeight(true) - $tabContainer.children('.tabBar').outerHeight(true);
+        $tabContainer.children('.tabPanels').height(h);
+        $('#browser-view-iframe').width('100%').height(h);
     }
 
     $('body').layout({
@@ -310,6 +311,7 @@ $(function () {
     $(document).bind('hptabshow', function (e, $panel, $anchor) {
         if ($panel.is('#browser-view-container')) {
             $panel.parent().removeClass('overflowAuto');
+            $('#browser-view-iframe').width($('#resultsPane').outerWidth() - 1);
         }
         else {
             $panel.parent().addClass('overflowAuto');
