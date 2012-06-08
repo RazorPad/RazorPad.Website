@@ -5,15 +5,15 @@
 
 .form-box 
 {
-    width: 100%;
-    float: left;
 }
 
 .form-box .box {
     margin: 12px 0 0;
-    padding: 20px 25px 15px;
+    padding: 20px 25px 15px 70px;
     background: whiteSmoke;
     border: 1px solid #E5E5E5;
+    position: relative;
+    display: inline-block;
 }
 
 .form-box h2 {
@@ -103,6 +103,8 @@
     font-weight: bold;
     background: #BCC7D8;
     padding: 7px 15px;
+    height: 16px;
+    margin-left: 130px;
     color: #384A6F;
     display: inline-block;
 }
@@ -137,12 +139,11 @@ input[type="text"].input-validation-error, input[type="password"].input-validati
 
 
 .login-form .column {
-    width: 37%;
+    width: 360px;
     display: inline-block;
     vertical-align: top;
-    float: left;
-    position: relative;
     height: 260px;
+    position: relative;
 }
 
 .login-form .column .seperator
@@ -150,7 +151,7 @@ input[type="text"].input-validation-error, input[type="password"].input-validati
     width:1px;
     background: #ccc;
     height: 78%;
-    right: 15%;
+    right: 35px;
     top: 30px;
     position: absolute;
 }
