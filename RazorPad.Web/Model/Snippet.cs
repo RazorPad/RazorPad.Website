@@ -11,10 +11,11 @@ namespace RazorPad.Web
     {
         public long Id { get; private set; }
 
-        public string CloneOf { get; set; }
-
         [Required]
         public string CreatedBy { get; set; }
+
+        [Required]
+        public int Revision { get; set; }
 
         [Required]
         public DateTime DateCreated { get; private set; }
@@ -53,6 +54,8 @@ namespace RazorPad.Web
         {
             DateCreated = DateTime.UtcNow;
         }
+
+        public string CloneOf { get; set; }
     }
 
     public static class SnippetRepositoryExtensions
@@ -60,7 +63,12 @@ namespace RazorPad.Web
         
         public static Snippet FindSnippet(this IRepository repository, string key)
         {
-            return repository.SingleOrDefault<Snippet>(x => x.Key == key);
+            return FindSnippet(repository, key, 0);
+        }
+
+        public static Snippet FindSnippet(this IRepository repository, string key, uint revision)
+        {
+            return repository.SingleOrDefault<Snippet>(x => x.Key == key && x.Revision == revision);
         }
 
         public static IEnumerable<Snippet> FindSnippetsByUsername(this IRepository repository, string username)

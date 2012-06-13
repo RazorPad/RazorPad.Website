@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RazorPad.Web.Authentication;
+using RazorPad.Web.EntityFramework;
 using RazorPad.Web.Services;
 using RazorPad.Web.Website.Models;
 
@@ -52,12 +53,17 @@ namespace RazorPad.Web.Website.Controllers
 
         public ActionResult Save([Bind(Prefix = "")]SaveRequest request, bool clone = false)
         {
-            var createdBy = GetCurrentUserId(HttpContext);
+            var snippet = SaveSnippet(request, clone);
+            return Json(snippet);
+        }
+
+        public Snippet SaveSnippet(SaveRequest request, bool clone)
+        {
+            // get username
+            var currentUser = GetCurrentUserId(HttpContext);
 
             Snippet snippet = null;
-
             var snippetExists = !String.IsNullOrWhiteSpace(request.SnippetId);
-
             if (snippetExists)
             {
                 snippet = _repository.FindSnippet(request.SnippetId);
@@ -67,43 +73,28 @@ namespace RazorPad.Web.Website.Controllers
             // See if we are cloning or not
             if (snippetExists)
             {
-                var userOwnsSnippet = snippet.CreatedBy.Equals(createdBy, StringComparison.OrdinalIgnoreCase);
+                var userOwnsSnippet = snippet.CreatedBy.Equals(currentUser, StringComparison.OrdinalIgnoreCase);
                 clone = clone || !userOwnsSnippet;
             }
 
             var shouldCreateNewSnippet = !snippetExists || clone;
-
             if (shouldCreateNewSnippet)
             {
-                if (clone)
-                {
-                    request.CloneOf = request.SnippetId;
-                }
-
-                snippet = new Snippet
-                {
-                    CloneOf = request.CloneOf,
-                    CreatedBy = createdBy,
-                    Language = request.Language,
-                    Model = request.Model,
-                    Notes = request.Notes,
-                    Title = request.Title,
-                    View = request.Template,
-                };
-
-                _repository.Save(snippet);
-            }
-            else
-            {
-                snippet.Model = request.Model;
-                snippet.Notes = request.Notes;
-                snippet.Title = request.Title;
-                snippet.View = request.Template;
-
-                _repository.SaveChanges();
+                snippet = new Snippet()
+                              {
+                                  CreatedBy = currentUser,
+                                  Language = request.Language,
+                                  Model = request.Model,
+                                  Notes = request.Notes,
+                                  Title = request.Title,
+                                  View = request.Template,
+                                  CloneOf = clone ? request.SnippetId : null
+                              };
             }
 
-            return Json(snippet);
+            _repository.Save(snippet);
+
+            return snippet;
         }
 
 

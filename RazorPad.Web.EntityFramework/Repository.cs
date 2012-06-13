@@ -50,9 +50,15 @@ namespace RazorPad.Web.EntityFramework
             Contract.Requires(instance != null);
 
             _context.Set<TEntity>().Add(instance);
-            
+
             if (_isSharedContext == false)
-                _context.SaveChanges();
+            {
+                // TODO: Refactor to remove business logic out of here
+                if (instance is Snippet)
+                    _context.InsertSnippet(instance as Snippet);
+                else
+                    _context.SaveChanges();
+            }
         }
 
         public override void SaveChanges()

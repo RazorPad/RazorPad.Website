@@ -5,7 +5,6 @@ namespace RazorPad.Web.Website.Models
 {
     public class SaveRequest : ParseRequest
     {
-        public string CloneOf { get; set; }
 
         public TemplateLanguage Language { get; set; }
         
@@ -31,6 +30,8 @@ namespace RazorPad.Web.Website.Models
         public string SnippetId { get; set; }
 
         public string Title { get; set; }
+
+        public uint Revision { get; set; }
     }
 
     

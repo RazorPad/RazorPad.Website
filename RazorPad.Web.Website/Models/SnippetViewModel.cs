@@ -73,6 +73,8 @@ namespace RazorPad.Web.Website.Models
 
         public string View { get; set; }
 
+        public int Revision { get; set; }
+
 
         public SnippetViewModel()
         {
@@ -93,6 +95,9 @@ namespace RazorPad.Web.Website.Models
             Title = snippet.Title;
             View = snippet.View;
             Notes = snippet.Notes;
+            Revision = snippet.Revision;
         }
+
+        
     }
 }

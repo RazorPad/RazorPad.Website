@@ -40,14 +40,15 @@ namespace RazorPad.Web.EntityFramework.Migrations
                 c => new
                     {
                         Id = c.Long(nullable: false, identity: true),
-                        CloneOf = c.String(),
                         CreatedBy = c.String(nullable: false),
+                        Revision = c.Int(nullable: false),
                         DateCreated = c.DateTime(nullable: false),
                         Key = c.String(nullable: false),
                         Model = c.String(),
                         Notes = c.String(maxLength: 1000),
                         Title = c.String(maxLength: 500),
                         View = c.String(nullable: false),
+                        CloneOf = c.String(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id);

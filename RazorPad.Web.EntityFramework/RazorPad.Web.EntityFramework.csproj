@@ -40,6 +40,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,13 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201204011722571_Initial.cs" />
-    <Compile Include="Migrations\201204011722571_Initial.Designer.cs">
-      <DependentUpon>201204011722571_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201204100201425_UserCascadeDelete.cs" />
-    <Compile Include="Migrations\201204100201425_UserCascadeDelete.Designer.cs">
-      <DependentUpon>201204100201425_UserCascadeDelete.cs</DependentUpon>
+    <Compile Include="Migrations\201206131821535_Initial.cs" />
+    <Compile Include="Migrations\201206131821535_Initial.Designer.cs">
+      <DependentUpon>201206131821535_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
